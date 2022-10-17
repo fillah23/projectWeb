@@ -395,3 +395,99 @@ body.shrink .tooltip {
   color: #1B1717;
   text-align: center;
 }
+.details
+{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+  width: 55em;
+  padding: 20px;
+  /* display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-gap: 30px; */
+  margin-top: 20px;
+}
+.details .recentOrders 
+{
+  position: relative;
+  display: grid;
+  min-height: 100px;
+  background: white;
+  padding: 20px;
+  box-shadow: 0 7px 25px rgba(0,0,0,0.08);
+  border-radius: 20px;
+}
+.cardHeader
+{
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+
+}
+.cardHeader h2
+{
+  font-weight: 600;
+  color: #30475E;
+}
+.btn
+{
+  position: relative;
+  padding: 5px 10px;
+  background: #30475E;
+  text-decoration: none;
+  color: white;
+  border-radius: 6px;
+}
+/* table */
+.details table
+{
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+.details table thead td
+{
+  font-weight: 600;
+}
+.details .recentOrders table tr
+{
+  color: black;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+.details .recentOrders table tr:last-child
+{
+  border-bottom: none;
+}
+.details .recentOrders table tbody tr:hover
+{
+  background: #30475E;
+  color: white;
+}
+.details .recentOrders table tr td
+{
+  padding: 10px;
+}
+.details .recentOrders table tr td:last-child
+{
+  text-align: end;
+}
+.details .recentOrders table tr td:nth-child(2)
+{
+  text-align: end;
+}
+.table-wrapper
+{
+min-height: 500px;
+max-height: 450px;
+overflow-y: auto;
+}
+
+::-webkit-scrollbar{
+  width: 10px;
+  
+}
+::-webkit-scrollbar-thumb{
+  background: linear-gradient(#222831,#30475E);
+  border-radius: 6px;
+}
