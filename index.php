@@ -57,7 +57,7 @@
 				<li><a href="#portfolio" class="smoothScroll">PORTFOLIO</a></li>
 				<li><a href="#pricing" class="smoothScroll">PRICING</a></li>
 				<li><a href="#contact" class="smoothScroll">CONTACT</a></li>
-				<li><a href="login.html" class="smoothScroll">LOGIN</a></li>
+				<li><a href="pages/login.php" class="smoothScroll">LOGIN</a></li>
 			</ul>
 		</div>
 	</div>

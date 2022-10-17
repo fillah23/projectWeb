@@ -387,11 +387,11 @@ body.shrink .admin-profile {
 body.shrink .tooltip {
   display: grid;
 }
-
-/* table{
-  height: 100vh;
-  display:grid;
-  justify-content:center;
-  align-items:center;
-  
-} */
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  color: #1B1717;
+  text-align: center;
+}
