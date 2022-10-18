@@ -125,7 +125,11 @@
     </div>
   </nav>
   <div id="content"></div>
-
+  <div class="footer">
+        <p class="copyright">
+            &copy; 2022 - <span>Fans Vision</span> All Rights Reserved.
+        </p>
+    </div>
   <script src="../js/home.js"></script>
   <script src="../js/jquery-3.6.0.min.js"></script>
   <script>

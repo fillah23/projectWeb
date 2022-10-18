@@ -470,16 +470,16 @@ body.shrink .tooltip {
 }
 .details .recentOrders table tr td:last-child
 {
-  text-align: end;
+  text-align: start;
 }
 .details .recentOrders table tr td:nth-child(2)
 {
-  text-align: end;
+  text-align: start;
 }
 .table-wrapper
 {
-min-height: 500px;
-max-height: 450px;
+min-height: 460px;
+max-height: 460px;
 overflow-y: auto;
 }
 
@@ -491,3 +491,4 @@ overflow-y: auto;
   background: linear-gradient(#222831,#30475E);
   border-radius: 6px;
 }
+
