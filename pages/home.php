@@ -7,7 +7,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sidebar Menu</title>
   <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
-  <link rel="stylesheet" href="../css/home.css">
+  <link rel="stylesheet" href="../css/home.css?v=1.1">
+  <link rel="stylesheet" href="../style1.css?v=1.1">
 </head>
 
 <body>

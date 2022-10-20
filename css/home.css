@@ -172,7 +172,7 @@ nav:hover .shrink-btn,
 }
 
 .icon {
-  font-size: 1.3rem;
+  font-size: 1.5rem;
   text-align: center;
   min-width: 3.7rem;
   display: grid;
@@ -410,8 +410,12 @@ body.shrink .tooltip {
 }
 .details .recentOrders 
 {
-  position: relative;
-  display: grid;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+  
+  min-width: 840px;
   min-height: 100px;
   background: white;
   padding: 20px;
@@ -478,11 +482,55 @@ body.shrink .tooltip {
 }
 .table-wrapper
 {
-min-height: 460px;
-max-height: 460px;
+  min-height: 470px;
+  max-height: 470px;
 overflow-y: auto;
 }
-
+@media only screen and (max-width: 1350px) {
+  .table-wrapper {
+    min-height: 400px;
+    max-height: 400px;
+    overflow-y: auto;
+  }
+  .details .recentOrders{
+    min-width: 740px;
+  }
+  
+}
+@media only screen and (max-width: 1260px) {
+  .table-wrapper {
+    min-height: 400px;
+    max-height: 400px;
+    overflow-y: auto;
+  }
+  .details .recentOrders{
+    min-width: 540px;
+  }
+  
+}
+@media only screen and (max-width: 1060px) {
+  nav{
+    width: 13rem;
+    height: 110vh;
+  }
+  
+}
+@media only screen and (max-width: 969px) {
+  nav{
+    width: 12rem;
+    height: 110vh;
+  }
+}
+@media only screen and (max-width: 930px) {
+  .table-wrapper {
+    min-height: 350px;
+    max-height: 350px;
+    overflow-y: auto;
+  }
+  .details .recentOrders{
+    min-width: 440px;
+  }
+}
 ::-webkit-scrollbar{
   width: 10px;
   
