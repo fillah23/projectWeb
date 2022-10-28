@@ -8,7 +8,7 @@
   <title>Sidebar Menu</title>
   <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
   <link rel="stylesheet" href="../css/home.css?v=1.1">
-  <link rel="stylesheet" href="../style1.css?v=1.1">
+  <link rel="stylesheet" href="../css/popup.css?v=1.3">
 </head>
 
 <body>
@@ -145,7 +145,7 @@
         if (menu == "transaksi") {
           $('#content').load('transaksi.php');
         } else if (menu == "produk") {
-          $('#content').load('produk.php');
+          $('#content').load('produk/produk.php');
         } else if (menu == "pelanggan") {
           $('#content').load('pelanggan.php');
         } else if (menu == "portfolio") {
@@ -158,6 +158,8 @@
       });
     });
   </script>
+
+  
 </body>
 
 </html>

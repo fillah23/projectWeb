@@ -34,7 +34,7 @@ body {
     width: 380px;
     padding: 20px 30px;
     background: #fff;
-    box-shadow: 2px 2px 5px 5px rgba(0,0,0,0.15);
+    /* box-shadow: 0 0 0 500vmax rgb(0 0 0 / 0.5); */
     border-radius: 10px;
     transition: top 0ms ease-in-out 200ms,
                 opacity 200ms ease-in-out 0ms, 
@@ -115,7 +115,7 @@ body {
     width: 380px;
     padding: 20px 30px;
     background: #fff;
-    box-shadow: 2px 2px 5px 5px rgba(0,0,0,0.15);
+    /* box-shadow: 2px 2px 5px 5px rgba(0,0,0,0.15); */
     border-radius: 10px;
     transition: top 0ms ease-in-out 200ms,
                 opacity 200ms ease-in-out 0ms, 
