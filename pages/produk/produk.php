@@ -282,8 +282,8 @@ function auto(){
                     // console.log(value['fname']);
                     $('.tabel').append('<tr>' +
                         '<td class="produk_id" style="width: 20%;">' + value['kode_produk'] + '</td>\
-                                <td style="width: 20%;">' + value['nama_produk'] + '</td>\
-                                <td style="width: 30%;">' + value['harga_produk'] + '</td>\
+                                <td style="width: 25%;">' + value['nama_produk'] + '</td>\
+                                <td style="width: 25%;">' + value['harga_produk'] + '</td>\
                                 <td style="width: 20%;">' + value['stok'] + '</td>\
                                 <td style="width: 10%;">\
                                 <a href="#" id="btn-edit">\
