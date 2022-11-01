@@ -147,7 +147,7 @@
         } else if (menu == "produk") {
           $('#content').load('produk/produk.php');
         } else if (menu == "pelanggan") {
-          $('#content').load('pelanggan.php');
+          $('#content').load('pelanggan/pelanggan.php');
         } else if (menu == "portfolio") {
           $('#content').load('portfolio.php');
         } else if (menu == "akun") {
