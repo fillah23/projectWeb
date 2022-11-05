@@ -27,6 +27,7 @@ body {
     border-radius: 5px;
 }
 .popup{
+    overflow: auto;         
     position: absolute;
     top: -150%;
     left: 50%;
@@ -39,7 +40,7 @@ body {
     transition: top 0ms ease-in-out 200ms,
                 opacity 200ms ease-in-out 0ms, 
                 transform 20ms ease-in-out 0ms;
-                
+    max-height: 25rem;     
 }
 .popup.active{
     top: 50%;
@@ -76,6 +77,8 @@ body {
     color: #222;
 }
 .popup .form .form-element input[type="text"],
+.popup .form .form-element input[type="email"],
+.popup .form .form-element select,
 .popup .form .form-element input[type="password"] {
     margin-top: 5px;
     display: block;
@@ -84,6 +87,9 @@ body {
     outline: none;
     border: 1px solid #aaa;
     border-radius: 5px;
+}
+.popup .form .form-element option{
+    font-size: 20px;
 }
 .popup .form .form-element input[type="checkbox"] {
     margin-right: 5px;
@@ -157,6 +163,9 @@ body {
     color: #222;
 }
 .edit .form .form-element input[type="text"],
+.edit .form .form-element input[type="email"],
+.edit .form .form-element select,
+.edit .form .form-element option,
 .edit .form .form-element input[type="password"] {
     margin-top: 5px;
     display: block;

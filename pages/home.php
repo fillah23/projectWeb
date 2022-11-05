@@ -7,11 +7,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sidebar Menu</title>
   <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
-  <link rel="stylesheet" href="../css/home.css?v=1.1">
-  <link rel="stylesheet" href="../css/popup.css?v=1.3">
+  <link rel="stylesheet" href="../css/home.css?v=1.4">
+  <link rel="stylesheet" href="../css/popup.css?v=1.4">
 </head>
 
-<body>
+<body class="shrink">
   <nav>
     <div class="sidebar-top">
       <span class="shrink-btn">
@@ -20,12 +20,10 @@
       <img src="../images/F .png" class="logo" alt="">
       <h3 class="hide">FANS VISION</h3>
     </div>
-
     <div class="search">
       <i class='bx bx-search'></i>
       <input type="text" class="hide" placeholder="Quick Search ...">
     </div>
-
     <div class="sidebar-links">
       <ul>
         <div class="active-tab"></div>
@@ -79,7 +77,16 @@
 
       <ul>
         <li class="tooltip-element" data-tooltip="0">
-          <a href="" data-active="4" id="akun" class="menu">
+          <a href="" data-active="4" id="faq" class="menu">
+            <div class="icon">
+              <i class='bx bx-message-dots' ></i>
+              <i class='bx bxs-message-dots' ></i>
+            </div>
+            <span class="link hide">FAQ</span>
+          </a>
+        </li>
+        <li class="tooltip-element" data-tooltip="1">
+          <a href="" data-active="5" id="akun" class="menu">
             <div class="icon">
               <i class='bx bx-user-plus'></i>
               <i class='bx bxs-user-plus'></i>
@@ -87,8 +94,8 @@
             <span class="link hide">Pengaturan Akun</span>
           </a>
         </li>
-        <li class="tooltip-element" data-tooltip="1">
-          <a href="" data-active="5" id="riwayat" class="menu">
+        <li class="tooltip-element" data-tooltip="2">
+          <a href="" data-active="6" id="riwayat" class="menu">
             <div class="icon">
               <i class='bx bx-bar-chart-square'></i>
               <i class='bx bxs-bar-chart-square'></i>
@@ -97,12 +104,12 @@
           </a>
         </li>
         <div class="tooltip">
-          <span class="show">Pengaturan Akun</span>
+          <span class="show">FAQ</span>
+          <span>Pengaturan Akun</span>
           <span>Riwayat</span>
         </div>
       </ul>
     </div>
-
     <div class="sidebar-footer">
       <a href="#" class="account tooltip-element" data-tooltip="0">
         <i class='bx bx-user'></i>
@@ -154,6 +161,8 @@
           $('#content').load('akun.php');
         } else if (menu == "riwayat") {
           $('#content').load('riwayat.php');
+        }else if (menu == "faq") {
+          $('#content').load('faq.php');
         }
       });
     });

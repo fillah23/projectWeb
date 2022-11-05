@@ -20,6 +20,9 @@ function auto(){
     return $value;
 
 }
+$conn = mysqli_connect("localhost","root","","fans");
+$perintah="select * from produk order by kode_produk ASC";
+$query=mysqli_query($conn,$perintah);
 ?>
 <main>
     <!-- table -->
@@ -55,7 +58,7 @@ function auto(){
         <div class="form">
             <h2>Tambah Data</h2>
             <div class="form-element">
-                <input type="hidden" id="kode" name="kode" placeholder="Masukkan kode" value="<?= auto(); ?>" readonly>
+                <input type="text" id="kode" name="kode" placeholder="Masukkan kode" value="<?= auto(); ?>" readonly>
             </div>
             <div class="form-element">
                 <label for="nama">Nama</label>
@@ -63,13 +66,11 @@ function auto(){
             </div>
             <div class="form-element">
                 <label for="email">Email</label>
-                <input type="text" id="email" name="email" placeholder="Masukkan Email" autocomplete="off"
-                    onkeypress="return onlyNumberKey(event)">
+                <input type="email" id="email" name="email" placeholder="Masukkan Email" autocomplete="off">
             </div>
             <div class="form-element">
                 <label for="password">Password</label>
-                <input type="text" id="password" name="password" placeholder="Masukkan Password" autocomplete="off"
-                    onkeypress="return onlyNumberKey(event)">
+                <input type="password" id="password" name="password" placeholder="Masukkan Password" autocomplete="off">
             </div>
             <div class="form-element">
                 <label for="nomer_hp">Nomer HP</label>
@@ -78,16 +79,22 @@ function auto(){
             </div>
             <div class="form-element">
                 <label for="status">Status</label>
-                <input type="text" id="status" name="status" placeholder="Masukkan Status" autocomplete="off"
-                    onkeypress="return onlyNumberKey(event)">
+                <input type="text" id="status" name="status" placeholder="Masukkan Status" autocomplete="off">
             </div>
             <div class="form-element">
-                <label for="harga_produk">Harga Produk</label>
-                <input type="text" id="harga_produk" name="harga_produk" placeholder="Masukkan Harga Produk" autocomplete="off"
-                    onkeypress="return onlyNumberKey(event)">
+                <label for="nama_produk" >Nama Produk</label>
+                <select name="pilihProduk" id="pilihProduk">
+                <option>==Pilih barang==</option>
+                <?php while($data=mysqli_fetch_array($query)){?>
+                <option data-harga="<?= $data['harga_produk']; ?>" data-kode="<?= $data['kode_produk']; ?>"><?php echo $data['nama_produk'];?></option>
+                <?php } ?>
+                </select>
             </div>
             <div class="form-element">
-                <input type="hidden" id="kode_produk" name="kode_produk" placeholder="Masukkan kode produk" readonly>
+                <input type="text" id="kode_produk" name="kode_produk" placeholder="Masukkan kode produk" readonly>
+            </div>
+            <div class="form-element">
+                <input type="text" id="harga" name="harga" placeholder="Masukkan kode harga" readonly>
             </div>
             <div class="form-element">
                 <input type="hidden" id="tanggal" name="tanggal" placeholder="Masukkan Tanggal" readonly>
@@ -382,4 +389,17 @@ function auto(){
 
         });
     }
+</script>
+<script>
+    $('#pilihProduk').on('change', function(){
+  // ambil data dari elemen option yang dipilih
+  const harga = $('#pilihProduk option:selected').data('harga');
+  const kode = $('#pilihProduk option:selected').data('kode');
+  
+  // tampilkan data ke element
+  $('[name=harga]').val(harga);
+  $('[name=kode_produk]').val(kode);
+  
+
+});
 </script>
