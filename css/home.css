@@ -17,7 +17,7 @@
 
 body {
   font-family: "Poppins", sans-serif;
-  overflow-x: hidden;
+  overflow: auto;
   background-color: #ECECEC;
   min-height: 100vh;
   display: flex;
@@ -61,6 +61,8 @@ main {
   color: #1B1717;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center
 }
 
 main h1 {
@@ -395,32 +397,21 @@ body.shrink .tooltip {
   color: #1B1717;
   text-align: center;
 }
-.details
-{
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%,-50%);
-  width: 55em;
-  padding: 20px;
-  /* display: grid;
-  grid-template-columns: 2fr 1fr;
-  grid-gap: 30px; */
-  margin-top: 20px;
+.details{
+  width: 100%;
 }
 .details .recentOrders 
-{
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%,-50%);
-  
-  min-width: 840px;
+{ 
   min-height: 100px;
+  height: 38em;
   background: white;
   padding: 20px;
   box-shadow: 0 7px 25px rgba(0,0,0,0.08);
   border-radius: 20px;
+}
+.recentOrders{
+  max-width: 72em;
+  min-width: 65em;
 }
 .cardHeader
 {
@@ -482,38 +473,58 @@ body.shrink .tooltip {
 }
 .table-wrapper
 {
-  min-height: 470px;
-  max-height: 470px;
+  min-height: 520px;
+  max-height: 520px;
 overflow-y: auto;
 }
 @media only screen and (max-width: 1350px) {
   .table-wrapper {
-    min-height: 400px;
-    max-height: 400px;
     overflow-y: auto;
   }
   .details .recentOrders{
-    min-width: 740px;
+    min-width: 61em;
   }
   
 }
 @media only screen and (max-width: 1260px) {
   .table-wrapper {
-    min-height: 400px;
-    max-height: 400px;
     overflow-y: auto;
   }
   .details .recentOrders{
-    min-width: 540px;
+    min-width: 57em;
   }
-  
+  nav{
+    height: 110vh;
+  }
+}
+@media only screen and (max-height:635px) {
+  nav{
+    height: 120vh;
+  }
+}
+@media only screen and (max-height:600px) {
+  nav{
+    height: 130vh;
+  }
+}
+@media only screen and (max-height:560px) {
+  nav{
+    height: 140vh;
+  }
+}
+@media only screen and (max-height:520px) {
+  nav{
+    height: 150vh;
+  }
 }
 @media only screen and (max-width: 1060px) {
   nav{
     width: 13rem;
     height: 110vh;
   }
-  
+  .details .recentOrders{
+    min-width: 50em;
+  }
 }
 @media only screen and (max-width: 969px) {
   nav{
@@ -522,17 +533,13 @@ overflow-y: auto;
   }
 }
 @media only screen and (max-width: 930px) {
-  .table-wrapper {
-    min-height: 350px;
-    max-height: 350px;
-    overflow-y: auto;
-  }
   .details .recentOrders{
-    min-width: 440px;
+    min-width: 48em;
   }
 }
 ::-webkit-scrollbar{
   width: 6px;
+  height: 8px;
   
 }
 ::-webkit-scrollbar-thumb{
