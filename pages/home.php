@@ -14,7 +14,7 @@ $query_run = mysqli_query($conn, $query);
   <title>Sidebar Menu</title>
   <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
   <link rel="stylesheet" href="../css/home.css?v=1.9">
-  <link rel="stylesheet" href="../css/popup.css?v=1.6">
+  <link rel="stylesheet" href="../css/popup.css?v=1.8">
 </head>
 
 <body class="shrink">
