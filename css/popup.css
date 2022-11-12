@@ -114,6 +114,7 @@ body {
     font-weight: 600;
 }
 .edit{
+    overflow: auto;
     position: absolute;
     top: -150%;
     left: 50%;
@@ -126,8 +127,10 @@ body {
     transition: top 0ms ease-in-out 200ms,
                 opacity 200ms ease-in-out 0ms, 
                 transform 20ms ease-in-out 0ms;
+    max-height: 25rem;
                 
 }
+
 .edit.active{
     top: 50%;
     opacity: 1;
@@ -174,6 +177,9 @@ body {
     outline: none;
     border: 1px solid #aaa;
     border-radius: 5px;
+}
+.edit .form .form-element option{
+    font-size: 20px;
 }
 .edit .form .form-element input[type="checkbox"] {
     margin-right: 5px;

@@ -1,3 +1,9 @@
+<?php 
+$conn = mysqli_connect("localhost","root","","fans");
+
+$query = "UPDATE `pelanggan` SET status = 'non aktif', tanggal_berlangganan = date(now()) WHERE MONTH(tanggal_berlangganan) != MONTH(date(NOW()))";
+$query_run = mysqli_query($conn, $query);
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,7 +14,7 @@
   <title>Sidebar Menu</title>
   <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
   <link rel="stylesheet" href="../css/home.css?v=1.9">
-  <link rel="stylesheet" href="../css/popup.css?v=1.4">
+  <link rel="stylesheet" href="../css/popup.css?v=1.6">
 </head>
 
 <body class="shrink">
@@ -22,7 +28,7 @@
     </div>
     <div class="search">
       <i class='bx bx-search'></i>
-      <input type="text" class="hide" placeholder="Quick Search ...">
+      <input type="text" id="search_transaksi" class="hide search_field" placeholder="Quick Search ...">
     </div>
     <div class="sidebar-links">
       <ul>
@@ -151,18 +157,25 @@
 
         if (menu == "transaksi") {
           $('#content').load('transaksi.php');
+          $(".search_field").attr("id", "search_transaksi");
         } else if (menu == "produk") {
           $('#content').load('produk/produk.php');
+          $(".search_field").attr("id", "search_produk");
         } else if (menu == "pelanggan") {
           $('#content').load('pelanggan/pelanggan.php');
+          $(".search_field").attr("id", "search_pelanggan");
         } else if (menu == "portfolio") {
           $('#content').load('portfolio.php');
+          $(".search_field").attr("id", "search_portfolio");
         } else if (menu == "akun") {
           $('#content').load('akun.php');
+          $(".search_field").attr("id", "search_akun");
         } else if (menu == "riwayat") {
           $('#content').load('riwayat.php');
+          $(".search_field").attr("id", "search_riwayat");
         }else if (menu == "faq") {
           $('#content').load('faq.php');
+          $(".search_field").attr("id", "search_faq");
         }
       });
     });

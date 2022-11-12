@@ -23,6 +23,8 @@ function auto(){
 $conn = mysqli_connect("localhost","root","","fans");
 $perintah="select * from produk order by kode_produk ASC";
 $query=mysqli_query($conn,$perintah);
+
+$query_edit=mysqli_query($conn,$perintah);
 ?>
 <main>
     <!-- table -->
@@ -58,7 +60,7 @@ $query=mysqli_query($conn,$perintah);
         <div class="form">
             <h2>Tambah Data</h2>
             <div class="form-element">
-                <input type="text" id="kode" name="kode" placeholder="Masukkan kode" value="<?= auto(); ?>" readonly>
+                <input type="hidden" id="kode" name="kode" placeholder="Masukkan kode" value="<?= auto(); ?>" readonly>
             </div>
             <div class="form-element">
                 <label for="nama">Nama</label>
@@ -78,26 +80,22 @@ $query=mysqli_query($conn,$perintah);
                     onkeypress="return onlyNumberKey(event)">
             </div>
             <div class="form-element">
-                <label for="status">Status</label>
-                <input type="text" id="status" name="status" placeholder="Masukkan Status" autocomplete="off">
-            </div>
-            <div class="form-element">
                 <label for="nama_produk" >Nama Produk</label>
                 <select name="pilihProduk" id="pilihProduk">
                 <option>==Pilih barang==</option>
                 <?php while($data=mysqli_fetch_array($query)){?>
-                <option data-harga="<?= $data['harga_produk']; ?>" data-kode="<?= $data['kode_produk']; ?>"><?php echo $data['nama_produk'];?></option>
+                <option data-harga="<?= $data['harga_produk']; ?>" data-nama="<?= $data['nama_produk']; ?>"><?php echo $data['nama_produk'];?></option>
                 <?php } ?>
                 </select>
             </div>
             <div class="form-element">
-                <input type="text" id="kode_produk" name="kode_produk" placeholder="Masukkan kode produk" readonly>
+                <input type="hidden" id="nama_produk" name="nama_produk" placeholder="Masukkan nama produk" readonly>
             </div>
             <div class="form-element">
-                <input type="text" id="harga" name="harga" placeholder="Masukkan kode harga" readonly>
+                <input type="hidden" id="harga" name="harga" placeholder="Masukkan kode harga" readonly>
             </div>
             <div class="form-element">
-                <input type="hidden" id="tanggal" name="tanggal" placeholder="Masukkan Tanggal" readonly>
+                <input type="hidden" id="tanggal" name="tanggal" placeholder="Masukkan Tanggal" value="<?php echo date("Y-m-d") ?>" readonly>
             </div>
             <div class="form-element">
                 <button type="button" id="submit">Tambah</button>
@@ -113,20 +111,38 @@ $query=mysqli_query($conn,$perintah);
             <input type="hidden" name="" id="id_edit">
             <div class="form-element">
                 <label for="nama">Nama</label>
-                <input type="text" id="nama_edit" placeholder="Masukkan Nama">
+                <input type="text" id="nama_edit" name="nama" placeholder="Masukkan Nama" autocomplete="off">
             </div>
-
             <div class="form-element">
-                <label for="harga">Harga</label>
-                <input type="text" id="harga_edit" placeholder="Masukkan Harga"
+                <label for="email">Email</label>
+                <input type="email" id="email_edit" name="email" placeholder="Masukkan Email" autocomplete="off">
+            </div>
+            <div class="form-element">
+                <label for="password">Password</label>
+                <input type="password" id="password_edit" name="password" placeholder="Masukkan Password" autocomplete="off">
+            </div>
+            <div class="form-element">
+                <label for="nomer_hp">Nomer HP</label>
+                <input type="text" id="nomer_hp_edit" name="nomer_hp" placeholder="Masukkan Nomer HP" autocomplete="off"
                     onkeypress="return onlyNumberKey(event)">
             </div>
             <div class="form-element">
-                <label for="stok">Stok</label>
-                <input type="text" id="stok_edit" placeholder="Masukkan Stok" onkeypress="return onlyNumberKey(event)">
+                <label for="nama_produk" >Nama Produk</label>
+                <select name="pilihProduk_edit" id="pilihProduk_edit">
+                <option>==Pilih barang==</option>
+                <?php while($data_edit=mysqli_fetch_array($query_edit)){?>
+                <option data-harga="<?= $data_edit['harga_produk']; ?>" data-nama="<?= $data_edit['nama_produk']; ?>"><?php echo $data_edit['nama_produk'];?></option>
+                <?php } ?>
+                </select>
             </div>
             <div class="form-element">
-                <button id="edit_button">Edit</button>
+                <input type="hidden" id="nama_produk_edit" name="nama_produk_edit" placeholder="Masukkan nama produk" readonly>
+            </div>
+            <div class="form-element">
+                <input type="hidden" id="harga_edit" name="harga_edit" placeholder="Masukkan kode harga" readonly>
+            </div>
+            <div class="form-element">
+                <button type="button" id="submit_edit">Edit</button>
             </div>
         </div>
     </div>
@@ -172,7 +188,7 @@ $query=mysqli_query($conn,$perintah);
     function hapus() {
         $(document).on("click", "#btn-hapus", function () {
 
-            var kode_produk = $(this).closest('tr').find('.produk_id').text();
+            var kode_pelanggan = $(this).closest('tr').find('.pelanggan_id').text();
             // alert(stud_id);
             Swal.fire({
                 title: 'Yakin ingin menghapus?',
@@ -186,10 +202,10 @@ $query=mysqli_query($conn,$perintah);
                 if (result.value) {
                     $.ajax({
                         type: "POST",
-                        url: "produk/code.php",
+                        url: "pelanggan/code.php",
                         data: {
                             'checking_delete': true,
-                            'kode_produk': kode_produk,
+                            'kode_pelanggan': kode_pelanggan,
                         },
                         success: function (response) {
                             // console.log(response);
@@ -213,24 +229,30 @@ $query=mysqli_query($conn,$perintah);
     }
 
     function editData() {
-        $('#edit_button').click(function (e) {
+        $('#submit_edit').click(function (e) {
             e.preventDefault();
 
             var kode = $('#id_edit').val();
             var nama = $('#nama_edit').val();
+            var email = $('#email_edit').val();
+            var password = $('#password_edit').val();
+            var nomer_hp = $('#nomer_hp_edit').val();
+            var nama_produk = $('#nama_produk_edit').val();
             var harga = $('#harga_edit').val();
-            var stok = $('#stok_edit').val();
 
-            if (nama != '' & harga != '' & stok != '') {
+            if (kode != '' & nama != '' & email != '' & password != '' & nomer_hp != '' & nama_produk != '' & harga != '' ) {
                 $.ajax({
                     type: "POST",
-                    url: "produk/code.php",
+                    url: "pelanggan/code.php",
                     data: {
                         'checking_update': true,
-                        'kode_produk': kode,
-                        'nama_produk': nama,
+                        'kode_pelanggan': kode,
+                        'nama_pelanggan': nama,
+                        'email_pelanggan': email,
+                        'password': password,
+                        'nomer_hp': nomer_hp,
+                        'nama_produk': nama_produk,
                         'harga_produk': harga,
-                        'stok': stok,
                     },
                     success: function (response) {
                         // console.log(response);
@@ -268,24 +290,27 @@ $query=mysqli_query($conn,$perintah);
     function cek_edit() {
         $(document).on("click", "#btn-edit", function () {
 
-            var kode_produk = $(this).closest('tr').find('.produk_id').text();
+            var kode_pelanggan = $(this).closest('tr').find('.pelanggan_id').text();
             // alert(stud_id);
 
             $.ajax({
                 type: "POST",
-                url: "produk/code.php",
+                url: "pelanggan/code.php",
                 data: {
                     'checking_edit': true,
-                    'kode_produk': kode_produk,
+                    'kode_pelanggan': kode_pelanggan,
                 },
                 success: function (response) {
                     // console.log(response);
                     $.each(response, function (key, value) {
                         // console.log(studview['fname']);
-                        $('#id_edit').val(value['kode_produk']);
-                        $('#nama_edit').val(value['nama_produk']);
+                        $('#id_edit').val(value['kode_pelanggan']);
+                        $('#nama_edit').val(value['nama_pelanggan']);
+                        $('#email_edit').val(value['email_pelanggan']);
+                        $('#password_edit').val(value['password']);
+                        $('#nomer_hp_edit').val(value['nomer_hp']);
+                        $('#nama_produk_edit').val(value['nama_produk']);
                         $('#harga_edit').val(value['harga_produk']);
-                        $('#stok_edit').val(value['stok']);
                     });
                     document.querySelector(".edit").classList.add("active");
                     $(".edit").css({
@@ -306,7 +331,7 @@ $query=mysqli_query($conn,$perintah);
                 $.each(response, function (key, value) {
                     // console.log(value['fname']);
                     $('.tabel').append('<tr>' +
-                        '<td class="produk_id" style="width: 20%;">' + value['kode_pelanggan'] + '</td>\
+                        '<td class="pelanggan_id" style="width: 20%;">' + value['kode_pelanggan'] + '</td>\
                                 <td style="width: 25%;">' + value['nama_pelanggan'] + '</td>\
                                 <td style="width: 25%;">' + value['nomer_hp'] + '</td>\
                                 <td style="width: 20%;">' + value['status'] + '</td>\
@@ -340,19 +365,27 @@ $query=mysqli_query($conn,$perintah);
 
             var kode = $('#kode').val();
             var nama = $('#nama').val();
+            var email = $('#email').val();
+            var password = $('#password').val();
+            var nomer_hp = $('#nomer_hp').val();
+            var nama_produk = $('#nama_produk').val();
             var harga = $('#harga').val();
-            var stok = $('#stok').val();
+            var tanggal = $('#tanggal').val();
 
-            if (kode != '' & nama != '' & harga != '' & stok != '') {
+            if (kode != '' & nama != '' & email != '' & password != '' & nomer_hp != '' & nama_produk != '' & harga != '' ) {
                 $.ajax({
                     type: "POST",
-                    url: "produk/code.php",
+                    url: "pelanggan/code.php",
                     data: {
                         'checking_add': true,
-                        'kode_produk': kode,
-                        'nama_produk': nama,
+                        'kode_pelanggan': kode,
+                        'nama_pelanggan': nama,
+                        'email_pelanggan': email,
+                        'password': password,
+                        'nomer_hp': nomer_hp,
+                        'nama_produk': nama_produk,
                         'harga_produk': harga,
-                        'stok': stok,
+                        'tanggal_berlangganan': tanggal,
                     },
                     success: function (response) {
                         // console.log(response);
@@ -371,8 +404,12 @@ $query=mysqli_query($conn,$perintah);
                         getdata();
                         $('#kode').val(response);
                         $('#nama').val("");
+                        $('#email').val("");
+                        $('#password').val("");
+                        $('#nomer_hp').val("");
+                        $('#nama_produk').val("");
                         $('#harga').val("");
-                        $('#stok').val("");
+                        $('#tanggal').val("");
                     }
                 });
 
@@ -394,11 +431,22 @@ $query=mysqli_query($conn,$perintah);
     $('#pilihProduk').on('change', function(){
   // ambil data dari elemen option yang dipilih
   const harga = $('#pilihProduk option:selected').data('harga');
-  const kode = $('#pilihProduk option:selected').data('kode');
+  const nama = $('#pilihProduk option:selected').data('nama');
   
   // tampilkan data ke element
   $('[name=harga]').val(harga);
-  $('[name=kode_produk]').val(kode);
+  $('[name=nama_produk]').val(nama);
+  
+
+});
+    $('#pilihProduk_edit').on('change', function(){
+  // ambil data dari elemen option yang dipilih
+  const harga = $('#pilihProduk_edit option:selected').data('harga');
+  const nama = $('#pilihProduk_edit option:selected').data('nama');
+  
+  // tampilkan data ke element
+  $('[name=harga_edit]').val(harga);
+  $('[name=nama_produk_edit]').val(nama);
   
 
 });
