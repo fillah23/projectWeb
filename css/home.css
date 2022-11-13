@@ -61,8 +61,7 @@ main {
   color: #1B1717;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center
+  
 }
 
 main h1 {
@@ -70,7 +69,8 @@ main h1 {
 }
 
 main .copyright {
-  margin-top: auto;
+  position: absolute;
+  bottom: 5px;
   font-size: 0.9rem;
 }
 
@@ -389,14 +389,7 @@ body.shrink .admin-profile {
 body.shrink .tooltip {
   display: grid;
 }
-.footer {
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  color: #1B1717;
-  text-align: center;
-}
+
 .details{
   width: 100%;
 }
@@ -406,11 +399,12 @@ body.shrink .tooltip {
   height: 38em;
   background: white;
   padding: 20px;
-  box-shadow: 0 7px 25px rgba(0,0,0,0.08);
+  /* box-shadow: 0 7px 25px rgba(0,0,0,0.08); */
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
   border-radius: 20px;
 }
 .recentOrders{
-  max-width: 72em;
+  max-width: 80em;
   min-width: 65em;
 }
 .cardHeader

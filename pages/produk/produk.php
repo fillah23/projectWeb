@@ -21,91 +21,90 @@ function auto(){
 
 }
 ?>
-<main>
-    <!-- table -->
-    <div class="details">
-        <div class="recentOrders">
-            <div class="cardHeader">
-                <h2>
-                    Produk
-                </h2>
-                <a href="#" id="show-login" class="btn" onclick="bg()">Tambah</a>
-            </div>
-            <div class="table-wrapper">
-                <table>
-                    <thead>
-                        <tr>
-                            <td>Kode Produk</td>
-                            <td>Nama</td>
-                            <td>Harga</td>
-                            <td>Stok</td>
-                            <td>Aksi</td>
-                        </tr>
-                    </thead>
-                    <tbody class="tabel">
-                    </tbody>
-                </table>
-            </div>
+<!-- table -->
+<div class="details">
+    <div class="recentOrders">
+        <div class="cardHeader">
+            <h2>
+                Produk
+            </h2>
+            <a href="#" id="show-login" class="btn" onclick="bg()">Tambah</a>
+        </div>
+        <div id="table-produk" class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <td>ID</td>
+                        <td>Nama</td>
+                        <td>Harga</td>
+                        <td>Stok</td>
+                        <td>Aksi</td>
+                    </tr>
+                </thead>
+                <tbody class="tabel">
+                </tbody>
+            </table>
+        </div>
 
+    </div>
+</div>
+
+<div class="popup">
+    <div class="close-btn">&times;</div>
+
+    <div class="form">
+        <h2>Tambah Data</h2>
+        <div class="form-element">
+            <!-- <label for="kode">kode</label> -->
+            <input type="hidden" id="kode" name="kode" placeholder="Masukkan kode" value="<?= auto(); ?>" readonly>
+        </div>
+        <div class="form-element">
+            <label for="nama">Nama</label>
+            <input type="text" id="nama" name="nama" placeholder="Masukkan Nama" autocomplete="off">
+        </div>
+
+        <div class="form-element">
+            <label for="harga">Harga</label>
+            <input type="text" id="harga" name="harga" placeholder="Masukkan Harga" autocomplete="off"
+                onkeypress="return onlyNumberKey(event)">
+        </div>
+        <div class="form-element">
+            <label for="stok">Stok</label>
+            <input type="text" id="stok" name="stok" placeholder="Masukkan Stok" autocomplete="off"
+                onkeypress="return onlyNumberKey(event)">
+        </div>
+        <div class="form-element">
+            <button type="button" id="submit">Tambah</button>
         </div>
     </div>
 
-    <div class="popup">
-        <div class="close-btn">&times;</div>
 
-        <div class="form">
-            <h2>Tambah Data</h2>
-            <div class="form-element">
-                <!-- <label for="kode">kode</label> -->
-                <input type="hidden" id="kode" name="kode" placeholder="Masukkan kode" value="<?= auto(); ?>" readonly>
-            </div>
-            <div class="form-element">
-                <label for="nama">Nama</label>
-                <input type="text" id="nama" name="nama" placeholder="Masukkan Nama" autocomplete="off">
-            </div>
-
-            <div class="form-element">
-                <label for="harga">Harga</label>
-                <input type="text" id="harga" name="harga" placeholder="Masukkan Harga" autocomplete="off"
-                    onkeypress="return onlyNumberKey(event)">
-            </div>
-            <div class="form-element">
-                <label for="stok">Stok</label>
-                <input type="text" id="stok" name="stok" placeholder="Masukkan Stok" autocomplete="off"
-                    onkeypress="return onlyNumberKey(event)">
-            </div>
-            <div class="form-element">
-                <button type="button" id="submit">Tambah</button>
-            </div>
+</div>
+<div class="edit">
+    <div class="close-btn" id="close-edit">&times;</div>
+    <div class="form">
+        <h2>Edit Data</h2>
+        <input type="hidden" name="" id="id_edit">
+        <div class="form-element">
+            <label for="nama">Nama</label>
+            <input type="text" id="nama_edit" placeholder="Masukkan Nama">
         </div>
 
-
-    </div>
-    <div class="edit">
-        <div class="close-btn" id="close-edit">&times;</div>
-        <div class="form">
-            <h2>Edit Data</h2>
-            <input type="hidden" name="" id="id_edit">
-            <div class="form-element">
-                <label for="nama">Nama</label>
-                <input type="text" id="nama_edit" placeholder="Masukkan Nama">
-            </div>
-
-            <div class="form-element">
-                <label for="harga">Harga</label>
-                <input type="text" id="harga_edit" placeholder="Masukkan Harga"
-                    onkeypress="return onlyNumberKey(event)">
-            </div>
-            <div class="form-element">
-                <label for="stok">Stok</label>
-                <input type="text" id="stok_edit" placeholder="Masukkan Stok" onkeypress="return onlyNumberKey(event)">
-            </div>
-            <div class="form-element">
-                <button id="edit_button">Edit</button>
-            </div>
+        <div class="form-element">
+            <label for="harga">Harga</label>
+            <input type="text" id="harga_edit" placeholder="Masukkan Harga" onkeypress="return onlyNumberKey(event)">
+        </div>
+        <div class="form-element">
+            <label for="stok">Stok</label>
+            <input type="text" id="stok_edit" placeholder="Masukkan Stok" onkeypress="return onlyNumberKey(event)">
+        </div>
+        <div class="form-element">
+            <button id="edit_button">Edit</button>
         </div>
     </div>
-</main>
+</div>
+
+
 <script>
     document.querySelector("#show-login").addEventListener("click", function () {
         document.querySelector(".popup").classList.add("active");
@@ -364,4 +363,10 @@ function auto(){
 
         });
     }
+
+    $(document).ready(function(){
+    $('#search_produk').on('keyup',function(){
+    $('#table-produk').load('produk/search.php?keyword=' +$('#search_produk').val());
+    });
+    });
 </script>

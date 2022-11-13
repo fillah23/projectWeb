@@ -26,167 +26,175 @@ $query=mysqli_query($conn,$perintah);
 
 $query_edit=mysqli_query($conn,$perintah);
 ?>
-<main>
-    <!-- table -->
-    <div class="details">
-        <div class="recentOrders">
-            <div class="cardHeader">
-                <h2>
-                    Pelanggan
-                </h2>
-                <a href="#" id="show-login" class="btn" onclick="bg()">Tambah</a>
-            </div>
-            <div class="table-wrapper">
-                <table>
-                    <thead>
-                        <tr>
-                        <td>Pelanggan</td>
-                        <td>Nama</td>
-                        <td>nomer hp</td>
-                        <td>status</td>
-                        <td>Aksi</td>
-                        </tr>
-                    </thead>
-                    <tbody class="tabel">
-                    </tbody>
-                </table>
-            </div>
 
+<!-- table -->
+<div class="details">
+    <div class="recentOrders">
+        <div class="cardHeader">
+            <h2>
+                Pelanggan
+            </h2>
+            <a href="#" id="show-login" class="btn">Tambah</a>
         </div>
-    </div>
+        <div id="table-pelanggan" class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <td>ID</td>
+                        <td>Nama</td>
+                        <td>Nomer hp</td>
+                        <td>Produk</td>
+                        <td>Status</td>
+                        <td>Aksi</td>
+                    </tr>
+                </thead>
+                <tbody class="tabel">
+                </tbody>
+            </table>
+        </div>
 
-    <div class="popup">
-        <div class="close-btn">&times;</div>
-        <div class="form">
-            <h2>Tambah Data</h2>
-            <div class="form-element">
-                <input type="hidden" id="kode" name="kode" placeholder="Masukkan kode" value="<?= auto(); ?>" readonly>
-            </div>
-            <div class="form-element">
-                <label for="nama">Nama</label>
-                <input type="text" id="nama" name="nama" placeholder="Masukkan Nama" autocomplete="off">
-            </div>
-            <div class="form-element">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" placeholder="Masukkan Email" autocomplete="off">
-            </div>
-            <div class="form-element">
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" placeholder="Masukkan Password" autocomplete="off">
-            </div>
-            <div class="form-element">
-                <label for="nomer_hp">Nomer HP</label>
-                <input type="text" id="nomer_hp" name="nomer_hp" placeholder="Masukkan Nomer HP" autocomplete="off"
-                    onkeypress="return onlyNumberKey(event)">
-            </div>
-            <div class="form-element">
-                <label for="nama_produk" >Nama Produk</label>
-                <select name="pilihProduk" id="pilihProduk">
+    </div>
+</div>
+
+<div class="popup">
+    <div class="close-btn">&times;</div>
+    <div class="form">
+        <h2>Tambah Data</h2>
+        <div class="form-element">
+            <input type="hidden" id="kode" name="kode" placeholder="Masukkan kode" value="<?= auto(); ?>" readonly>
+        </div>
+        <div class="form-element">
+            <label for="nama">Nama</label>
+            <input type="text" id="nama" name="nama" placeholder="Masukkan Nama" autocomplete="off">
+        </div>
+        <div class="form-element">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="Masukkan Email" autocomplete="off">
+        </div>
+        <div class="form-element">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" placeholder="Masukkan Password" autocomplete="off">
+        </div>
+        <div class="form-element">
+            <label for="nomer_hp">Nomer HP</label>
+            <input type="text" id="nomer_hp" name="nomer_hp" placeholder="Masukkan Nomer HP" autocomplete="off"
+                onkeypress="return onlyNumberKey(event)">
+        </div>
+        <div class="form-element">
+            <label for="nama_produk">Nama Produk</label>
+            <select name="pilihProduk" id="pilihProduk">
                 <option>==Pilih barang==</option>
                 <?php while($data=mysqli_fetch_array($query)){?>
-                <option data-harga="<?= $data['harga_produk']; ?>" data-nama="<?= $data['nama_produk']; ?>"><?php echo $data['nama_produk'];?></option>
+                <option data-harga="<?= $data['harga_produk']; ?>" data-nama="<?= $data['nama_produk']; ?>">
+                    <?php echo $data['nama_produk'];?></option>
                 <?php } ?>
-                </select>
-            </div>
-            <div class="form-element">
-                <input type="hidden" id="nama_produk" name="nama_produk" placeholder="Masukkan nama produk" readonly>
-            </div>
-            <div class="form-element">
-                <input type="hidden" id="harga" name="harga" placeholder="Masukkan kode harga" readonly>
-            </div>
-            <div class="form-element">
-                <input type="hidden" id="tanggal" name="tanggal" placeholder="Masukkan Tanggal" value="<?php echo date("Y-m-d") ?>" readonly>
-            </div>
-            <div class="form-element">
-                <button type="button" id="submit">Tambah</button>
-            </div>
+            </select>
         </div>
-
-
+        <div class="form-element">
+            <input type="hidden" id="nama_produk" name="nama_produk" placeholder="Masukkan nama produk" readonly>
+        </div>
+        <div class="form-element">
+            <input type="hidden" id="harga" name="harga" placeholder="Masukkan kode harga" readonly>
+        </div>
+        <div class="form-element">
+            <input type="hidden" id="tanggal" name="tanggal" placeholder="Masukkan Tanggal"
+                value="<?php echo date("Y-m-d") ?>" readonly>
+        </div>
+        <div class="form-element">
+            <button type="button" id="submit">Tambah</button>
+        </div>
     </div>
-    <div class="edit">
-        <div class="close-btn" id="close-edit">&times;</div>
-        <div class="form">
-            <h2>Edit Data</h2>
-            <input type="hidden" name="" id="id_edit">
-            <div class="form-element">
-                <label for="nama">Nama</label>
-                <input type="text" id="nama_edit" name="nama" placeholder="Masukkan Nama" autocomplete="off">
-            </div>
-            <div class="form-element">
-                <label for="email">Email</label>
-                <input type="email" id="email_edit" name="email" placeholder="Masukkan Email" autocomplete="off">
-            </div>
-            <div class="form-element">
-                <label for="password">Password</label>
-                <input type="password" id="password_edit" name="password" placeholder="Masukkan Password" autocomplete="off">
-            </div>
-            <div class="form-element">
-                <label for="nomer_hp">Nomer HP</label>
-                <input type="text" id="nomer_hp_edit" name="nomer_hp" placeholder="Masukkan Nomer HP" autocomplete="off"
-                    onkeypress="return onlyNumberKey(event)">
-            </div>
-            <div class="form-element">
-                <label for="nama_produk" >Nama Produk</label>
-                <select name="pilihProduk_edit" id="pilihProduk_edit">
-                <option>==Pilih barang==</option>
+
+
+</div>
+<div class="edit">
+    <div class="close-btn" id="close-edit">&times;</div>
+    <div class="form">
+        <h2>Edit Data</h2>
+        <input type="hidden" name="" id="id_edit">
+        <div class="form-element">
+            <label for="nama">Nama</label>
+            <input type="text" id="nama_edit" name="nama" placeholder="Masukkan Nama" autocomplete="off">
+        </div>
+        <div class="form-element">
+            <label for="email">Email</label>
+            <input type="email" id="email_edit" name="email" placeholder="Masukkan Email" autocomplete="off">
+        </div>
+        <div class="form-element">
+            <label for="password">Password</label>
+            <input type="password" id="password_edit" name="password" placeholder="Masukkan Password"
+                autocomplete="off">
+        </div>
+        <div class="form-element">
+            <label for="nomer_hp">Nomer HP</label>
+            <input type="text" id="nomer_hp_edit" name="nomer_hp" placeholder="Masukkan Nomer HP" autocomplete="off"
+                onkeypress="return onlyNumberKey(event)">
+        </div>
+        <div class="form-element">
+            <label for="">Status</label>
+            <select name="" id="status">
+                <option>aktif</option>
+                <option>non aktif</option>
+            </select>
+        </div>
+        <div class="form-element">
+            <label for="nama_produk">Nama Produk</label>
+            <select name="pilihProduk_edit" id="pilihProduk_edit">
                 <?php while($data_edit=mysqli_fetch_array($query_edit)){?>
-                <option data-harga="<?= $data_edit['harga_produk']; ?>" data-nama="<?= $data_edit['nama_produk']; ?>"><?php echo $data_edit['nama_produk'];?></option>
+                <option data-harga="<?= $data_edit['harga_produk']; ?>" data-nama="<?= $data_edit['nama_produk']; ?>">
+                    <?php echo $data_edit['nama_produk'];?></option>
                 <?php } ?>
-                </select>
-            </div>
-            <div class="form-element">
-                <input type="hidden" id="nama_produk_edit" name="nama_produk_edit" placeholder="Masukkan nama produk" readonly>
-            </div>
-            <div class="form-element">
-                <input type="hidden" id="harga_edit" name="harga_edit" placeholder="Masukkan kode harga" readonly>
-            </div>
-            <div class="form-element">
-                <button type="button" id="submit_edit">Edit</button>
-            </div>
+            </select>
+        </div>
+        <div class="form-element">
+            <input type="hidden" id="harga_edit" name="harga_edit" placeholder="Masukkan kode harga" readonly>
+        </div>
+        <div class="form-element">
+            <button type="button" id="submit_edit">Edit</button>
         </div>
     </div>
-    <div class="view">
-        <div class="close-btn">&times;</div>
-        <div class="form">
-            <h2>Lihat Data</h2>
-            <div class="form-element">
-                <p class="id_view" hidden></p>
-                <label for="">Nama :</label>
-                <p><span class="nama_view"></span></p>
-                
-            </div>
-            <div class="form-element">
-                <label for="">Email :</label>
-                <p><span class="email_view"></span></p>
-            </div>
-            <div class="form-element">
-                <label for="">Password : </label>
-                <p><span class="password_view"></span></p>
-            </div>
-            <div class="form-element">
-                <label for="">Nomer hp : </label>
-                <p><span class="nomer_hp_view"></span></p>
-            </div>
-            <div class="form-element">
-                <label for="">Status : </label>
-                <p><span class="status_view"></span></p>
-            </div>
-            <div class="form-element">
-                <label for="">Produk : </label>
-                <p><span class="nama_produk_view"></span></p>
-            </div>
-            <div class="form-element">
-                <label for="">Harga : </label>
-                <p><span class="harga_view"></span></p>
-            </div>
-            <div class="form-element">
-                <label for="">Tanggal berlangganan : </label>
-                <p><span class="tanggal_view"></span></p>
-            </div>
+</div>
+<div class="view">
+    <div class="close-btn">&times;</div>
+    <div class="form">
+        <h2>Lihat Data</h2>
+        <div class="form-element">
+            <p class="id_view" hidden></p>
+            <label for="">Nama :</label>
+            <p><span class="nama_view"></span></p>
+
+        </div>
+        <div class="form-element">
+            <label for="">Email :</label>
+            <p><span class="email_view"></span></p>
+        </div>
+        <div class="form-element">
+            <label for="">Password : </label>
+            <p><span class="password_view"></span></p>
+        </div>
+        <div class="form-element">
+            <label for="">Nomer hp : </label>
+            <p><span class="nomer_hp_view"></span></p>
+        </div>
+        <div class="form-element">
+            <label for="">Status : </label>
+            <p><span class="status_view"></span></p>
+        </div>
+        <div class="form-element">
+            <label for="">Produk : </label>
+            <p><span class="nama_produk_view"></span></p>
+        </div>
+        <div class="form-element">
+            <label for="">Harga : </label>
+            <p><span class="harga_view"></span></p>
+        </div>
+        <div class="form-element">
+            <label for="">Tanggal berlangganan : </label>
+            <p><span class="tanggal_view"></span></p>
         </div>
     </div>
-</main>
+</div>
+
 <script>
     document.querySelector("#show-login").addEventListener("click", function () {
         document.querySelector(".popup").classList.add("active");
@@ -231,43 +239,44 @@ $query_edit=mysqli_query($conn,$perintah);
         hapus();
         viewData();
     });
+
     function viewData() {
-            $(document).on("click", "#btn-view", function () {
+        $(document).on("click", "#btn-view", function () {
 
-                var kode = $(this).closest('tr').find('.pelanggan_id').text();
-                // alert(stud_id);
+            var kode = $(this).closest('tr').find('.pelanggan_id').text();
+            // alert(stud_id);
 
-                $.ajax({
-                    type: "POST",
-                    url: "pelanggan/code.php",
-                    data: {
-                        'checking_view': true,
-                        'kode_pelanggan': kode,
-                    },
-                    success: function (response) {
-                        // console.log(response);
-                        $.each(response, function (key, studview) {
-                            // console.log(studview['fname']);
-                            $('.id_view').text(studview['kode_pelanggan']);
-                            $('.nama_view').text(studview['nama_pelanggan']);
-                            $('.email_view').text(studview['email_pelanggan']);
-                            $('.password_view').text(studview['password']);
-                            $('.nomer_hp_view').text(studview['nomer_hp']);
-                            $('.status_view').text(studview['status']);
-                            $('.nama_produk_view').text(studview['nama_produk']);
-                            $('.harga_view').text(studview['harga_produk']);
-                            $('.tanggal_view').text(studview['tanggal_berlangganan']);
-                            
-                        });
-                        document.querySelector(".view").classList.add("active");
-                        $(".view").css({
-                            "box-shadow": "0 0 0 500vmax rgb(0 0 0 / 0.5)"
-                        });
-                    }
-                });
+            $.ajax({
+                type: "POST",
+                url: "pelanggan/code.php",
+                data: {
+                    'checking_view': true,
+                    'kode_pelanggan': kode,
+                },
+                success: function (response) {
+                    // console.log(response);
+                    $.each(response, function (key, studview) {
+                        // console.log(studview['fname']);
+                        $('.id_view').text(studview['kode_pelanggan']);
+                        $('.nama_view').text(studview['nama_pelanggan']);
+                        $('.email_view').text(studview['email_pelanggan']);
+                        $('.password_view').text(studview['password']);
+                        $('.nomer_hp_view').text(studview['nomer_hp']);
+                        $('.status_view').text(studview['status']);
+                        $('.nama_produk_view').text(studview['nama_produk']);
+                        $('.harga_view').text(studview['harga_produk']);
+                        $('.tanggal_view').text(studview['tanggal_berlangganan']);
 
+                    });
+                    document.querySelector(".view").classList.add("active");
+                    $(".view").css({
+                        "box-shadow": "0 0 0 500vmax rgb(0 0 0 / 0.5)"
+                    });
+                }
             });
-        }
+
+        });
+    }
 
     function hapus() {
         $(document).on("click", "#btn-hapus", function () {
@@ -321,10 +330,12 @@ $query_edit=mysqli_query($conn,$perintah);
             var email = $('#email_edit').val();
             var password = $('#password_edit').val();
             var nomer_hp = $('#nomer_hp_edit').val();
-            var nama_produk = $('#nama_produk_edit').val();
+            var nama_produk = $('#pilihProduk_edit').val();
             var harga = $('#harga_edit').val();
+            var status = $('#status').val();
 
-            if (kode != '' & nama != '' & email != '' & password != '' & nomer_hp != '' & nama_produk != '' & harga != '' ) {
+            if (kode != '' & nama != '' & email != '' & password != '' & nomer_hp != '' & nama_produk != '' &
+                harga != '') {
                 $.ajax({
                     type: "POST",
                     url: "pelanggan/code.php",
@@ -337,6 +348,7 @@ $query_edit=mysqli_query($conn,$perintah);
                         'nomer_hp': nomer_hp,
                         'nama_produk': nama_produk,
                         'harga_produk': harga,
+                        'status': status,
                     },
                     success: function (response) {
                         // console.log(response);
@@ -393,8 +405,9 @@ $query_edit=mysqli_query($conn,$perintah);
                         $('#email_edit').val(value['email_pelanggan']);
                         $('#password_edit').val(value['password']);
                         $('#nomer_hp_edit').val(value['nomer_hp']);
-                        $('#nama_produk_edit').val(value['nama_produk']);
+                        $('#pilihProduk_edit').val(value['nama_produk']);
                         $('#harga_edit').val(value['harga_produk']);
+                        $('#status').val(value['status']);
                     });
                     document.querySelector(".edit").classList.add("active");
                     $(".edit").css({
@@ -415,9 +428,11 @@ $query_edit=mysqli_query($conn,$perintah);
                 $.each(response, function (key, value) {
                     // console.log(value['fname']);
                     $('.tabel').append('<tr>' +
-                        '<td class="pelanggan_id" style="width: 20%;">' + value['kode_pelanggan'] + '</td>\
-                                <td style="width: 25%;">' + value['nama_pelanggan'] + '</td>\
-                                <td style="width: 25%;">' + value['nomer_hp'] + '</td>\
+                        '<td class="pelanggan_id" style="width: 10%;">' + value[
+                            'kode_pelanggan'] + '</td>\
+                                <td style="width: 20%;">' + value['nama_pelanggan'] + '</td>\
+                                <td style="width: 20%;">' + value['nomer_hp'] + '</td>\
+                                <td style="width: 22%;">' + value['nama_produk'] + '</td>\
                                 <td style="width: 18%;">' + value['status'] + '</td>\
                                 <td style="width: 12%;">\
                                 <a href="#" id="btn-view">\
@@ -464,7 +479,8 @@ $query_edit=mysqli_query($conn,$perintah);
             var harga = $('#harga').val();
             var tanggal = $('#tanggal').val();
 
-            if (kode != '' & nama != '' & email != '' & password != '' & nomer_hp != '' & nama_produk != '' & harga != '' ) {
+            if (kode != '' & nama != '' & email != '' & password != '' & nomer_hp != '' & nama_produk != '' &
+                harga != '') {
                 $.ajax({
                     type: "POST",
                     url: "pelanggan/code.php",
@@ -520,26 +536,19 @@ $query_edit=mysqli_query($conn,$perintah);
     }
 </script>
 <script>
-    $('#pilihProduk').on('change', function(){
-  // ambil data dari elemen option yang dipilih
-  const harga = $('#pilihProduk option:selected').data('harga');
-  const nama = $('#pilihProduk option:selected').data('nama');
-  
-  // tampilkan data ke element
-  $('[name=harga]').val(harga);
-  $('[name=nama_produk]').val(nama);
-  
+    $('#pilihProduk').on('change', function () {
+        // ambil data dari elemen option yang dipilih
+        const harga = $('#pilihProduk option:selected').data('harga');
+        const nama = $('#pilihProduk option:selected').data('nama');
 
-});
-    $('#pilihProduk_edit').on('change', function(){
-  // ambil data dari elemen option yang dipilih
-  const harga = $('#pilihProduk_edit option:selected').data('harga');
-  const nama = $('#pilihProduk_edit option:selected').data('nama');
-  
-  // tampilkan data ke element
-  $('[name=harga_edit]').val(harga);
-  $('[name=nama_produk_edit]').val(nama);
-  
+        // tampilkan data ke element
+        $('[name=harga]').val(harga);
+        $('[name=nama_produk]').val(nama);
+    });
 
-});
+    $(document).ready(function(){
+    $('#search_pelanggan').on('keyup',function(){
+    $('#table-pelanggan').load('pelanggan/search.php?keyword=' +$('#search_pelanggan').val());
+    });
+    });
 </script>

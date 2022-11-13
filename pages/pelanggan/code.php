@@ -81,10 +81,11 @@ if(isset($_POST['checking_update']))
     $nomer_hp = $_POST['nomer_hp'];
     $nama_produk = $_POST['nama_produk'];
     $harga_produk = $_POST['harga_produk'];
+    $status = $_POST['status'];
 
     $query = "UPDATE pelanggan SET nama_pelanggan='$nama',email_pelanggan='$email_pelanggan',
-    password='$password',nomer_hp='$nomer_hp',nama_produk='$nama_produk',harga_produk='$harga_produk'
-    WHERE kode_pelanggan='$kode'";
+    password='$password',nomer_hp='$nomer_hp',nama_produk='$nama_produk',harga_produk='$harga_produk',
+    `status`='$status' WHERE kode_pelanggan='$kode'";
     $query_run = mysqli_query($conn, $query);
 
     if($query_run)

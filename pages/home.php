@@ -13,7 +13,7 @@ $query_run = mysqli_query($conn, $query);
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sidebar Menu</title>
   <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
-  <link rel="stylesheet" href="../css/home.css?v=1.9">
+  <link rel="stylesheet" href="../css/home.css?v=2.1">
   <link rel="stylesheet" href="../css/popup.css?v=1.8">
 </head>
 
@@ -28,7 +28,7 @@ $query_run = mysqli_query($conn, $query);
     </div>
     <div class="search">
       <i class='bx bx-search'></i>
-      <input type="text" id="search_transaksi" class="hide search_field" placeholder="Quick Search ...">
+      <input type="text" id="search_transaksi" class="hide search_field" placeholder="Quick Search ..." autocomplete="off">
     </div>
     <div class="sidebar-links">
       <ul>
@@ -85,8 +85,8 @@ $query_run = mysqli_query($conn, $query);
         <li class="tooltip-element" data-tooltip="0">
           <a href="" data-active="4" id="faq" class="menu">
             <div class="icon">
-              <i class='bx bx-message-dots' ></i>
-              <i class='bx bxs-message-dots' ></i>
+              <i class='bx bx-message-dots'></i>
+              <i class='bx bxs-message-dots'></i>
             </div>
             <span class="link hide">FAQ</span>
           </a>
@@ -138,17 +138,17 @@ $query_run = mysqli_query($conn, $query);
       </div>
     </div>
   </nav>
-  <div id="content"></div>
-  <div class="footer">
-        <p class="copyright">
-            &copy; 2022 - <span>Fans Vision</span> All Rights Reserved.
-        </p>
-    </div>
+  <main>
+    <div id="content"></div>
+    <p class="copyright">
+      &copy; 2022 - <span>Fans Vision</span> All Rights Reserved.
+    </p>
+  </main>
   <script src="../js/home.js"></script>
   <script src="../js/jquery-3.6.0.min.js"></script>
   <script>
     $(document).ready(function () {
-      $('#content').load('transaksi.php');
+      $('#content').load('transaksi/transaksi.php');
 
       $('.menu').click(function (e) {
         e.preventDefault();
@@ -156,7 +156,7 @@ $query_run = mysqli_query($conn, $query);
         var menu = $(this).attr('id');
 
         if (menu == "transaksi") {
-          $('#content').load('transaksi.php');
+          $('#content').load('transaksi/transaksi.php');
           $(".search_field").attr("id", "search_transaksi");
         } else if (menu == "produk") {
           $('#content').load('produk/produk.php');
@@ -173,7 +173,7 @@ $query_run = mysqli_query($conn, $query);
         } else if (menu == "riwayat") {
           $('#content').load('riwayat.php');
           $(".search_field").attr("id", "search_riwayat");
-        }else if (menu == "faq") {
+        } else if (menu == "faq") {
           $('#content').load('faq.php');
           $(".search_field").attr("id", "search_faq");
         }
@@ -181,7 +181,7 @@ $query_run = mysqli_query($conn, $query);
     });
   </script>
 
-  
+
 </body>
 
 </html>
