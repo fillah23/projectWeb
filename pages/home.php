@@ -168,7 +168,7 @@ $query_run = mysqli_query($conn, $query);
           $('#content').load('portfolio.php');
           $(".search_field").attr("id", "search_portfolio");
         } else if (menu == "akun") {
-          $('#content').load('akun.php');
+          $('#content').load('akun/akun.php');
           $(".search_field").attr("id", "search_akun");
         } else if (menu == "riwayat") {
           $('#content').load('riwayat.php');
