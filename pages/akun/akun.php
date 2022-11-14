@@ -31,7 +31,7 @@ function auto(){
                 </h2>
                 <a href="#" id="show-login" class="btn" onclick="bg()">Tambah</a>
             </div>
-            <div class="table-wrapper">
+            <div id="table-akun" class="table-wrapper">
                 <table>
                     <thead>
                         <tr>
@@ -385,4 +385,10 @@ function auto(){
 
         });
     }
+
+    $(document).ready(function(){
+    $('#search_akun').on('keyup',function(){
+    $('#table-akun').load('akun/search.php?keyword=' +$('#search_akun').val());
+    });
+    });
 </script>
