@@ -2,7 +2,7 @@
 
 $conn = mysqli_connect("localhost","root","","fans");
 
-$query = "SELECT * FROM akun";
+$query = "SELECT * FROM akun where kode_akun not like '%AA00001%'";
 $query_run = mysqli_query($conn, $query);
 $result_array = [];
 

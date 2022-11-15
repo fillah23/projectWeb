@@ -89,6 +89,7 @@ main .copyright span {
 .sidebar-top .logo {
   width: 2.1rem;
   margin: 0 0.8rem;
+  cursor: pointer;
 }
 
 .sidebar-top h3 {
@@ -404,7 +405,7 @@ body.shrink .tooltip {
   border-radius: 20px;
 }
 .recentOrders{
-  max-width: 80em;
+  max-width: 100em;
   min-width: 65em;
 }
 .cardHeader

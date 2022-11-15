@@ -21,7 +21,6 @@ function auto(){
 
 }
 ?>
-<main>
     <!-- table -->
     <div class="details">
         <div class="recentOrders">
@@ -119,7 +118,7 @@ function auto(){
             </div>
         </div>
     </div>
-</main>
+
 <script>
     document.querySelector("#show-login").addEventListener("click", function () {
         document.querySelector(".popup").classList.add("active");
@@ -277,7 +276,6 @@ function auto(){
                         $('#id_edit').val(value['kode_akun']);
                         $('#nama_edit').val(value['nama_akun']);
                         $('#email_edit').val(value['email_akun']);
-                        $('#password_edit').val(value['password']);
                         $('#level_edit').val(value['level']);
                     });
                     document.querySelector(".edit").classList.add("active");

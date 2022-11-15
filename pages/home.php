@@ -1,8 +1,15 @@
 <?php 
+session_start();
+if(!isset($_SESSION["login"])){
+	header("Location: login.php");
+	exit;
+}
 $conn = mysqli_connect("localhost","root","","fans");
 
 $query = "UPDATE `pelanggan` SET status = 'non aktif', tanggal_berlangganan = date(now()) WHERE MONTH(tanggal_berlangganan) != MONTH(date(NOW()))";
 $query_run = mysqli_query($conn, $query);
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,7 +20,7 @@ $query_run = mysqli_query($conn, $query);
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sidebar Menu</title>
   <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
-  <link rel="stylesheet" href="../css/home.css?v=2.3">
+  <link rel="stylesheet" href="../css/home.css?v=2.4">
   <link rel="stylesheet" href="../css/popup.css?v=1.8">
 </head>
 
@@ -23,12 +30,14 @@ $query_run = mysqli_query($conn, $query);
       <span class="shrink-btn">
         <i class='bx bx-chevron-left'></i>
       </span>
-      <img src="../images/F .png" class="logo" alt="">
+      <img src="../images/F .png" class="logo" alt="" onclick="toggleFullScreen()">
       <h3 class="hide">FANS VISION</h3>
     </div>
+    <!-- <p>tes</p> -->
     <div class="search">
       <i class='bx bx-search'></i>
-      <input type="text" id="search_transaksi" class="hide search_field" placeholder="Quick Search ..." autocomplete="off">
+      <input type="text" id="search_transaksi" class="hide search_field" placeholder="Quick Search ..."
+        autocomplete="off">
     </div>
     <div class="sidebar-links">
       <ul>
@@ -124,16 +133,16 @@ $query_run = mysqli_query($conn, $query);
         <div class="admin-profile hide">
           <img src="../images/profil.svg" alt="">
           <div class="admin-info">
-            <h3>Rio</h3>
-            <h5>Admin</h5>
+            <h3><?= $_SESSION['nama_akun']; ?></h3>
+            <h5><?= $_SESSION['level']; ?></h5>
           </div>
         </div>
-        <a href="../index.php" class="log-out">
+        <a href="logout.php" class="log-out">
           <i class='bx bx-log-out'></i>
         </a>
       </div>
       <div class="tooltip">
-        <span class="show">Rio Javier</span>
+        <span class="show"><?= $_SESSION['nama_akun']; ?></span>
         <span>Logout</span>
       </div>
     </div>
@@ -179,6 +188,32 @@ $query_run = mysqli_query($conn, $query);
         }
       });
     });
+
+    function toggleFullScreen() {
+      if (!document.fullscreenElement && // alternative standard method
+        !document.mozFullScreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement
+        ) { // current working methods
+        if (document.documentElement.requestFullscreen) {
+          document.documentElement.requestFullscreen();
+        } else if (document.documentElement.msRequestFullscreen) {
+          document.documentElement.msRequestFullscreen();
+        } else if (document.documentElement.mozRequestFullScreen) {
+          document.documentElement.mozRequestFullScreen();
+        } else if (document.documentElement.webkitRequestFullscreen) {
+          document.documentElement.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
+        }
+      } else {
+        if (document.exitFullscreen) {
+          document.exitFullscreen();
+        } else if (document.msExitFullscreen) {
+          document.msExitFullscreen();
+        } else if (document.mozCancelFullScreen) {
+          document.mozCancelFullScreen();
+        } else if (document.webkitExitFullscreen) {
+          document.webkitExitFullscreen();
+        }
+      }
+    }
   </script>
 
 

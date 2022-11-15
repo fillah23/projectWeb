@@ -7,7 +7,7 @@ if(isset($_POST['checking_add']))
     $nama = $_POST['nama_akun'];
     $email = $_POST['email_akun'];
     $password = $_POST['password'];
-    $password = md5($password);
+    $password = password_hash($password,PASSWORD_DEFAULT);
     $level = $_POST['level'];
    
 
@@ -72,7 +72,7 @@ if(isset($_POST['checking_update']))
     $nama = $_POST['nama_akun'];
     $email = $_POST['email_akun'];
     $password = $_POST['password'];
-    $password = md5($password);
+    $password = password_hash($password,PASSWORD_DEFAULT);
     $level = $_POST['level'];
 
     $query = "UPDATE akun SET nama_akun='$nama',email_akun='$email', password = '$password', level='$level' WHERE kode_akun='$kode'";
