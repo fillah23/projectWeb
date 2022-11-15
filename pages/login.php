@@ -2,17 +2,6 @@
 session_start();
 $conn = mysqli_connect("localhost","root","","fans");
 
-if(isset($_COOKIE['id']) && isset($_COOKIE['key'])){
-    $id=$_COOKIE['id'];
-    $key=$_COOKIE['key'];
-
-    $result =mysqli_query($conn,"SELECT email_akun FROM akun WHERE kode_akun = $id ");
-    $row=mysqli_fetch_assoc($result);
-    if($key === hash('sha256',$row['email_akun'])){
-        $_SESSION['login']=true;
-    }
-}
-
 if(isset($_SESSION["login"])){
 	header("Location: home.php");
 	exit;
@@ -28,10 +17,6 @@ if(isset($_POST["login"])){
 		$level=$row['level'];
         if(password_verify($password,$row["password"])){
             $_SESSION["login"] = true;
-            if(isset($_POST['remember'])){
-                setcookie('id',$row['kode_akun'],time()+60);
-                setcookie('key',hash('sha256',$row['email_akun']),time()+60);
-            }
 			$_SESSION['nama_akun'] = $nama_akun;
 			$_SESSION['level'] = $level;
             header("Location: home.php");
@@ -39,6 +24,7 @@ if(isset($_POST["login"])){
         }
     }
     $error=true;
+	
 }
 ?>
 <!DOCTYPE html>
@@ -60,9 +46,6 @@ if(isset($_POST["login"])){
 			<form action="" method="POST">
 				<img src="../images/avatar.svg">
 				<h2 class="title">Welcome</h2>
-				<?php if(isset($error) ) :?>
-    <p><?= $error; ?></p>
-    <?php endif; ?>
            		<div class="input-div one">
            		   <div class="i">
            		   		<i class="fas fa-user"></i>
@@ -81,12 +64,24 @@ if(isset($_POST["login"])){
            		    	<input type="password" class="input" name="password">
             	   </div>
             	</div>
-            	<input type="checkbox" name="remember" id="remember">
-                <label for="remember">Remember me</label>
             	<input type="submit" class="btn" value="Login" name="login">
             </form>
         </div>
     </div>
     <script type="text/javascript" src="../js/main.js"></script>
+	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 </html>
+<?php 
+if(isset($error) ){
+	echo "<script>
+	Swal.fire({
+				position: 'center',
+				icon: 'warning',
+				title: 'Email / Password salah',
+				showConfirmButton: false,
+				timer: 2000
+			})
+	</script>";
+}
+?>

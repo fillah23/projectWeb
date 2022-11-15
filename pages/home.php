@@ -9,7 +9,6 @@ $conn = mysqli_connect("localhost","root","","fans");
 $query = "UPDATE `pelanggan` SET status = 'non aktif', tanggal_berlangganan = date(now()) WHERE MONTH(tanggal_berlangganan) != MONTH(date(NOW()))";
 $query_run = mysqli_query($conn, $query);
 
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -100,7 +99,7 @@ $query_run = mysqli_query($conn, $query);
             <span class="link hide">FAQ</span>
           </a>
         </li>
-        <li class="tooltip-element" data-tooltip="1">
+        <li class="tooltip-element" data-tooltip="1" id="menu_akun">
           <a href="" data-active="5" id="akun" class="menu">
             <div class="icon">
               <i class='bx bx-user-plus'></i>
@@ -109,7 +108,7 @@ $query_run = mysqli_query($conn, $query);
             <span class="link hide">Pengaturan Akun</span>
           </a>
         </li>
-        <li class="tooltip-element" data-tooltip="2">
+        <li class="tooltip-element" data-tooltip="2" id="menu_riwayat">
           <a href="" data-active="6" id="riwayat" class="menu">
             <div class="icon">
               <i class='bx bx-bar-chart-square'></i>
@@ -220,3 +219,20 @@ $query_run = mysqli_query($conn, $query);
 </body>
 
 </html>
+<?php 
+
+if($_SESSION['level']=="Admin"){
+  echo "<script>
+  document.getElementById('menu_akun').hidden = true;
+  document.getElementById('menu_riwayat').hidden = true;
+  </script>";
+}elseif($_SESSION['level']=="Super"){
+  echo "<script>
+  document.getElementById('menu_akun').hidden = false;
+  document.getElementById('menu_riwayat').hidden = false;
+  </script>";
+}else{
+  header("Location: login.php");
+	exit;
+}
+?>
