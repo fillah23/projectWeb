@@ -182,7 +182,7 @@ $query_run = mysqli_query($conn, $query);
           $('#content').load('riwayat.php');
           $(".search_field").attr("id", "search_riwayat");
         } else if (menu == "faq") {
-          $('#content').load('faq.php');
+          $('#content').load('faq/faq.php');
           $(".search_field").attr("id", "search_faq");
         }
       });
