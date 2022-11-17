@@ -1,50 +1,40 @@
-<!DOCTYPE html>
-<html>
 <style>
-  :root {
-  --main-color: #30475E;
-  --main-color-dark: #222831;
-  --main-color-light: #30475E;
-  --text-color: #cfcde7;
+  input[type="date"]{
+    background-color: #0080ff;
+    padding: 5px;
+    /* position: absolute;
+    transform: translate(-50%,-50%);
+    top: 50%;
+    left: 50%; */
+    font-family: "Roboto Mono",monospace;
+    color: #ffffff;
+    font-size: 14px;
+    border: none;
+    outline: none;
+    border-radius: 5px;
 }
-.tooltipLogo {
-  position: relative;
-  display: inline-block;
-}
-
-.tooltipLogo .tooltiptext {
-  visibility: hidden;
-  width: 120px;
-  background-color: var(--main-color);
-  color: #fff;
-  text-align: center;
-  border-radius: 6px;
-  padding: 5px 0;
-
-  /* Position the tooltip */
-  position: absolute;
-  z-index: 1;
-  width: 120px;
-  top: 100%;
-  left: 50%;
-  margin-left: -60px
-}
-
-.tooltipLogo:hover .tooltiptext {
-  visibility: visible;
+::-webkit-calendar-picker-indicator{
+    background-color: #ffffff;
+    padding: 5px;
+    cursor: pointer;
+    border-radius: 3px;
 }
 </style>
-<body style="text-align:center;">
+<table>
 
-<h2>Basic Tooltip</h2>
+    <td id="1">Hello</td>
 
-<p>Move the mouse over the text below:</p>
+    <td id="1">Hello</td>
 
-<div class="tooltipLogo">Hover over me
-  <span class="tooltiptext">Tooltip text</span>
-</div>
+    <td id="2">Hello</td>
+    <input type="date" name="" id="">
 
-<p>Note that the position of the tooltip text isn't very good. Go back to the tutorial and continue reading on how to position the tooltip in a desirable way.</p>
+</table>
+<script src="js/jquery-3.6.0.min.js"></script>
+<script>
+  $(document).ready(function(){
 
-</body>
-</html>
+$('#2').parent().append('<td id="2">2</td>');
+
+}); 
+</script>

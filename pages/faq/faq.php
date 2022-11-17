@@ -295,8 +295,8 @@
                         })
                         $('.tabel').html("");
                         getdata();
-                        $('#pertanyaan').val();
-                        $('#jawaban').val();
+                        $('#pertanyaan').val("");
+                        $('#jawaban').val("");
                     }
                 });
 

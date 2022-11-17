@@ -15,10 +15,12 @@ if(isset($_POST["login"])){
         $row= mysqli_fetch_assoc($result);
 		$nama_akun=$row['nama_akun'];
 		$level=$row['level'];
+		$kode_akun=$row['kode_akun'];
         if(password_verify($password,$row["password"])){
             $_SESSION["login"] = true;
 			$_SESSION['nama_akun'] = $nama_akun;
 			$_SESSION['level'] = $level;
+			$_SESSION['kode_akun'] = $kode_akun;
             header("Location: home.php");
             exit;
         }

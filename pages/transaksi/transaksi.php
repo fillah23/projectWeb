@@ -1,3 +1,26 @@
+<?php 
+function auto(){
+    $conn = mysqli_connect("localhost","root","","fans");
+
+    $num = '';
+    $perfix = 'TR';
+    $query = "SELECT MAX(kode_transaksi) AS kode from detail_transaksi";
+    $run = mysqli_query($conn,$query);
+    $data = mysqli_fetch_array($run);
+    $row = mysqli_fetch_row($run);
+    $num = $data['kode'];
+    $number = (int)substr($num,2,5);
+    $number++;
+
+    if($row > 0){
+        return 'kode telah digunakan';
+    }else{
+        $value = $perfix.sprintf("%05s",$number);
+    }
+    return $value;
+
+}
+?>
 <div class="details">
   <div class="recentOrders">
     <div class="cardHeader">
@@ -23,12 +46,213 @@
     </div>
   </div>
 </div>
-
+<div class="popup">
+  <div class="close-btn">&times;</div>
+  <div class="form">
+    <div class="form-element">
+      <h2>Apakah Yakin ingin bayar?</h2>
+      <button type="button" id="submit">Bayar</button>
+    </div>
+  </div>
+</div>
+<input type="text" value="<?= auto(); ?>" id="idbarang">
+<input type="text" value="<?php echo date("Y-m-d") ?>" id="tanggal">
+<input type="text" id="harga_barang">
+<input type="text" id="id_pelanggan">
+<input type="text" id="barang">
+<input type="text" id="id_akun">
+<input type="text" id="name_akun">
+<input type="text" id="nama_plg">
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+  document.querySelector(".popup .close-btn").addEventListener("click", function () {
+    document.querySelector(".popup").classList.remove("active");
+    $(".popup").css({
+      "box-shadow": "none"
+    });
+  });
+</script>
 <script>
   $(document).ready(function () {
     getdata();
+    cekbayar();
+    addData();
+    update();
+    detail();
   });
+  function detail(){
+    $('#submit').click(function (e) {
+      e.preventDefault();
+
+
+      var id = $('#idbarang').val();
+      var tanggal = $('#tanggal').val();
+      var harga_barang = $('#harga_barang').val();
+      var id_pelanggan = $('#nama_plg').val();
+      var barang = $('#barang').val();
+      var idakun = $('#name_akun').val();
+
+
+      if (tanggal != '' & id != '') {
+        $.ajax({
+          type: "POST",
+          url: "transaksi/code.php",
+          data: {
+            'checking_add_detail': true,
+            'id': id,
+            'tanggal': tanggal,
+            'harga_barang': harga_barang,
+            'id_pelanggan': id_pelanggan,
+            'barang': barang,
+            'idakun': idakun,
+
+          },
+          success: function (response) {
+            // console.log(response);
+            $('#idbarang').val(response);
+          }
+        });
+
+      } else {
+        // console.log("Please enter all fileds.");
+        Swal.fire({
+          position: 'center',
+          icon: 'error',
+          title: 'Lengkapi data',
+          showConfirmButton: false,
+          timer: 2000
+        })
+      }
+
+    });
+  }
+  function update(){
+    $('#submit').click(function (e) {
+            e.preventDefault();
+
+            var kode = $('#id_pelanggan').val();
+            var tanggal = $('#tanggal').val();
+           
+
+            if (kode != '' ) {
+                $.ajax({
+                    type: "POST",
+                    url: "transaksi/code.php",
+                    data: {
+                        'checking_update': true,
+                        'id': kode,
+                        'tanggal': tanggal,
+                        
+                    },
+                    success: function (response) {
+   
+                    }
+                });
+
+            } else {
+                // console.log("Please enter all fileds.");
+                Swal.fire({
+                    position: 'center',
+                    icon: 'error',
+                    title: 'Lengkapi data',
+                    showConfirmButton: false,
+                    timer: 2000
+                })
+            }
+
+        });
+  }
+  function addData() {
+    $('#submit').click(function (e) {
+      e.preventDefault();
+
+
+      var id = $('#idbarang').val();
+      var tanggal = $('#tanggal').val();
+      var harga_barang = $('#harga_barang').val();
+      var id_pelanggan = $('#id_pelanggan').val();
+      var barang = $('#barang').val();
+      var idakun = $('#id_akun').val();
+
+
+      if (tanggal != '' & id != '') {
+        $.ajax({
+          type: "POST",
+          url: "transaksi/code.php",
+          data: {
+            'checking_add': true,
+            'id': id,
+            'tanggal': tanggal,
+            'harga_barang': harga_barang,
+            'id_pelanggan': id_pelanggan,
+            'barang': barang,
+            'idakun': idakun,
+
+          },
+          success: function (response) {
+            // console.log(response);
+            document.querySelector(".popup").classList.remove("active");
+            $(".popup").css({
+              "box-shadow": "none"
+            });
+            Swal.fire({
+              position: 'center',
+              icon: 'success',
+              title: "pembayaran berhasil",
+              showConfirmButton: false,
+              timer: 2000
+            })
+            $('.tabel').html("");
+            getdata();
+            
+          }
+        });
+
+      } else {
+        // console.log("Please enter all fileds.");
+        Swal.fire({
+          position: 'center',
+          icon: 'error',
+          title: 'Lengkapi data',
+          showConfirmButton: false,
+          timer: 2000
+        })
+      }
+
+    });
+  }
+
+  function cekbayar() {
+    $(document).on("click", "#btn-bayar", function () {
+
+      var id = $(this).closest('tr').find('.transaksi_id').text();
+      // alert(stud_id);
+
+      $.ajax({
+        type: "POST",
+        url: "transaksi/code.php",
+        data: {
+          'checking_bayar': true,
+          'id': id,
+        },
+        success: function (response) {
+          // console.log(response);
+          $.each(response, function (key, value) {
+            // console.log(studview['fname']);
+            $('#harga_barang').val(value['harga_produk']);
+            $('#id_pelanggan').val(value['kode_pelanggan']);
+            $('#barang').val(value['nama_produk']);
+            $('#nama_plg').val(value['nama_pelanggan']);
+          });
+          document.querySelector(".popup").classList.add("active");
+          $(".popup").css({
+            "box-shadow": "0 0 0 500vmax rgb(0 0 0 / 0.5)"
+          });
+        }
+      });
+
+    });
+  }
 
   function getdata() {
     $.ajax({
@@ -39,13 +263,13 @@
         $.each(response, function (key, value) {
           // console.log(value['fname']);
           $('.tabel').append('<tr>' +
-            '<td class="pelanggan_id" style="width: 10%;">' + value['kode_pelanggan'] + '</td>\
+            '<td class="transaksi_id" style="width: 10%;">' + value['kode_pelanggan'] + '</td>\
                                 <td style="width: 20%;">' + value['nama_pelanggan'] + '</td>\
                                 <td style="width: 20%;">' + value['nomer_hp'] + '</td>\
                                 <td style="width: 22%;">' + value['nama_produk'] + '</td>\
                                 <td style="width: 18%;">' + value['status'] + '</td>\
                                 <td style="width: 12%;">\
-                                <a href="#" id="btn-view">\
+                                <a href="#" id="btn-bayar">\
                                 <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24"\
                                     style="fill: rgba(13, 255, 19, 1);">\
                                     <path\
@@ -75,9 +299,14 @@
       }
     });
   }
-  $(document).ready(function(){
-  $('#search_transaksi').on('keyup',function(){
-    $('#table-transaksi').load('transaksi/search.php?keyword=' +$('#search_transaksi').val());
+  $(document).ready(function () {
+    $('#search_transaksi').on('keyup', function () {
+      $('#table-transaksi').load('transaksi/search.php?keyword=' + $('#search_transaksi').val());
+    });
   });
-  });
+</script>
+<script>
+  document.getElementById("id_akun").value=localStorage.getItem("textvalue");
+  document.getElementById("name_akun").value=localStorage.getItem("textvalue2");
+
 </script>
