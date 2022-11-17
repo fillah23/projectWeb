@@ -136,6 +136,7 @@ $query_run = mysqli_query($conn, $query);
             <h5><?= $_SESSION['level']; ?></h5>
             <input type="text" value="<?= $_SESSION['kode_akun']; ?>" id="idakun" hidden>
             <input type="text" value="<?= $_SESSION['nama_akun']; ?>" id="namaakun" hidden>
+            <input type="text" value="<?= $_SESSION['level']; ?>" id="levelakun" hidden>
           </div>
         </div>
         <a href="logout.php" class="log-out">
@@ -219,14 +220,20 @@ $query_run = mysqli_query($conn, $query);
   <script>
     kirim();
     kirim2();
+    kirim3();
     function kirim(){
       var x = document.getElementById("idakun").value;
-      localStorage.setItem("textvalue",x);
+      sessionStorage.setItem("textvalue",x);
       return false;
     }
     function kirim2(){
       var y = document.getElementById("namaakun").value;
-      localStorage.setItem("textvalue2",y);
+      sessionStorage.setItem("textvalue2",y);
+      return false;
+    }
+    function kirim3(){
+      var y = document.getElementById("levelakun").value;
+      sessionStorage.setItem("textvalue3",y);
       return false;
     }
   </script>

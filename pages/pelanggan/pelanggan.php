@@ -194,7 +194,7 @@ $query_edit=mysqli_query($conn,$perintah);
         </div>
     </div>
 </div>
-
+<input type="text" name="" id="level"value="Admin" hidden>
 <script>
     document.querySelector("#show-login").addEventListener("click", function () {
         document.querySelector(".popup").classList.add("active");
@@ -443,7 +443,7 @@ $query_edit=mysqli_query($conn,$perintah);
                                     </path>\
                                 </svg>\
                                 </a>\
-                                <a href="#" id="btn-edit">\
+                                <a href="#" id="btn-edit" class="aksi_pelanggan">\
                                 <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"\
                                     style="fill: rgba(255, 212, 0, 1);">\
                                     <path\
@@ -451,7 +451,7 @@ $query_edit=mysqli_query($conn,$perintah);
                                     </path>\
                                 </svg>\
                                 </a>\
-                                <a href="#" id="btn-hapus">\
+                                <a href="#" id="btn-hapus" class="aksi_pelanggan">\
                                 <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"\
                                     style="fill: rgba(227, 71, 36, 1);">\
                                     <path\
@@ -460,7 +460,7 @@ $query_edit=mysqli_query($conn,$perintah);
                                 </svg>\
                                 </a>\
                                 </td>\
-                            </tr>');
+                            </tr><script>$(".aksi_pelanggan").hide();if(document.getElementById("level").value=="Super"){$(".aksi_pelanggan").show();}</' + 'script>');
                 });
             }
         });
@@ -551,4 +551,5 @@ $query_edit=mysqli_query($conn,$perintah);
     $('#table-pelanggan').load('pelanggan/search.php?keyword=' +$('#search_pelanggan').val());
     });
     });
+    document.getElementById("level").value=sessionStorage.getItem("textvalue3");
 </script>

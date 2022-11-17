@@ -38,7 +38,7 @@ function auto(){
                         <td>Nama</td>
                         <td>Harga</td>
                         <td>Stok</td>
-                        <td>Aksi</td>
+                        <td class="aksi_produk">Aksi</td>
                     </tr>
                 </thead>
                 <tbody class="tabel">
@@ -103,7 +103,7 @@ function auto(){
         </div>
     </div>
 </div>
-
+<input type="text" name="" id="level"value="Admin" hidden>
 
 <script>
     document.querySelector("#show-login").addEventListener("click", function () {
@@ -270,7 +270,7 @@ function auto(){
 
         });
     }
-
+    
     function getdata() {
         $.ajax({
             type: "GET",
@@ -284,7 +284,7 @@ function auto(){
                                 <td style="width: 25%;">' + value['nama_produk'] + '</td>\
                                 <td style="width: 25%;">' + value['harga_produk'] + '</td>\
                                 <td style="width: 20%;">' + value['stok'] + '</td>\
-                                <td style="width: 10%;">\
+                                <td style="width: 10%;" class="aksi_produk">\
                                 <a href="#" id="btn-edit">\
                                 <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"\
                                     style="fill: rgba(255, 212, 0, 1);">\
@@ -302,7 +302,8 @@ function auto(){
                                 </svg>\
                             </a>\
                                 </td>\
-                            </tr>');
+                            </tr><script>$(".aksi_produk").hide();if(document.getElementById("level").value=="Super"){$(".aksi_produk").show();}</' + 'script>'
+                            );
                 });
             }
         });
@@ -369,4 +370,5 @@ function auto(){
     $('#table-produk').load('produk/search.php?keyword=' +$('#search_produk').val());
     });
     });
+    document.getElementById("level").value=sessionStorage.getItem("textvalue3");
 </script>
