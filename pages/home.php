@@ -217,6 +217,7 @@ $query_run = mysqli_query($conn, $query);
       }
     }
   </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js" integrity="sha256-/H4YS+7aYb9kJ5OKhFYPUjSJdrtV6AeyJOtTkw6X72o=" crossorigin="anonymous"></script>
   <script>
     kirim();
     kirim2();
@@ -233,7 +234,8 @@ $query_run = mysqli_query($conn, $query);
     }
     function kirim3(){
       var y = document.getElementById("levelakun").value;
-      sessionStorage.setItem("textvalue3",y);
+      var encrypted = CryptoJS.AES.encrypt(y, "Secret Passphrase");
+      sessionStorage.setItem("textvalue3",encrypted);
       return false;
     }
   </script>

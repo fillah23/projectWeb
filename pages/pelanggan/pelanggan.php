@@ -551,5 +551,9 @@ $query_edit=mysqli_query($conn,$perintah);
     $('#table-pelanggan').load('pelanggan/search.php?keyword=' +$('#search_pelanggan').val());
     });
     });
-    document.getElementById("level").value=sessionStorage.getItem("textvalue3");
+</script>
+<script>
+    var x = sessionStorage.getItem("textvalue3");
+    var decrypted = CryptoJS.AES.decrypt(x, "Secret Passphrase");
+    document.getElementById("level").value= decrypted.toString(CryptoJS.enc.Utf8);
 </script>
