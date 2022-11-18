@@ -1,0 +1,94 @@
+<html>
+    <head>
+        <title>Cetak Nota <?= $d->invoice ?></title>
+        <link rel="stylesheet" href="<?= asset('css/print.css?time='. md5(time())) ?>">
+        <style>
+          @page { margin: 0 }
+body { margin: 0; font-size:10px;font-family: monospace;}
+td { font-size:10px; }
+.sheet {
+  margin: 0;
+  overflow: hidden;
+  position: relative;
+  box-sizing: border-box;
+  page-break-after: always;
+}
+
+/** Paper sizes **/
+body.struk        .sheet { width: 58mm; }
+body.struk .sheet        { padding: 2mm; }
+
+.txt-left { text-align: left;}
+.txt-center { text-align: center;}
+.txt-right { text-align: right;}
+
+/** For screen preview **/
+@media screen {
+  body { background: #e0e0e0;font-family: monospace; }
+  .sheet {
+    background: white;
+    box-shadow: 0 .5mm 2mm rgba(0,0,0,.3);
+    margin: 5mm;
+  }
+}
+
+/** Fix for Chrome issue #273306 **/
+@media print {
+    body { font-family: monospace; }
+    body.struk                 { width: 58mm; text-align: left;}
+    body.struk .sheet          { padding: 2mm; }
+    .txt-left { text-align: left;}
+    .txt-center { text-align: center;}
+    .txt-right { text-align: right;}
+}
+        </style>
+    </head>
+    <body class="struk" onload="printOut()">
+        <section class="sheet">
+        <table cellpadding="0" cellspacing="0" align="center">
+          <tr>
+            <td >Fans Vision</td>
+          </tr>
+        </table>
+        <p>====================================</p>
+        <table>
+          <tr>
+            <td id="tanggal_struk"></td>
+          </tr>
+          <tr>
+            <td>ID Transaksi : <span id="trans"></span></td>
+          </tr>
+        </table>
+        <p>====================================</p>
+        <table>
+          <tr>
+            <td>Transaksi :</td>
+          </tr>
+          <tr>
+            <td><span id="produk"></span> : RP <span id="harga"></span></td>
+          </tr>
+        </table>
+        <p>====================================</p>
+        <table cellpadding="0" cellspacing="0" align="center">
+          <tr>
+            <td >Terima kasih atas kunjungan anda </td>
+          </tr>
+
+        </table>
+        </section>
+        <script>
+          var lama = 1000;
+          t = null;
+          function printOut(){
+              window.print();
+              t = setTimeout("self.close()",lama);
+          }
+</script>
+<script>
+  document.getElementById("tanggal_struk").innerHTML =sessionStorage.getItem("textvalue4");
+  document.getElementById("trans").innerHTML =sessionStorage.getItem("textvalue5");
+  document.getElementById("produk").innerHTML =sessionStorage.getItem("textvalue6");
+  document.getElementById("harga").innerHTML =sessionStorage.getItem("textvalue7");
+</script>
+    </body>
+</html>

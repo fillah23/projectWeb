@@ -51,7 +51,7 @@ function auto(){
   <div class="form">
     <div class="form-element">
       <h2>Apakah Yakin ingin bayar?</h2>
-      <button type="button" id="submit">Bayar</button>
+      <button type="button" id="submit" onclick="struk3(); struk4(); location.href='transaksi/struk.html'; ">Bayar</button>
     </div>
   </div>
 </div>
@@ -60,6 +60,7 @@ function auto(){
 <input type="text" id="harga_barang">
 <input type="text" id="id_pelanggan">
 <input type="text" id="barang">
+<input type="text" id="barang1" value="">
 <input type="text" id="id_akun">
 <input type="text" id="name_akun">
 <input type="text" id="nama_plg">
@@ -242,6 +243,7 @@ function auto(){
             $('#harga_barang').val(value['harga_produk']);
             $('#id_pelanggan').val(value['kode_pelanggan']);
             $('#barang').val(value['nama_produk']);
+            $('#barang1').val(value['nama_produk']);
             $('#nama_plg').val(value['nama_pelanggan']);
           });
           document.querySelector(".popup").classList.add("active");
@@ -306,7 +308,32 @@ function auto(){
   });
 </script>
 <script>
-  document.getElementById("id_akun").value=localStorage.getItem("textvalue");
-  document.getElementById("name_akun").value=localStorage.getItem("textvalue2");
-
+  document.getElementById("id_akun").value=sessionStorage.getItem("textvalue");
+  document.getElementById("name_akun").value=sessionStorage.getItem("textvalue2");
+</script>
+<script>
+  struk();
+  struk2();
+  
+  
+  function struk(){
+    var x = document.getElementById("tanggal").value;
+      sessionStorage.setItem("textvalue4",x);
+      return false;
+  }
+  function struk2(){
+    var x = document.getElementById("idbarang").value;
+      sessionStorage.setItem("textvalue5",x);
+      return false;
+  }
+  function struk3(){
+    var x = document.getElementById("barang").value;
+      sessionStorage.setItem("textvalue6",x);
+      return false;
+  }
+  function struk4(){
+    var x = document.getElementById("harga_barang").value;
+      sessionStorage.setItem("textvalue7",x);
+      return false;
+  }
 </script>
