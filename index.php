@@ -167,7 +167,7 @@
 			</div>
 			<div class="col-md-3 col-sm-6 wow fadeIn" data-wow-delay="0.9s">
 				<div class="team-wrapper">
-					<img src="images/team1.jpeg" class="img-responsive" alt="team img">
+					<img src="images/team1.jpeg" class="img-responsive" alt="team img" style="width: 260px; height: 300px;">
 						<div class="team-des">
 							<h4>Rio Javier Reyhan</h4>
 							<h3>Cable TV Manager</h3>
@@ -182,7 +182,7 @@
 			</div>
 			<div class="col-md-3 col-sm-6 wow fadeIn" data-wow-delay="1.3s">
 				<div class="team-wrapper">
-					<img src="images/team2.jpeg" class="img-responsive" alt="team img">
+					<img src="images/team2.jpeg" class="img-responsive" alt="team img" style="width: 260px; height: 300px;">
 						<div class="team-des">
 							<h4>Fillah Septian</h4>
 							<h3>Internet Manager</h3>
@@ -243,7 +243,7 @@
 				<div class="iso-section">
 					<ul class="filter-wrapper clearfix">
                    		 <li><a href="#" data-filter="*" class="selected opc-main-bg">All</a></li>
-                   		 <li><a href="#" class="opc-main-bg" data-filter=".html">INTERNET</a></li>
+                   		 <li><a href="#" class="opc-main-bg" data-filter=".internet">INTERNET</a></li>
                    		 <li><a href="#" class="opc-main-bg" data-filter=".photoshop">CABLE TV</a></li>
                     	 <li><a href="#" class="opc-main-bg" data-filter=".wordpress">BROADCAST</a></li>
                     	 <li><a href="#" class="opc-main-bg" data-filter=".mobile">DIGITAL TEAM</a></li>
@@ -251,7 +251,7 @@
                		<div class="iso-box-section wow fadeIn" data-wow-delay="0.9s">
                			<div class="iso-box-wrapper col4-iso-box">
 
-               				 <div class="iso-box html wordpress mobile col-lg-4 col-md-4 col-sm-6">
+               				 <div class="iso-box internet wordpress mobile col-lg-4 col-md-4 col-sm-6">
                				 	<a href="images/portfolio-img1.jpg" data-lightbox-gallery="portfolio-gallery"><img src="images/portfolio-img1.jpg" alt="portfolio img"></a>
                				 </div>
 
@@ -259,7 +259,7 @@
                				 	<a href="images/portfolio-img2.jpg" data-lightbox-gallery="portfolio-gallery"><img src="images/portfolio-img2.jpg" alt="portfolio img"></a>
                				 </div>
 
-               				 <div class="iso-box html mobile col-lg-4 col-md-4 col-sm-6">
+               				 <div class="iso-box internet mobile col-lg-4 col-md-4 col-sm-6">
                				 	<a href="images/portfolio-img3.jpg" data-lightbox-gallery="portfolio-gallery"><img src="images/portfolio-img3.jpg" alt="portfolio img"></a>
                				 </div>
 
@@ -267,7 +267,7 @@
                				 	<a href="images/portfolio-img4.jpg" data-lightbox-gallery="portfolio-gallery"><img src="images/portfolio-img4.jpg" alt="portfolio img"></a>
                				 </div>
 
-               				 <div class="iso-box html photoshop col-lg-4 col-md-4 col-sm-6">
+               				 <div class="iso-box internet photoshop col-lg-4 col-md-4 col-sm-6">
                				 	<a href="images/portfolio-img5.jpg" data-lightbox-gallery="portfolio-gallery"><img src="images/portfolio-img5.jpg" alt="portfolio img"></a>
                				 </div>
 

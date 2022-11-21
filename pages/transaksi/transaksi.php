@@ -51,7 +51,7 @@ function auto(){
   <div class="form">
     <div class="form-element">
       <h2>Apakah Yakin ingin bayar?</h2>
-      <button type="button" id="submit" onclick="struk3(); struk4(); location.href='transaksi/struk.html'; ">Bayar</button>
+      <button class="button" type="button" id="submit" onclick="struk3(); struk4(); window.open('transaksi/struk.html','_blank'); ">Bayar</button>
     </div>
   </div>
 </div>

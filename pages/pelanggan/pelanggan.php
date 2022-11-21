@@ -101,7 +101,7 @@ $query_edit=mysqli_query($conn,$perintah);
                 value="<?php echo date("Y-m-d") ?>" readonly>
         </div>
         <div class="form-element">
-            <button type="button" id="submit">Tambah</button>
+            <button type="button" id="submit" class="button">Tambah</button>
         </div>
     </div>
 
@@ -150,7 +150,7 @@ $query_edit=mysqli_query($conn,$perintah);
             <input type="hidden" id="harga_edit" name="harga_edit" placeholder="Masukkan kode harga" readonly>
         </div>
         <div class="form-element">
-            <button type="button" id="submit_edit">Edit</button>
+            <button type="button" id="submit_edit" class="button">Edit</button>
         </div>
     </div>
 </div>

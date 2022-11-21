@@ -20,7 +20,7 @@ $query_run = mysqli_query($conn, $query);
   <title>Sidebar Menu</title>
   <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
   <link rel="stylesheet" href="../css/home.css?v=2.4">
-  <link rel="stylesheet" href="../css/popup.css?v=1.8">
+  <link rel="stylesheet" href="../css/popup.css?v=2.0">
 </head>
 
 <body class="shrink">
@@ -176,7 +176,7 @@ $query_run = mysqli_query($conn, $query);
           $('#content').load('pelanggan/pelanggan.php');
           $(".search_field").attr("id", "search_pelanggan");
         } else if (menu == "portfolio") {
-          $('#content').load('portfolio.php');
+          $('#content').load('portfolio/portfolio.php');
           $(".search_field").attr("id", "search_portfolio");
         } else if (menu == "akun") {
           $('#content').load('akun/akun.php');
@@ -239,7 +239,14 @@ $query_run = mysqli_query($conn, $query);
       return false;
     }
   </script>
-
+<link rel="stylesheet" href="../dropify/dist/css/dropify.min.css">
+<script src="../dropify/dist/js/dropify.min.js"></script>
+<script type="text/javascript">
+     $(document).ready(function() {
+        // Basic
+        $('.dropify').dropify();
+    });
+</script>
 </body>
 
 </html>

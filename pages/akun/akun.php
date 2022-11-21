@@ -81,7 +81,7 @@ function auto(){
             </div>
             
             <div class="form-element">
-                <button type="button" id="submit">Tambah</button>
+                <button type="button" id="submit" class="button">Tambah</button>
             </div>
         </div>
 
@@ -114,7 +114,7 @@ function auto(){
                 </select>
             </div>
             <div class="form-element">
-                <button id="edit_button">Edit</button>
+                <button id="edit_button" class="button">Edit</button>
             </div>
         </div>
     </div>

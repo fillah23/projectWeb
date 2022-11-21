@@ -74,7 +74,7 @@ function auto(){
                 onkeypress="return onlyNumberKey(event)">
         </div>
         <div class="form-element">
-            <button type="button" id="submit">Tambah</button>
+            <button type="button" id="submit" class="button">Tambah</button>
         </div>
     </div>
 
@@ -99,7 +99,7 @@ function auto(){
             <input type="text" id="stok_edit" placeholder="Masukkan Stok" onkeypress="return onlyNumberKey(event)">
         </div>
         <div class="form-element">
-            <button id="edit_button">Edit</button>
+            <button id="edit_button" class="button">Edit</button>
         </div>
     </div>
 </div>
