@@ -7,8 +7,9 @@ if(isset($_POST['checking_add']))
     $nama = $_POST['nama_produk'];
     $harga = $_POST['harga_produk'];
     $stok = $_POST['stok'];
+    $kecepatan = $_POST['kecepatan'];
 
-    $query = "INSERT INTO produk (kode_produk,nama_produk,harga_produk,stok) VALUES ('$kode','$nama','$harga','$stok')";
+    $query = "INSERT INTO produk (kode_produk,nama_produk,harga_produk,stok,kecepatan) VALUES ('$kode','$nama','$harga','$stok','$kecepatan')";
     $query_run = mysqli_query($conn, $query);
     function auto(){
         $conn = mysqli_connect("localhost","root","","fans");
@@ -69,8 +70,9 @@ if(isset($_POST['checking_update']))
     $nama = $_POST['nama_produk'];
     $harga = $_POST['harga_produk'];
     $stok = $_POST['stok'];
+    $kecepatan = $_POST['kecepatan'];
 
-    $query = "UPDATE produk SET nama_produk='$nama',harga_produk='$harga',stok='$stok' WHERE kode_produk='$kode'";
+    $query = "UPDATE produk SET nama_produk='$nama',harga_produk='$harga',stok='$stok',kecepatan='$kecepatan' WHERE kode_produk='$kode'";
     $query_run = mysqli_query($conn, $query);
 
     if($query_run)

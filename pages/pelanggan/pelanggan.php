@@ -85,16 +85,13 @@ $query_edit=mysqli_query($conn,$perintah);
             <select name="pilihProduk" id="pilihProduk">
                 <option>==Pilih barang==</option>
                 <?php while($data=mysqli_fetch_array($query)){?>
-                <option data-harga="<?= $data['harga_produk']; ?>" data-nama="<?= $data['nama_produk']; ?>">
+                <option data-nama="<?= $data['kode_produk']; ?>">
                     <?php echo $data['nama_produk'];?></option>
                 <?php } ?>
             </select>
         </div>
         <div class="form-element">
             <input type="hidden" id="nama_produk" name="nama_produk" placeholder="Masukkan nama produk" readonly>
-        </div>
-        <div class="form-element">
-            <input type="hidden" id="harga" name="harga" placeholder="Masukkan kode harga" readonly>
         </div>
         <div class="form-element">
             <input type="hidden" id="tanggal" name="tanggal" placeholder="Masukkan Tanggal"
@@ -141,13 +138,13 @@ $query_edit=mysqli_query($conn,$perintah);
             <label for="nama_produk">Nama Produk</label>
             <select name="pilihProduk_edit" id="pilihProduk_edit">
                 <?php while($data_edit=mysqli_fetch_array($query_edit)){?>
-                <option data-harga="<?= $data_edit['harga_produk']; ?>" data-nama="<?= $data_edit['nama_produk']; ?>">
+                <option data-nama="<?= $data_edit['kode_produk']; ?>">
                     <?php echo $data_edit['nama_produk'];?></option>
                 <?php } ?>
             </select>
         </div>
         <div class="form-element">
-            <input type="hidden" id="harga_edit" name="harga_edit" placeholder="Masukkan kode harga" readonly>
+            <input type="hidden" id="kodep_edit" name="kodep_edit" placeholder="Masukkan kode harga" readonly>
         </div>
         <div class="form-element">
             <button type="button" id="submit_edit" class="button">Edit</button>
@@ -331,11 +328,11 @@ $query_edit=mysqli_query($conn,$perintah);
             var password = $('#password_edit').val();
             var nomer_hp = $('#nomer_hp_edit').val();
             var nama_produk = $('#pilihProduk_edit').val();
-            var harga = $('#harga_edit').val();
+            var kodep = $('#kodep_edit').val();
             var status = $('#status').val();
 
             if (kode != '' & nama != '' & email != '' & password != '' & nomer_hp != '' & nama_produk != '' &
-                harga != '') {
+                kodep != '') {
                 $.ajax({
                     type: "POST",
                     url: "pelanggan/code.php",
@@ -347,7 +344,7 @@ $query_edit=mysqli_query($conn,$perintah);
                         'password': password,
                         'nomer_hp': nomer_hp,
                         'nama_produk': nama_produk,
-                        'harga_produk': harga,
+                        'kode_p': kodep,
                         'status': status,
                     },
                     success: function (response) {
@@ -406,7 +403,7 @@ $query_edit=mysqli_query($conn,$perintah);
                         $('#password_edit').val(value['password']);
                         $('#nomer_hp_edit').val(value['nomer_hp']);
                         $('#pilihProduk_edit').val(value['nama_produk']);
-                        $('#harga_edit').val(value['harga_produk']);
+                        $('#kodep_edit').val(value['kode_produk']);
                         $('#status').val(value['status']);
                     });
                     document.querySelector(".edit").classList.add("active");
@@ -476,11 +473,9 @@ $query_edit=mysqli_query($conn,$perintah);
             var password = $('#password').val();
             var nomer_hp = $('#nomer_hp').val();
             var nama_produk = $('#nama_produk').val();
-            var harga = $('#harga').val();
             var tanggal = $('#tanggal').val();
 
-            if (kode != '' & nama != '' & email != '' & password != '' & nomer_hp != '' & nama_produk != '' &
-                harga != '') {
+            if (kode != '' & nama != '' & email != '' & password != '' & nomer_hp != '' & nama_produk != '' ) {
                 $.ajax({
                     type: "POST",
                     url: "pelanggan/code.php",
@@ -492,7 +487,6 @@ $query_edit=mysqli_query($conn,$perintah);
                         'password': password,
                         'nomer_hp': nomer_hp,
                         'nama_produk': nama_produk,
-                        'harga_produk': harga,
                         'tanggal_berlangganan': tanggal,
                     },
                     success: function (response) {
@@ -538,12 +532,17 @@ $query_edit=mysqli_query($conn,$perintah);
 <script>
     $('#pilihProduk').on('change', function () {
         // ambil data dari elemen option yang dipilih
-        const harga = $('#pilihProduk option:selected').data('harga');
         const nama = $('#pilihProduk option:selected').data('nama');
 
         // tampilkan data ke element
-        $('[name=harga]').val(harga);
         $('[name=nama_produk]').val(nama);
+    });
+    $('#pilihProduk_edit').on('change', function () {
+        // ambil data dari elemen option yang dipilih
+        const nama = $('#pilihProduk_edit option:selected').data('nama');
+
+        // tampilkan data ke element
+        $('[name=kodep_edit]').val(nama);
     });
 
     $(document).ready(function(){

@@ -4,7 +4,7 @@ function auto(){
 
     $num = '';
     $perfix = 'TR';
-    $query = "SELECT MAX(kode_transaksi) AS kode from detail_transaksi";
+    $query = "SELECT MAX(kode_transaksi) AS kode from transaksi";
     $run = mysqli_query($conn,$query);
     $data = mysqli_fetch_array($run);
     $row = mysqli_fetch_row($run);
@@ -51,19 +51,17 @@ function auto(){
   <div class="form">
     <div class="form-element">
       <h2>Apakah Yakin ingin bayar?</h2>
-      <button class="button" type="button" id="submit" onclick="struk3(); struk4(); window.open('transaksi/struk.html','_blank'); ">Bayar</button>
+      <button class="button" type="button" id="submit"
+        onclick="struk3(); struk4(); window.open('transaksi/struk.html','_blank'); ">Bayar</button>
     </div>
   </div>
 </div>
-<input type="text" value="<?= auto(); ?>" id="idbarang">
-<input type="text" value="<?php echo date("Y-m-d") ?>" id="tanggal">
-<input type="text" id="harga_barang">
-<input type="text" id="id_pelanggan">
-<input type="text" id="barang">
-<input type="text" id="barang1" value="">
-<input type="text" id="id_akun">
-<input type="text" id="name_akun">
-<input type="text" id="nama_plg">
+<input type="hidden" id="id_akun">
+<input type="hidden" value="<?php echo auto() ?>" id="idbarang">
+<input type="hidden" value="<?php echo date("Y-m-d") ?>" id="tanggal">
+<input type="hidden" id="harga_barang">
+<input type="hidden" id="barang">
+<input type="hidden" id="id_pelanggan">
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
   document.querySelector(".popup .close-btn").addEventListener("click", function () {
@@ -71,6 +69,9 @@ function auto(){
     $(".popup").css({
       "box-shadow": "none"
     });
+    $('#harga_barang').val("");
+    $('#barang').val("");
+    $('#id_pelanggan').val("");
   });
 </script>
 <script>
@@ -79,182 +80,7 @@ function auto(){
     cekbayar();
     addData();
     update();
-    detail();
   });
-  function detail(){
-    $('#submit').click(function (e) {
-      e.preventDefault();
-
-
-      var id = $('#idbarang').val();
-      var tanggal = $('#tanggal').val();
-      var harga_barang = $('#harga_barang').val();
-      var id_pelanggan = $('#nama_plg').val();
-      var barang = $('#barang').val();
-      var idakun = $('#name_akun').val();
-
-
-      if (tanggal != '' & id != '') {
-        $.ajax({
-          type: "POST",
-          url: "transaksi/code.php",
-          data: {
-            'checking_add_detail': true,
-            'id': id,
-            'tanggal': tanggal,
-            'harga_barang': harga_barang,
-            'id_pelanggan': id_pelanggan,
-            'barang': barang,
-            'idakun': idakun,
-
-          },
-          success: function (response) {
-            // console.log(response);
-            $('#idbarang').val(response);
-          }
-        });
-
-      } else {
-        // console.log("Please enter all fileds.");
-        Swal.fire({
-          position: 'center',
-          icon: 'error',
-          title: 'Lengkapi data',
-          showConfirmButton: false,
-          timer: 2000
-        })
-      }
-
-    });
-  }
-  function update(){
-    $('#submit').click(function (e) {
-            e.preventDefault();
-
-            var kode = $('#id_pelanggan').val();
-            var tanggal = $('#tanggal').val();
-           
-
-            if (kode != '' ) {
-                $.ajax({
-                    type: "POST",
-                    url: "transaksi/code.php",
-                    data: {
-                        'checking_update': true,
-                        'id': kode,
-                        'tanggal': tanggal,
-                        
-                    },
-                    success: function (response) {
-   
-                    }
-                });
-
-            } else {
-                // console.log("Please enter all fileds.");
-                Swal.fire({
-                    position: 'center',
-                    icon: 'error',
-                    title: 'Lengkapi data',
-                    showConfirmButton: false,
-                    timer: 2000
-                })
-            }
-
-        });
-  }
-  function addData() {
-    $('#submit').click(function (e) {
-      e.preventDefault();
-
-
-      var id = $('#idbarang').val();
-      var tanggal = $('#tanggal').val();
-      var harga_barang = $('#harga_barang').val();
-      var id_pelanggan = $('#id_pelanggan').val();
-      var barang = $('#barang').val();
-      var idakun = $('#id_akun').val();
-
-
-      if (tanggal != '' & id != '') {
-        $.ajax({
-          type: "POST",
-          url: "transaksi/code.php",
-          data: {
-            'checking_add': true,
-            'id': id,
-            'tanggal': tanggal,
-            'harga_barang': harga_barang,
-            'id_pelanggan': id_pelanggan,
-            'barang': barang,
-            'idakun': idakun,
-
-          },
-          success: function (response) {
-            // console.log(response);
-            document.querySelector(".popup").classList.remove("active");
-            $(".popup").css({
-              "box-shadow": "none"
-            });
-            Swal.fire({
-              position: 'center',
-              icon: 'success',
-              title: "pembayaran berhasil",
-              showConfirmButton: false,
-              timer: 2000
-            })
-            $('.tabel').html("");
-            getdata();
-            
-          }
-        });
-
-      } else {
-        // console.log("Please enter all fileds.");
-        Swal.fire({
-          position: 'center',
-          icon: 'error',
-          title: 'Lengkapi data',
-          showConfirmButton: false,
-          timer: 2000
-        })
-      }
-
-    });
-  }
-
-  function cekbayar() {
-    $(document).on("click", "#btn-bayar", function () {
-
-      var id = $(this).closest('tr').find('.transaksi_id').text();
-      // alert(stud_id);
-
-      $.ajax({
-        type: "POST",
-        url: "transaksi/code.php",
-        data: {
-          'checking_bayar': true,
-          'id': id,
-        },
-        success: function (response) {
-          // console.log(response);
-          $.each(response, function (key, value) {
-            // console.log(studview['fname']);
-            $('#harga_barang').val(value['harga_produk']);
-            $('#id_pelanggan').val(value['kode_pelanggan']);
-            $('#barang').val(value['nama_produk']);
-            $('#barang1').val(value['nama_produk']);
-            $('#nama_plg').val(value['nama_pelanggan']);
-          });
-          document.querySelector(".popup").classList.add("active");
-          $(".popup").css({
-            "box-shadow": "0 0 0 500vmax rgb(0 0 0 / 0.5)"
-          });
-        }
-      });
-
-    });
-  }
 
   function getdata() {
     $.ajax({
@@ -301,6 +127,136 @@ function auto(){
       }
     });
   }
+
+  function cekbayar() {
+    $(document).on("click", "#btn-bayar", function () {
+
+      var id = $(this).closest('tr').find('.transaksi_id').text();
+      // alert(stud_id);
+
+      $.ajax({
+        type: "POST",
+        url: "transaksi/code.php",
+        data: {
+          'checking_bayar': true,
+          'id': id,
+        },
+        success: function (response) {
+          // console.log(response);
+          $.each(response, function (key, value) {
+            // console.log(studview['fname']);
+            $('#harga_barang').val(value['harga_produk']);
+            $('#id_pelanggan').val(value['kode_pelanggan']);
+            $('#barang').val(value['nama_produk']);
+          });
+          document.querySelector(".popup").classList.add("active");
+          $(".popup").css({
+            "box-shadow": "0 0 0 500vmax rgb(0 0 0 / 0.5)"
+          });
+        }
+      });
+
+    });
+  }
+
+  function addData() {
+    $('#submit').click(function (e) {
+      e.preventDefault();
+
+
+      var id = $('#idbarang').val();
+      var tanggal = $('#tanggal').val();
+      var harga_barang = $('#harga_barang').val();
+      var id_pelanggan = $('#id_pelanggan').val();
+      var idakun = $('#id_akun').val();
+
+
+      if (tanggal != '' & id != '') {
+        $.ajax({
+          type: "POST",
+          url: "transaksi/code.php",
+          data: {
+            'checking_add': true,
+            'id': id,
+            'tanggal': tanggal,
+            'harga_barang': harga_barang,
+            'id_pelanggan': id_pelanggan,
+            'idakun': idakun,
+
+          },
+          success: function (response) {
+            // console.log(response);
+            document.querySelector(".popup").classList.remove("active");
+            $(".popup").css({
+              "box-shadow": "none"
+            });
+            Swal.fire({
+              position: 'center',
+              icon: 'success',
+              title: "pembayaran berhasil",
+              showConfirmButton: false,
+              timer: 2000
+            })
+            $('.tabel').html("");
+            getdata();
+            $('#idbarang').val(response);
+            $('#harga_barang').val("");
+            $('#barang').val("");
+            $('#id_pelanggan').val("");
+          }
+        });
+
+      } else {
+        // console.log("Please enter all fileds.");
+        Swal.fire({
+          position: 'center',
+          icon: 'error',
+          title: 'Lengkapi data',
+          showConfirmButton: false,
+          timer: 2000
+        })
+      }
+
+    });
+  }
+
+  function update() {
+    $('#submit').click(function (e) {
+      e.preventDefault();
+
+      var kode = $('#id_pelanggan').val();
+      var tanggal = $('#tanggal').val();
+
+
+      if (kode != '') {
+        $.ajax({
+          type: "POST",
+          url: "transaksi/code.php",
+          data: {
+            'checking_update': true,
+            'id': kode,
+            'tanggal': tanggal,
+
+          },
+          success: function (response) {
+
+          }
+        });
+
+      } else {
+        // console.log("Please enter all fileds.");
+        Swal.fire({
+          position: 'center',
+          icon: 'error',
+          title: 'Lengkapi data',
+          showConfirmButton: false,
+          timer: 2000
+        })
+      }
+
+    });
+  }
+  document.getElementById("id_akun").value = sessionStorage.getItem("textvalue");
   $(document).ready(function () {
     $('#search_transaksi').on('keyup', function () {
       $('#table-transaksi').load('transaksi/search.php?keyword=' + $('#search_transaksi').val());
@@ -308,32 +264,31 @@ function auto(){
   });
 </script>
 <script>
-  document.getElementById("id_akun").value=sessionStorage.getItem("textvalue");
-  document.getElementById("name_akun").value=sessionStorage.getItem("textvalue2");
-</script>
-<script>
   struk();
   struk2();
-  
-  
-  function struk(){
+
+
+  function struk() {
     var x = document.getElementById("tanggal").value;
-      sessionStorage.setItem("textvalue4",x);
-      return false;
+    sessionStorage.setItem("textvalue4", x);
+    return false;
   }
-  function struk2(){
+
+  function struk2() {
     var x = document.getElementById("idbarang").value;
-      sessionStorage.setItem("textvalue5",x);
-      return false;
+    sessionStorage.setItem("textvalue5", x);
+    return false;
   }
-  function struk3(){
+
+  function struk3() {
     var x = document.getElementById("barang").value;
-      sessionStorage.setItem("textvalue6",x);
-      return false;
+    sessionStorage.setItem("textvalue6", x);
+    return false;
   }
-  function struk4(){
+
+  function struk4() {
     var x = document.getElementById("harga_barang").value;
-      sessionStorage.setItem("textvalue7",x);
-      return false;
+    sessionStorage.setItem("textvalue7", x);
+    return false;
   }
 </script>

@@ -36,6 +36,7 @@ function auto(){
                     <tr>
                         <td>ID</td>
                         <td>Nama</td>
+                        <td>Kecepatan</td>
                         <td>Harga</td>
                         <td>Stok</td>
                         <td class="aksi_produk">Aksi</td>
@@ -56,11 +57,15 @@ function auto(){
         <h2>Tambah Data</h2>
         <div class="form-element">
             <!-- <label for="kode">kode</label> -->
-            <input type="hidden" id="kode" name="kode" placeholder="Masukkan kode" value="<?= auto(); ?>" readonly>
+            <input type="text" id="kode" name="kode" placeholder="Masukkan kode" value="<?= auto(); ?>" readonly>
         </div>
         <div class="form-element">
             <label for="nama">Nama</label>
             <input type="text" id="nama" name="nama" placeholder="Masukkan Nama" autocomplete="off">
+        </div>
+        <div class="form-element">
+            <label for="kecepatan">Kecepatan</label>
+            <input type="text" id="kecepatan" name="kecepatan" placeholder="Masukkan kecepatan" autocomplete="off">
         </div>
 
         <div class="form-element">
@@ -88,6 +93,10 @@ function auto(){
         <div class="form-element">
             <label for="nama">Nama</label>
             <input type="text" id="nama_edit" placeholder="Masukkan Nama">
+        </div>
+        <div class="form-element">
+            <label for="kecepatan">Kecepatan</label>
+            <input type="text" id="kecepatan_edit" placeholder="Masukkan kecepatan">
         </div>
 
         <div class="form-element">
@@ -194,8 +203,9 @@ function auto(){
             var nama = $('#nama_edit').val();
             var harga = $('#harga_edit').val();
             var stok = $('#stok_edit').val();
+            var kecepatan = $('#kecepatan_edit').val();
 
-            if (nama != '' & harga != '' & stok != '') {
+            if (nama != '' & harga != '' & stok != '' & kecepatan != '') {
                 $.ajax({
                     type: "POST",
                     url: "produk/code.php",
@@ -205,6 +215,7 @@ function auto(){
                         'nama_produk': nama,
                         'harga_produk': harga,
                         'stok': stok,
+                        'kecepatan': kecepatan,
                     },
                     success: function (response) {
                         // console.log(response);
@@ -260,6 +271,7 @@ function auto(){
                         $('#nama_edit').val(value['nama_produk']);
                         $('#harga_edit').val(value['harga_produk']);
                         $('#stok_edit').val(value['stok']);
+                        $('#kecepatan_edit').val(value['kecepatan']);
                     });
                     document.querySelector(".edit").classList.add("active");
                     $(".edit").css({
@@ -281,8 +293,9 @@ function auto(){
                     // console.log(value['fname']);
                     $('.tabel').append('<tr>' +
                         '<td class="produk_id" style="width: 20%;">' + value['kode_produk'] + '</td>\
-                                <td style="width: 25%;">' + value['nama_produk'] + '</td>\
-                                <td style="width: 25%;">' + value['harga_produk'] + '</td>\
+                                <td style="width: 20%;">' + value['nama_produk'] + '</td>\
+                                <td style="width: 10%;">' + value['kecepatan'] + '</td>\
+                                <td style="width: 20%;">' + value['harga_produk'] + '</td>\
                                 <td style="width: 20%;">' + value['stok'] + '</td>\
                                 <td style="width: 10%;" class="aksi_produk">\
                                 <a href="#" id="btn-edit">\
@@ -317,8 +330,9 @@ function auto(){
             var nama = $('#nama').val();
             var harga = $('#harga').val();
             var stok = $('#stok').val();
+            var kecepatan = $('#kecepatan').val();
 
-            if (kode != '' & nama != '' & harga != '' & stok != '') {
+            if (kode != '' & nama != '' & harga != '' & stok != '' & kecepatan != '') {
                 $.ajax({
                     type: "POST",
                     url: "produk/code.php",
@@ -328,6 +342,7 @@ function auto(){
                         'nama_produk': nama,
                         'harga_produk': harga,
                         'stok': stok,
+                        'kecepatan': kecepatan,
                     },
                     success: function (response) {
                         // console.log(response);
@@ -348,6 +363,7 @@ function auto(){
                         $('#nama').val("");
                         $('#harga').val("");
                         $('#stok').val("");
+                        $('#kecepatan').val("");
                     }
                 });
 

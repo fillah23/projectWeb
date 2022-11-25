@@ -9,14 +9,13 @@ if(isset($_POST['checking_add']))
     $password = $_POST['password'];
     $nomer_hp = $_POST['nomer_hp'];
     $nama_produk = $_POST['nama_produk'];
-    $harga_produk = $_POST['harga_produk'];
     $tanggal_berlangganan = $_POST['tanggal_berlangganan'];
 
     $query = "INSERT INTO pelanggan 
     (kode_pelanggan,nama_pelanggan,email_pelanggan,
-    `password`,nomer_hp,`status`,nama_produk,harga_produk,tanggal_berlangganan) 
+    `password`,nomer_hp,`status`,kode_produk,tanggal_berlangganan) 
     VALUES ('$kode','$nama','$email_pelanggan','$password','$nomer_hp',
-    'non aktif','$nama_produk','$harga_produk','$tanggal_berlangganan')";
+    'non aktif','$nama_produk','$tanggal_berlangganan')";
     $query_run = mysqli_query($conn, $query);
     function auto(){
         $conn = mysqli_connect("localhost","root","","fans");
@@ -54,7 +53,7 @@ if(isset($_POST['checking_edit']))
     $kode_pelanggan = $_POST['kode_pelanggan'];
     $result_array = [];
 
-    $query = "SELECT * FROM pelanggan WHERE kode_pelanggan='$kode_pelanggan' ";
+    $query = "SELECT * FROM pelanggan join produk on pelanggan.kode_produk = produk.kode_produk WHERE kode_pelanggan='$kode_pelanggan' ";
     $query_run = mysqli_query($conn, $query);
 
     if(mysqli_num_rows($query_run) > 0)
@@ -80,11 +79,11 @@ if(isset($_POST['checking_update']))
     $password = $_POST['password'];
     $nomer_hp = $_POST['nomer_hp'];
     $nama_produk = $_POST['nama_produk'];
-    $harga_produk = $_POST['harga_produk'];
+    $kode_p = $_POST['kode_p'];
     $status = $_POST['status'];
 
     $query = "UPDATE pelanggan SET nama_pelanggan='$nama',email_pelanggan='$email_pelanggan',
-    password='$password',nomer_hp='$nomer_hp',nama_produk='$nama_produk',harga_produk='$harga_produk',
+    `password`='$password',nomer_hp='$nomer_hp',kode_produk='$kode_p',
     `status`='$status' WHERE kode_pelanggan='$kode'";
     $query_run = mysqli_query($conn, $query);
 
@@ -120,7 +119,7 @@ if(isset($_POST['checking_view']))
     $kode = $_POST['kode_pelanggan'];
     $result_array = [];
 
-    $query = "SELECT * FROM pelanggan WHERE kode_pelanggan='$kode' ";
+    $query = "SELECT * FROM pelanggan join produk on pelanggan.kode_produk = produk.kode_produk WHERE kode_pelanggan='$kode' ";
     $query_run = mysqli_query($conn, $query);
 
     if(mysqli_num_rows($query_run) > 0)

@@ -2,7 +2,7 @@
 
 $conn = mysqli_connect("localhost","root","","fans");
 
-$query = "SELECT * FROM pelanggan WHERE `status` LIKE 'non aktif'";
+$query = "SELECT * FROM pelanggan join produk on pelanggan.kode_produk = produk.kode_produk WHERE `status` LIKE 'non aktif'";
 $query_run = mysqli_query($conn, $query);
 $result_array = [];
 
