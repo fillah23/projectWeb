@@ -95,7 +95,7 @@ $query_edit=mysqli_query($conn,$perintah);
         </div>
         <div class="form-element">
             <input type="hidden" id="tanggal" name="tanggal" placeholder="Masukkan Tanggal"
-                value="<?php echo date("Y-m-d") ?>" readonly>
+                value="<?php echo date("Y/m/d") ?>" readonly>
         </div>
         <div class="form-element">
             <button type="button" id="submit" class="button">Tambah</button>
