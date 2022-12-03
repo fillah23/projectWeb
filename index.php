@@ -93,7 +93,7 @@
 				<i class="icon-global medium-icon"></i>
 					<h3>INTERNET SERVICE</h3>
 					<hr>
-					<p>We provide broadband and dedicated internet packages with guaranteed quality and speed to meet your needs. For the Jember and surrounding areas.</p>
+					<p>Kami menyediakan paket internet broadband dan dedicated dengan kualitas dan kecepatan yang terjamin untuk memenuhi kebutuhan Anda. Untuk wilayah Jember dan sekitarnya..</p>
 			</div>
 			<div class="col-lg-4 col-md-4 col-sm-4 wow fadeInUp" data-wow-delay="0.9s">
 				<i class="icon-desktop medium-icon"></i>
@@ -125,7 +125,7 @@
 				<img src="images/about-img.jpg" class="img-responsive" alt="about img">
 			</div>
 			<div class="col-md-6 col-sm-12">
-				<h3 class="bold">NETWORK & BROADCAST TEAM</h3>
+				<h3 class="bold">INTERNET & TV DIGITAL</h3>
 				<h1 class="heading bold">Best Team from Fans Vision Jember</h1>
 				<!-- Nav tabs -->
 				<ul class="nav nav-tabs" role="tablist">
@@ -136,16 +136,16 @@
 				<!-- tab panes -->
 				<div class="tab-content">
 					<div role="tabpanel" class="tab-pane active" id="design">
-						<p>We provide broadband and dedicated internet packages with guaranteed quality and speed to meet your needs. </p>
-						<p>Our cable network area continues to grow to meet internet needs in the Jember area and its surroundings. We have a support team to solve your problem.</p>
+						<p>Kami menyediakan paket internet broadband dan dedicated dengan kualitas dan kecepatan yang terjamin untuk memenuhi kebutuhan Anda. </p>
+						<p>Area jaringan kabel kami terus berkembang untuk memenuhi kebutuhan internet di wilayah Jember dan sekitarnya. Kami memiliki tim pendukung untuk menyelesaikan masalah Anda.</p>
 					</div>
 					<div role="tabpanel" class="tab-pane" id="mobile">
 						<p>Digital and analog cable TV with local, international, and premium channels for your daily TV viewing needs. For the Jember and surrounding areas.</p>
-						<p>our support team will serve and solve your cable tv problems.</p>
+						<p>Tim teknisi kami akan melayani dan menyelesaikan masalah tv kabel anda.</p>
 					</div>
 					<div role="tabpanel" class="tab-pane" id="social">
-						<p>audio-visual production for streaming, event coverage, commercial advertising, and more. For the Jember and surrounding areas.</p>
-						<p>Lour broadcast team will serve according to your wishes with satisfactory results.</p>
+						<p>Produksi audio-visual untuk streaming, liputan acara, iklan komersial, dan banyak lagi. Untuk wilayah Jember dan sekitarnya.</p>
+						<p>Tim broadcast anda akan melayani sesuai keinginan anda dengan hasil yang memuaskan.</p>
 					</div>
 
 				</div>
@@ -295,54 +295,32 @@
 					<hr>
 				</div>
 			</div>
+			<?php 	$conn = mysqli_connect("localhost","root","","fans");
+                    $query = "SELECT * FROM produk";
+                    $result = mysqli_query($conn,$query);
+                    $no = 1;
+                    while($row = $row = mysqli_fetch_array($result)){
+                        
+                    
+                    ?>
 			<div class="col-md-4 col-sm-6">
 				<div class="plan plan-one wow bounceIn" data-wow-delay="0.3s">
 					<div class="plan_title">
 						<i class="icon-global medium-icon"></i>
-						<h3>INTERNET LITE</h3>
+						<h3><?php echo $row['nama_produk']; ?></h3>
 						
 					</div>
 					<ul>
                     	<li>Unmetered Data Transfer</li>
-						<li>Speed : Start from 50Mbps</li>
-						<li>1:8 Bandwidth</li>
+						<li>Speed : Start from <?php echo $row['kecepatan']; ?></li>
+						<li>1:4 Bandwidth</li>
                         <li>12-hour Support</li>
 					</ul>
 					<a href="#contact" class="smoothScroll"><button class="btn btn-warning">Contact Us</button></a>
 				</div>
 			</div>
-			<div class="col-md-4 col-sm-6">
-				<div class="plan plan-two wow bounceIn" data-wow-delay="0.3s">
-					<div class="plan_title">
-						<i class="icon-global medium-icon"></i>
-						<h3>INTERNET DEDICATED</h3>
-						
-					</div>
-					<ul>
-						<li>Unmetered Data Transfer</li>
-						<li>Speed : Start from 50Mbps</li>
-						<li>1:1 Bandwidth</li>
-                        <li>12-hour Support</li>
-					</ul>
-					<a href="#contact" class="smoothScroll"><button class="btn btn-warning">CONTACT US</button></a>
-				</div>
-			</div>
-			<div class="col-md-4 col-sm-6">
-				<div class="plan plan-three wow bounceIn" data-wow-delay="0.3s">
-					<div class="plan_title">
-						<i class="icon-global medium-icon"></i>
-						<h3>INTERNET CORPORATE</h3>
-						
-					</div>
-					<ul>
-						<li>Unmetered Data Transfer</li>
-						<li>Speed : Start from 10Mbps</li>
-						<li>1:1 Bandwidth</li>
-                        <li>12-hour Support</li>
-					</ul>
-					<a href="#contact" class="smoothScroll"><button class="btn btn-warning">CONTACT US</button></a>
-				</div>
-			</div>
+			<?php 
+                    } ?>
 		</div>
 	</div>		
 </section>
