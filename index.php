@@ -313,7 +313,7 @@
 					<ul>
                     	<li>Unmetered Data Transfer</li>
 						<li>Speed : Start from <?php echo $row['kecepatan']; ?></li>
-						<li>1:4 Bandwidth</li>
+						<li><?php echo $row['bandwith']; ?> Bandwidth</li>
                         <li>12-hour Support</li>
 					</ul>
 					<a href="#contact" class="smoothScroll"><button class="btn btn-warning">Contact Us</button></a>

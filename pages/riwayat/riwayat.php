@@ -5,6 +5,12 @@
             <h2>
                 Riwayat
             </h2>
+            <div>
+            Dari tanggal
+            <input type="date" id="date_picker_end" onchange="handledatechange()">
+            sampai
+            <input type="date" id="date_picker_end1" onchange="handledatechange1()">
+            </div>
         </div>
         <div id="table-faq" class="table-wrapper">
             <table>
@@ -28,7 +34,38 @@
 </div>
 
 
+<input type="text" id="tanggal">
+	<input type="text" id="tanggal2">
+	<script>
+		function handledatechange() {
+			var date_picker_end = document.getElementById("date_picker_end").value;
+			document.getElementById("tanggal").value = changedateformat(date_picker_end);
+		}
+		function changedateformat(val) {
+			const myArray = val.split("-");
 
+			let year = myArray[0];
+			let month = myArray[1];
+			let day = myArray[2];
+
+			let formatteddate = year + "-" + month + "-" + day;
+			return formatteddate;
+		}
+		function handledatechange1() {
+			var date_picker_end = document.getElementById("date_picker_end1").value;
+			document.getElementById("tanggal2").value = changedateformat1(date_picker_end);
+		}
+		function changedateformat1(val) {
+			const myArray = val.split("-");
+
+			let year = myArray[0];
+			let month = myArray[1];
+			let day = myArray[2];
+
+			let formatteddate = year + "-" + month + "-" + day;
+			return formatteddate;
+		}
+	</script>
 
 
 
@@ -68,7 +105,7 @@
     }
 
     $(document).ready(function(){
-    $('#search_faq').on('keyup',function(){
+    $('#search_faq').on(function(){
     $('#table-faq').load('faq/search.php?keyword=' +$('#search_faq').val());
     });
     });

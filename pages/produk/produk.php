@@ -38,7 +38,7 @@ function auto(){
                         <td>Nama</td>
                         <td>Kecepatan</td>
                         <td>Harga</td>
-                        <td>Stok</td>
+                        <td>Bandwith</td>
                         <td class="aksi_produk">Aksi</td>
                     </tr>
                 </thead>
@@ -74,9 +74,8 @@ function auto(){
                 onkeypress="return onlyNumberKey(event)">
         </div>
         <div class="form-element">
-            <label for="stok">Stok</label>
-            <input type="text" id="stok" name="stok" placeholder="Masukkan Stok" autocomplete="off"
-                onkeypress="return onlyNumberKey(event)">
+            <label for="stok">Bandwith</label>
+            <input type="text" id="stok" name="stok" placeholder="Masukkan Stok" autocomplete="off">
         </div>
         <div class="form-element">
             <button type="button" id="submit" class="button">Tambah</button>
@@ -104,8 +103,8 @@ function auto(){
             <input type="text" id="harga_edit" placeholder="Masukkan Harga" onkeypress="return onlyNumberKey(event)">
         </div>
         <div class="form-element">
-            <label for="stok">Stok</label>
-            <input type="text" id="stok_edit" placeholder="Masukkan Stok" onkeypress="return onlyNumberKey(event)">
+            <label for="stok">Bandwith</label>
+            <input type="text" id="stok_edit" placeholder="Masukkan Stok" >
         </div>
         <div class="form-element">
             <button id="edit_button" class="button">Edit</button>
@@ -270,7 +269,7 @@ function auto(){
                         $('#id_edit').val(value['kode_produk']);
                         $('#nama_edit').val(value['nama_produk']);
                         $('#harga_edit').val(value['harga_produk']);
-                        $('#stok_edit').val(value['stok']);
+                        $('#stok_edit').val(value['bandwith']);
                         $('#kecepatan_edit').val(value['kecepatan']);
                     });
                     document.querySelector(".edit").classList.add("active");
@@ -296,7 +295,7 @@ function auto(){
                                 <td style="width: 20%;">' + value['nama_produk'] + '</td>\
                                 <td style="width: 10%;">' + value['kecepatan'] + '</td>\
                                 <td style="width: 20%;">' + value['harga_produk'] + '</td>\
-                                <td style="width: 20%;">' + value['stok'] + '</td>\
+                                <td style="width: 20%;">' + value['bandwith'] + '</td>\
                                 <td style="width: 10%;" class="aksi_produk">\
                                 <a href="#" id="btn-edit">\
                                 <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"\

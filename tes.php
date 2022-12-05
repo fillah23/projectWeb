@@ -1,42 +1,45 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-	<title>
-		How to get input type date
-		in dd-mm-yyyy format ?
-	</title>
-	
-	<style>
-		body {
-			text-align: center;
-		}
-		h1 {
-			color: green;
-		}
-	</style>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
 </head>
-
 <body>
-	<h1>GeeksforGeeks</h1>
-	
-	<h3>
-		Get input date in
-		dd-mm-yyyy format
-	</h3>
-	
-	<label for="Date of Birth">
-		Enter the Date:
-    
-    <input type="date"
-    value="2022-02-20"
-    min="2022-02-20" max="2032-02-20">
+<input type="date" id="date_picker_end" onchange="handledatechange()">
+<input type="date" id="date_picker_end1" onchange="handledatechange1()">
+	<input type="text" id="tanggal">
+	<input type="text" id="tanggal2">
+	<script>
+		function handledatechange() {
+			var date_picker_end = document.getElementById("date_picker_end").value;
+			document.getElementById("tanggal").value = changedateformat(date_picker_end);
+		}
+		function changedateformat(val) {
+			const myArray = val.split("-");
 
+			let year = myArray[0];
+			let month = myArray[1];
+			let day = myArray[2];
 
-	</label>
-  <?php
-  echo date("d/m/Y");
-  ?>
+			let formatteddate = year + "-" + month + "-" + day;
+			return formatteddate;
+		}
+		function handledatechange1() {
+			var date_picker_end = document.getElementById("date_picker_end1").value;
+			document.getElementById("tanggal2").value = changedateformat1(date_picker_end);
+		}
+		function changedateformat1(val) {
+			const myArray = val.split("-");
+
+			let year = myArray[0];
+			let month = myArray[1];
+			let day = myArray[2];
+
+			let formatteddate = year + "-" + month + "-" + day;
+			return formatteddate;
+		}
+	</script>
 </body>
-
 </html>
