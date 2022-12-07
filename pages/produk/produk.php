@@ -57,7 +57,7 @@ function auto(){
         <h2>Tambah Data</h2>
         <div class="form-element">
             <!-- <label for="kode">kode</label> -->
-            <input type="text" id="kode" name="kode" placeholder="Masukkan kode" value="<?= auto(); ?>" readonly>
+            <input type="hidden" id="kode" name="kode" placeholder="Masukkan kode" value="<?= auto(); ?>" readonly>
         </div>
         <div class="form-element">
             <label for="nama">Nama</label>

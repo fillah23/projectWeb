@@ -139,7 +139,7 @@ $query_run = mysqli_query($conn, $query);
             <input type="text" value="<?= $_SESSION['level']; ?>" id="levelakun" hidden>
           </div>
         </div>
-        <a href="logout.php" class="log-out">
+        <a href="#" class="log-out" onclick="logout()">
           <i class='bx bx-log-out'></i>
         </a>
       </div>
@@ -157,6 +157,7 @@ $query_run = mysqli_query($conn, $query);
   </main>
   <script src="../js/home.js"></script>
   <script src="../js/jquery-3.6.0.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script>
     $(document).ready(function () {
       $('#content').load('transaksi/transaksi.php');
@@ -215,6 +216,20 @@ $query_run = mysqli_query($conn, $query);
           document.webkitExitFullscreen();
         }
       }
+    }
+    function logout(){
+      Swal.fire({
+                title: 'Yakin ingin logout?',
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya'
+            }).then((result) => {
+              if (result.value) {
+                location.href = "logout.php";
+              }
+            });
     }
   </script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js" integrity="sha256-/H4YS+7aYb9kJ5OKhFYPUjSJdrtV6AeyJOtTkw6X72o=" crossorigin="anonymous"></script>

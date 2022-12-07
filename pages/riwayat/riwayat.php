@@ -6,13 +6,12 @@
                 Riwayat
             </h2>
             <div>
-            Dari tanggal
+            <a href="#" id="show-login" class="btn" onclick="printDiv()">Export</a>
             <input type="date" id="date_picker_end" onchange="handledatechange()">
-            sampai
             <input type="date" id="date_picker_end1" onchange="handledatechange1()">
             </div>
         </div>
-        <div id="table-faq" class="table-wrapper">
+        <div id="table-riwayat" class="table-wrapper">
             <table>
                 <thead>
                     <tr>
@@ -21,8 +20,9 @@
                         <td>Produk</td>
                         <td>Tanggal</td>
                         <td>Kecepatan</td>
+                        <td>Bandwith</td>
                         <td>Admin</td>
-                        <td>Aksi</td>
+                        <td>Harga</td>
                     </tr>
                 </thead>
                 <tbody class="tabel">
@@ -87,17 +87,9 @@
                                 <td >' + value['nama_produk'] + '</td>\
                                 <td >' + value['tanggal_transaksi'] + '</td>\
                                 <td >' + value['kecepatan'] + '</td>\
+                                <td >' + value['bandwith'] + '</td>\
                                 <td >' + value['nama_akun'] + '</td>\
-                                <td >\
-                                <a href="#" id="btn-detail">\
-                                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"\
-                                    style="fill: rgba(138, 153, 181, 1);">\
-                                    <path\
-                                    d="M12 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0-6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 12c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z">\
-                                    </path>\
-                                </svg>\
-                            </a>\
-                                </td>\
+                                <td >' + value['harga_produk'] + '</td>\
                             </tr>');
                 });
             }
@@ -105,8 +97,18 @@
     }
 
     $(document).ready(function(){
-    $('#search_faq').on(function(){
-    $('#table-faq').load('faq/search.php?keyword=' +$('#search_faq').val());
+    $('#search_riwayat').on('keyup',function(){
+    $('#table-riwayat').load('riwayat/search.php?keyword=' +$('#search_riwayat').val());
     });
     });
 </script>
+<script>
+        function printDiv() {
+            let file = new Blob([$('#table-riwayat').html()], {type:"application/vnd.ms-excel"});
+let url = URL.createObjectURL(file);
+let a = $("<a />", {
+  href: url,
+  download: "filename.xls"}).appendTo("body").get(0).click();
+  e.preventDefault();
+        }
+    </script>

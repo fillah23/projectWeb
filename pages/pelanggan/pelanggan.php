@@ -132,6 +132,7 @@ $query_edit=mysqli_query($conn,$perintah);
             <select name="" id="status">
                 <option>aktif</option>
                 <option>non aktif</option>
+                <option>none</option>
             </select>
         </div>
         <div class="form-element">
@@ -191,7 +192,7 @@ $query_edit=mysqli_query($conn,$perintah);
         </div>
     </div>
 </div>
-<input type="text" name="" id="level"value="Admin" hidden>
+<input type="text" name="" id="level" value="Admin" hidden>
 <script>
     document.querySelector("#show-login").addEventListener("click", function () {
         document.querySelector(".popup").classList.add("active");
@@ -430,7 +431,8 @@ $query_edit=mysqli_query($conn,$perintah);
                                 <td style="width: 20%;">' + value['nama_pelanggan'] + '</td>\
                                 <td style="width: 20%;">' + value['nomer_hp'] + '</td>\
                                 <td style="width: 22%;">' + value['nama_produk'] + '</td>\
-                                <td style="width: 18%;">' + value['status'] + '</td>\
+                                <td style="width: 18%;">' + value['status'] +
+                        '</td>\
                                 <td style="width: 12%;">\
                                 <a href="#" id="btn-view">\
                                 <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24"\
@@ -457,7 +459,8 @@ $query_edit=mysqli_query($conn,$perintah);
                                 </svg>\
                                 </a>\
                                 </td>\
-                            </tr><script>$(".aksi_pelanggan").hide();if(document.getElementById("level").value=="Super"){$(".aksi_pelanggan").show();}</' + 'script>');
+                            </tr><script>$(".aksi_pelanggan").hide();if(document.getElementById("level").value=="Super"){$(".aksi_pelanggan").show();}</' +
+                        'script>');
                 });
             }
         });
@@ -465,8 +468,13 @@ $query_edit=mysqli_query($conn,$perintah);
 
     function addData() {
         $('#submit').click(function (e) {
+            if (validasi()) {
+                // code to submit all the info, display the success message and close the form
+            } else {return false};
             e.preventDefault();
+        });
 
+        function validasi() {
             var kode = $('#kode').val();
             var nama = $('#nama').val();
             var email = $('#email').val();
@@ -475,7 +483,8 @@ $query_edit=mysqli_query($conn,$perintah);
             var nama_produk = $('#nama_produk').val();
             var tanggal = $('#tanggal').val();
 
-            if (kode != '' & nama != '' & email != '' & password != '' & nomer_hp != '' & nama_produk != '' ) {
+            if (kode != '' & nama != '' & email != '' & password != '' & nomer_hp != '' & nama_produk != '') {
+                var valid = false;
                 $.ajax({
                     type: "POST",
                     url: "pelanggan/code.php",
@@ -490,30 +499,40 @@ $query_edit=mysqli_query($conn,$perintah);
                         'tanggal_berlangganan': tanggal,
                     },
                     success: function (response) {
+                        if (response == 0) {
+                            valid = true;
+                        }
                         // console.log(response);
-                        document.querySelector(".popup").classList.remove("active");
-                        $(".popup").css({
-                            "box-shadow": "none"
-                        });
-                        Swal.fire({
-                            position: 'center',
-                            icon: 'success',
-                            title: "Data berhasil ditambah",
-                            showConfirmButton: false,
-                            timer: 2000
-                        })
-                        $('.tabel').html("");
-                        getdata();
-                        $('#kode').val(response);
-                        $('#nama').val("");
-                        $('#email').val("");
-                        $('#password').val("");
-                        $('#nomer_hp').val("");
-                        $('#nama_produk').val("");
-                        $('#harga').val("");
-                        $('#tanggal').val("");
+
                     }
                 });
+                if (!valid) {
+                    alert("salah");
+                    return false;
+                } else {
+                    return true;
+                    document.querySelector(".popup").classList.remove("active");
+                    $(".popup").css({
+                        "box-shadow": "none"
+                    });
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: "Data berhasil ditambah",
+                        showConfirmButton: false,
+                        timer: 2000
+                    })
+                    $('.tabel').html("");
+                    getdata();
+                    $('#kode').val(response);
+                    $('#nama').val("");
+                    $('#email').val("");
+                    $('#password').val("");
+                    $('#nomer_hp').val("");
+                    $('#nama_produk').val("");
+                    $('#harga').val("");
+                    $('#tanggal').val("");
+                }
 
             } else {
                 // console.log("Please enter all fileds.");
@@ -525,8 +544,7 @@ $query_edit=mysqli_query($conn,$perintah);
                     timer: 2000
                 })
             }
-
-        });
+        }
     }
 </script>
 <script>
@@ -545,14 +563,14 @@ $query_edit=mysqli_query($conn,$perintah);
         $('[name=kodep_edit]').val(nama);
     });
 
-    $(document).ready(function(){
-    $('#search_pelanggan').on('keyup',function(){
-    $('#table-pelanggan').load('pelanggan/search.php?keyword=' +$('#search_pelanggan').val());
-    });
+    $(document).ready(function () {
+        $('#search_pelanggan').on('keyup', function () {
+            $('#table-pelanggan').load('pelanggan/search.php?keyword=' + $('#search_pelanggan').val());
+        });
     });
 </script>
 <script>
     var x = sessionStorage.getItem("textvalue3");
     var decrypted = CryptoJS.AES.decrypt(x, "Secret Passphrase");
-    document.getElementById("level").value= decrypted.toString(CryptoJS.enc.Utf8);
+    document.getElementById("level").value = decrypted.toString(CryptoJS.enc.Utf8);
 </script>

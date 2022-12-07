@@ -21,8 +21,9 @@ $produk= query($query);
         <tr>
             <td>ID</td>
             <td>Nama</td>
+            <td>Kecepatan</td>
             <td>Harga</td>
-            <td>Stok</td>
+            <td>Bandwith</td>
             <td>Aksi</td>
         </tr>
     </thead>
@@ -30,9 +31,10 @@ $produk= query($query);
         <?php foreach( $produk as $row ) { ?>
         <tr>
             <td class="produk_id" style="width: 20%;"><?= $row["kode_produk"]; ?></td>
-            <td style="width: 25%;"><?= $row["nama_produk"]; ?></td>
-            <td style="width: 25%;"><?= $row["harga_produk"]; ?></td>
-            <td style="width: 20%;"><?= $row["stok"]; ?></td>
+            <td style="width: 20%;"><?= $row["nama_produk"]; ?></td>
+            <td style="width: 10%;"><?= $row["kecepatan"]; ?></td>
+            <td style="width: 20%;"><?= $row["harga_produk"]; ?></td>
+            <td style="width: 20%;"><?= $row["bandwith"]; ?></td>
             <td style="width: 10%;">
                 <a href="#" id="btn-edit">
                     <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"

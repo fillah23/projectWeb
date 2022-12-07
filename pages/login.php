@@ -1,33 +1,5 @@
 <?php 
-session_start();
-$conn = mysqli_connect("localhost","root","","fans");
 
-if(isset($_SESSION["login"])){
-	header("Location: home.php");
-	exit;
-}
-if(isset($_POST["login"])){
-    $username=$_POST["email"];
-    $password=$_POST["password"];
-    $result=mysqli_query($conn,"SELECT * FROM akun WHERE email_akun='$username'");
-
-    if(mysqli_num_rows($result )=== 1){
-        $row= mysqli_fetch_assoc($result);
-		$nama_akun=$row['nama_akun'];
-		$level=$row['level'];
-		$kode_akun=$row['kode_akun'];
-        if(password_verify($password,$row["password"])){
-            $_SESSION["login"] = true;
-			$_SESSION['nama_akun'] = $nama_akun;
-			$_SESSION['level'] = $level;
-			$_SESSION['kode_akun'] = $kode_akun;
-            header("Location: home.php");
-            exit;
-        }
-    }
-    $error=true;
-	
-}
 ?>
 <!DOCTYPE html>
 <html>
@@ -45,7 +17,7 @@ if(isset($_POST["login"])){
 			<img src="../images/bg.svg">
 		</div>
 		<div class="login-content">
-			<form action="" method="POST">
+			<form action="validasi.php" method="POST">
 				<img src="../images/avatar.svg">
 				<h2 class="title">Welcome</h2>
            		<div class="input-div one">
@@ -53,7 +25,7 @@ if(isset($_POST["login"])){
            		   		<i class="fas fa-user"></i>
            		   </div>
            		   <div class="div">
-           		   		<h5>Username</h5>
+           		   		<h5>Email</h5>
            		   		<input type="text" class="input" name="email">
            		   </div>
            		</div>
@@ -67,6 +39,7 @@ if(isset($_POST["login"])){
             	   </div>
             	</div>
             	<input type="submit" class="btn" value="Login" name="login">
+				<p><a href="../index.php">kembali</a></p>
             </form>
         </div>
     </div>
@@ -75,8 +48,36 @@ if(isset($_POST["login"])){
 </body>
 </html>
 <?php 
-if(isset($error) ){
-	echo "<script>
+
+if(isset($_GET['email'])){
+	if($_GET['email'] == "kosong"){
+		echo "<script>
+	Swal.fire({
+				position: 'center',
+				icon: 'warning',
+				title: 'Email belum di masukkan',
+				showConfirmButton: false,
+				timer: 2000
+			})
+	</script>";
+	}
+}
+if(isset($_GET['password'])){
+	if($_GET['password'] == "kosong"){
+		echo "<script>
+	Swal.fire({
+				position: 'center',
+				icon: 'warning',
+				title: 'Password belum di masukkan',
+				showConfirmButton: false,
+				timer: 2000
+			})
+	</script>";
+	}
+}
+if(isset($_GET['login'])){
+	if($_GET['login'] == "gagal"){
+		echo "<script>
 	Swal.fire({
 				position: 'center',
 				icon: 'warning',
@@ -85,5 +86,7 @@ if(isset($error) ){
 				timer: 2000
 			})
 	</script>";
+	}
 }
+
 ?>

@@ -1,7 +1,7 @@
 <?php 
 $conn = mysqli_connect("localhost","root","","fans");
 $keyword = $_GET["keyword"];
-$query= "SELECT * FROM pelanggan WHERE 
+$query= "SELECT * FROM pelanggan join produk on pelanggan.kode_produk = produk.kode_produk WHERE 
             nama_pelanggan LIKE '%$keyword%'";
 function query($sql) {
 	global $conn;
