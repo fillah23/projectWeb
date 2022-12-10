@@ -1,6 +1,43 @@
 <?php 
 $conn = mysqli_connect("localhost","root","","fans");
 
+if(isset($_POST['validasi_email']))
+{
+    $email_pelanggan = $_POST['email_pelanggan'];
+    $result_array = [];
+
+    $query = "SELECT * FROM pelanggan join produk on pelanggan.kode_produk = produk.kode_produk WHERE email_pelanggan='$email_pelanggan' ";
+    $query_run = mysqli_query($conn, $query);
+    $num = mysqli_num_rows($query_run);
+
+    if($num>0)
+    {
+        echo 0;
+    }
+    else
+    {
+        echo 1;
+    }
+}
+if(isset($_POST['validasi_email_edit']))
+{
+    $email_pelanggan = $_POST['email_pelanggan'];
+    $email_pelanggan_user = $_POST['email_pelanggan_user'];
+    $result_array = [];
+
+    $query = "SELECT * FROM pelanggan join produk on pelanggan.kode_produk = produk.kode_produk WHERE email_pelanggan='$email_pelanggan' AND NOT email_pelanggan='$email_pelanggan_user' ";
+    $query_run = mysqli_query($conn, $query);
+    $num = mysqli_num_rows($query_run);
+
+    if($num>0)
+    {
+        echo 0;
+    }
+    else
+    {
+        echo 1;
+    }
+}
 if(isset($_POST['checking_add']))
 {
     $kode = $_POST['kode_pelanggan'];

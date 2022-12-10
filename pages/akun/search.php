@@ -1,7 +1,7 @@
 <?php 
 $conn = mysqli_connect("localhost","root","","fans");
 $keyword = $_GET["keyword"];
-$query= "SELECT * FROM akun WHERE 
+$query= "SELECT * FROM `akun` JOIN level_akun ON akun.id_level =level_akun.id_level WHERE 
             nama_akun LIKE '%$keyword%'";
 function query($sql) {
 	global $conn;

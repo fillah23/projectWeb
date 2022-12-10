@@ -1,4 +1,9 @@
 <?php 
+session_start();
+if(!isset($_SESSION["login"])){
+	header("Location: ../login.php");
+	exit;
+}
 function auto(){
     $conn = mysqli_connect("localhost","root","","fans");
 

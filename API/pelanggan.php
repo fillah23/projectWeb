@@ -1,6 +1,6 @@
 <?php
 $connect = new mysqli("localhost", "root", "", "fans");
-$queryResult=$connect->query("SELECT * FROM produk");
+$queryResult=$connect->query("SELECT * FROM pelanggan");
 $result=array();
 while($fetchData=$queryResult->fetch_assoc()){
     $result[]=$fetchData;

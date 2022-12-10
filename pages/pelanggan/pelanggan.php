@@ -1,4 +1,9 @@
 <?php 
+session_start();
+if(!isset($_SESSION["login"])){
+	header("Location: ../login.php");
+	exit;
+}
 function auto(){
     $conn = mysqli_connect("localhost","root","","fans");
 
@@ -116,6 +121,7 @@ $query_edit=mysqli_query($conn,$perintah);
         <div class="form-element">
             <label for="email">Email</label>
             <input type="email" id="email_edit" name="email" placeholder="Masukkan Email" autocomplete="off">
+            <input type="hidden" id="email_edit_user" name="email" placeholder="Masukkan Email" autocomplete="off">
         </div>
         <div class="form-element">
             <label for="password">Password</label>
@@ -326,57 +332,93 @@ $query_edit=mysqli_query($conn,$perintah);
             var kode = $('#id_edit').val();
             var nama = $('#nama_edit').val();
             var email = $('#email_edit').val();
+            var email_user = $('#email_edit_user').val();
             var password = $('#password_edit').val();
             var nomer_hp = $('#nomer_hp_edit').val();
             var nama_produk = $('#pilihProduk_edit').val();
             var kodep = $('#kodep_edit').val();
             var status = $('#status').val();
+            var mailformat = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
 
-            if (kode != '' & nama != '' & email != '' & password != '' & nomer_hp != '' & nama_produk != '' &
-                kodep != '') {
-                $.ajax({
-                    type: "POST",
-                    url: "pelanggan/code.php",
-                    data: {
-                        'checking_update': true,
-                        'kode_pelanggan': kode,
-                        'nama_pelanggan': nama,
-                        'email_pelanggan': email,
-                        'password': password,
-                        'nomer_hp': nomer_hp,
-                        'nama_produk': nama_produk,
-                        'kode_p': kodep,
-                        'status': status,
-                    },
-                    success: function (response) {
-                        // console.log(response);
-                        document.querySelector(".edit").classList.remove("active");
-                        $(".edit").css({
-                            "box-shadow": "none"
-                        });
+            $.ajax({
+                type: "POST",
+                url: "pelanggan/code.php",
+                data: {
+                    'validasi_email_edit': true,
+                    'email_pelanggan': email,
+                    'email_pelanggan_user': email_user,
+                },
+                success: function (response) {
+                    if (response == 0) {
                         Swal.fire({
                             position: 'center',
-                            icon: 'success',
-                            title: response,
+                            icon: 'error',
+                            title: 'Email sudah ada',
                             showConfirmButton: false,
                             timer: 2000
                         })
-                        $('.tabel').html("");
-                        getdata();
+                    } else {
+                        if (kode != '' & nama != '' & email != '' & password != '' & nomer_hp !=
+                            '' & nama_produk != '' &
+                            kodep != '') {
+                            if (email.match(mailformat)) {
+                                $.ajax({
+                                    type: "POST",
+                                    url: "pelanggan/code.php",
+                                    data: {
+                                        'checking_update': true,
+                                        'kode_pelanggan': kode,
+                                        'nama_pelanggan': nama,
+                                        'email_pelanggan': email,
+                                        'password': password,
+                                        'nomer_hp': nomer_hp,
+                                        'nama_produk': nama_produk,
+                                        'kode_p': kodep,
+                                        'status': status,
+                                    },
+                                    success: function (response) {
+                                        // console.log(response);
+                                        document.querySelector(".edit").classList
+                                            .remove(
+                                                "active");
+                                        $(".edit").css({
+                                            "box-shadow": "none"
+                                        });
+                                        Swal.fire({
+                                            position: 'center',
+                                            icon: 'success',
+                                            title: response,
+                                            showConfirmButton: false,
+                                            timer: 2000
+                                        })
+                                        $('.tabel').html("");
+                                        getdata();
 
+                                    }
+                                });
+                            }else{
+                                Swal.fire({
+                                position: 'center',
+                                icon: 'error',
+                                title: 'Format email salah',
+                                showConfirmButton: false,
+                                timer: 2000
+                            }) 
+                            }
+
+                        } else {
+                            // console.log("Please enter all fileds.");
+                            Swal.fire({
+                                position: 'center',
+                                icon: 'error',
+                                title: 'Lengkapi data',
+                                showConfirmButton: false,
+                                timer: 2000
+                            })
+                        }
                     }
-                });
-
-            } else {
-                // console.log("Please enter all fileds.");
-                Swal.fire({
-                    position: 'center',
-                    icon: 'error',
-                    title: 'Lengkapi data',
-                    showConfirmButton: false,
-                    timer: 2000
-                })
-            }
+                }
+            });
 
         });
     }
@@ -401,6 +443,7 @@ $query_edit=mysqli_query($conn,$perintah);
                         $('#id_edit').val(value['kode_pelanggan']);
                         $('#nama_edit').val(value['nama_pelanggan']);
                         $('#email_edit').val(value['email_pelanggan']);
+                        $('#email_edit_user').val(value['email_pelanggan']);
                         $('#password_edit').val(value['password']);
                         $('#nomer_hp_edit').val(value['nomer_hp']);
                         $('#pilihProduk_edit').val(value['nama_produk']);
@@ -468,13 +511,7 @@ $query_edit=mysqli_query($conn,$perintah);
 
     function addData() {
         $('#submit').click(function (e) {
-            if (validasi()) {
-                // code to submit all the info, display the success message and close the form
-            } else {return false};
             e.preventDefault();
-        });
-
-        function validasi() {
             var kode = $('#kode').val();
             var nama = $('#nama').val();
             var email = $('#email').val();
@@ -482,69 +519,92 @@ $query_edit=mysqli_query($conn,$perintah);
             var nomer_hp = $('#nomer_hp').val();
             var nama_produk = $('#nama_produk').val();
             var tanggal = $('#tanggal').val();
+            var mailformat = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
 
-            if (kode != '' & nama != '' & email != '' & password != '' & nomer_hp != '' & nama_produk != '') {
-                var valid = false;
-                $.ajax({
-                    type: "POST",
-                    url: "pelanggan/code.php",
-                    data: {
-                        'checking_add': true,
-                        'kode_pelanggan': kode,
-                        'nama_pelanggan': nama,
-                        'email_pelanggan': email,
-                        'password': password,
-                        'nomer_hp': nomer_hp,
-                        'nama_produk': nama_produk,
-                        'tanggal_berlangganan': tanggal,
-                    },
-                    success: function (response) {
-                        if (response == 0) {
-                            valid = true;
+            $.ajax({
+                type: "POST",
+                url: "pelanggan/code.php",
+                data: {
+                    'validasi_email': true,
+                    'email_pelanggan': email,
+                },
+                success: function (response) {
+                    if (response == 0) {
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'error',
+                            title: 'Email sudah ada',
+                            showConfirmButton: false,
+                            timer: 2000
+                        })
+                    } else {
+                        if (kode != '' & nama != '' & email != '' & password != '' & nomer_hp !=
+                            '' & nama_produk != '') {
+                            if (email.match(mailformat)) {
+                                $.ajax({
+                                    type: "POST",
+                                    url: "pelanggan/code.php",
+                                    data: {
+                                        'checking_add': true,
+                                        'kode_pelanggan': kode,
+                                        'nama_pelanggan': nama,
+                                        'email_pelanggan': email,
+                                        'password': password,
+                                        'nomer_hp': nomer_hp,
+                                        'nama_produk': nama_produk,
+                                        'tanggal_berlangganan': tanggal,
+                                    },
+                                    success: function (response) {
+                                        document.querySelector(".popup").classList
+                                            .remove("active");
+                                        $(".popup").css({
+                                            "box-shadow": "none"
+                                        });
+                                        Swal.fire({
+                                            position: 'center',
+                                            icon: 'success',
+                                            title: "Data berhasil ditambah",
+                                            showConfirmButton: false,
+                                            timer: 2000
+                                        })
+                                        $('.tabel').html("");
+                                        getdata();
+                                        $('#kode').val(response);
+                                        $('#nama').val("");
+                                        $('#email').val("");
+                                        $('#password').val("");
+                                        $('#nomer_hp').val("");
+                                        $('#nama_produk').val("");
+                                        $('#harga').val("");
+                                        $('#tanggal').val("");
+                                    }
+                                });
+                            } else {
+                                // console.log("Please enter all fileds.");
+                                Swal.fire({
+                                    position: 'center',
+                                    icon: 'error',
+                                    title: 'Format email salah',
+                                    showConfirmButton: false,
+                                    timer: 2000
+                                })
+                            }
+                        } else {
+                            // console.log("Please enter all fileds.");
+                            Swal.fire({
+                                position: 'center',
+                                icon: 'error',
+                                title: 'Lengkapi data',
+                                showConfirmButton: false,
+                                timer: 2000
+                            })
                         }
-                        // console.log(response);
-
                     }
-                });
-                if (!valid) {
-                    alert("salah");
-                    return false;
-                } else {
-                    return true;
-                    document.querySelector(".popup").classList.remove("active");
-                    $(".popup").css({
-                        "box-shadow": "none"
-                    });
-                    Swal.fire({
-                        position: 'center',
-                        icon: 'success',
-                        title: "Data berhasil ditambah",
-                        showConfirmButton: false,
-                        timer: 2000
-                    })
-                    $('.tabel').html("");
-                    getdata();
-                    $('#kode').val(response);
-                    $('#nama').val("");
-                    $('#email').val("");
-                    $('#password').val("");
-                    $('#nomer_hp').val("");
-                    $('#nama_produk').val("");
-                    $('#harga').val("");
-                    $('#tanggal').val("");
-                }
 
-            } else {
-                // console.log("Please enter all fileds.");
-                Swal.fire({
-                    position: 'center',
-                    icon: 'error',
-                    title: 'Lengkapi data',
-                    showConfirmButton: false,
-                    timer: 2000
-                })
-            }
-        }
+                }
+            });
+
+        });
     }
 </script>
 <script>

@@ -2,7 +2,7 @@
 
 $conn = mysqli_connect("localhost","root","","fans");
 
-$query = "SELECT * FROM akun where kode_akun not like '%AA00001%'";
+$query = "SELECT * FROM `akun` JOIN level_akun ON akun.id_level =level_akun.id_level where kode_akun not like '%AA00001%'";
 $query_run = mysqli_query($conn, $query);
 $result_array = [];
 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 25 Nov 2022 pada 13.00
+-- Waktu pembuatan: 10 Des 2022 pada 14.57
 -- Versi server: 10.4.21-MariaDB
 -- Versi PHP: 8.0.10
 
@@ -32,15 +32,17 @@ CREATE TABLE `akun` (
   `nama_akun` varchar(30) NOT NULL,
   `email_akun` varchar(30) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `level` varchar(12) NOT NULL
+  `id_level` int(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data untuk tabel `akun`
 --
 
-INSERT INTO `akun` (`kode_akun`, `nama_akun`, `email_akun`, `password`, `level`) VALUES
-('AA00001', 'owner', 'owner@gmail.com', '$2y$10$H7QhLQXmx7/K46Mk/3.1n.hUYkgY1oD3Zb13v/yQWhmgvKPoK25ZW', 'Super');
+INSERT INTO `akun` (`kode_akun`, `nama_akun`, `email_akun`, `password`, `id_level`) VALUES
+('AA00001', 'owner', 'owner@gmail.com', '$2y$10$H7QhLQXmx7/K46Mk/3.1n.hUYkgY1oD3Zb13v/yQWhmgvKPoK25ZW', 1),
+('AA00002', 'admin', 'admin@gmail.com', '$2y$10$I.Ycq5ccEggYwgJQcSnXJeVfqXkZEfioXEESt6uoGX2pxir2GekaS', 2),
+('AA00003', 'fillah', 'fillah@gmail.com', '$2y$10$kzwnVrlNnANPzXfUkd53Y.EhUwDBYmThitatAHpLV5bnppDLoAX5C', 1);
 
 -- --------------------------------------------------------
 
@@ -53,6 +55,25 @@ CREATE TABLE `faq` (
   `pertanyaan` varchar(100) NOT NULL,
   `jawaban` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `level_akun`
+--
+
+CREATE TABLE `level_akun` (
+  `id_level` int(4) NOT NULL,
+  `level` varchar(12) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `level_akun`
+--
+
+INSERT INTO `level_akun` (`id_level`, `level`) VALUES
+(1, 'Super'),
+(2, 'Admin');
 
 -- --------------------------------------------------------
 
@@ -76,9 +97,8 @@ CREATE TABLE `pelanggan` (
 --
 
 INSERT INTO `pelanggan` (`kode_pelanggan`, `nama_pelanggan`, `email_pelanggan`, `password`, `nomer_hp`, `status`, `tanggal_berlangganan`, `kode_produk`) VALUES
-('PL00001', 'fillah', 'fillah@gamil.com', '123', '123', 'aktif', '2022-11-25', 'PD00001'),
-('PL00002', '1', '1', '1', '12', 'aktif', '2022-11-25', 'PD00001'),
-('PL00003', '1', '1', '1', '1', 'aktif', '2022-11-25', 'PD00001');
+('PL00001', 'rio', 'rio@gmail.com', '123', '08880583766', 'non aktif', '2022-12-05', 'PD00002'),
+('PL00002', 'nabila', 'nabila@gmail.com', '123', '0888888', 'aktif', '2022-12-10', 'PD00001');
 
 -- --------------------------------------------------------
 
@@ -102,16 +122,16 @@ CREATE TABLE `produk` (
   `nama_produk` varchar(25) NOT NULL,
   `kecepatan` varchar(8) NOT NULL,
   `harga_produk` int(7) NOT NULL,
-  `stok` varchar(5) NOT NULL
+  `bandwith` varchar(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data untuk tabel `produk`
 --
 
-INSERT INTO `produk` (`kode_produk`, `nama_produk`, `kecepatan`, `harga_produk`, `stok`) VALUES
-('PD00001', 'Internet Lite', '10 mbps', 150000, '100'),
-('PD00002', '1', '1', 1, '1');
+INSERT INTO `produk` (`kode_produk`, `nama_produk`, `kecepatan`, `harga_produk`, `bandwith`) VALUES
+('PD00001', 'Internet Lite', '10 ', 100000, '1:4'),
+('PD00002', 'Internet Dedicated', '20', 150000, '1:4');
 
 -- --------------------------------------------------------
 
@@ -132,13 +152,9 @@ CREATE TABLE `transaksi` (
 --
 
 INSERT INTO `transaksi` (`kode_transaksi`, `tanggal_transaksi`, `total`, `kode_akun`, `kode_pelanggan`) VALUES
-('TR00001', '2022-11-25', 150000, 'AA00001', 'PL00002'),
-('TR00002', '2022-11-25', 150000, 'AA00001', 'PL00003'),
-('TR00003', '2022-11-25', 150000, 'AA00001', 'PL00001'),
-('TR00004', '2022-11-25', 150000, 'AA00001', 'PL00001'),
-('TR00005', '2022-11-25', 150000, 'AA00001', 'PL00003'),
-('TR00006', '2022-11-25', 150000, 'AA00001', 'PL00001'),
-('TR00007', '2022-11-25', 150000, 'AA00001', 'PL00001');
+('TR00001', '2022-12-05', 100000, 'AA00001', 'PL00001'),
+('TR00002', '2022-12-05', 100000, 'AA00001', 'PL00001'),
+('TR00003', '2022-12-10', 100000, 'AA00001', 'PL00002');
 
 --
 -- Indexes for dumped tables
@@ -148,13 +164,20 @@ INSERT INTO `transaksi` (`kode_transaksi`, `tanggal_transaksi`, `total`, `kode_a
 -- Indeks untuk tabel `akun`
 --
 ALTER TABLE `akun`
-  ADD PRIMARY KEY (`kode_akun`);
+  ADD PRIMARY KEY (`kode_akun`),
+  ADD KEY `id_level` (`id_level`);
 
 --
 -- Indeks untuk tabel `faq`
 --
 ALTER TABLE `faq`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indeks untuk tabel `level_akun`
+--
+ALTER TABLE `level_akun`
+  ADD PRIMARY KEY (`id_level`);
 
 --
 -- Indeks untuk tabel `pelanggan`
@@ -194,8 +217,20 @@ ALTER TABLE `faq`
   MODIFY `id` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+-- AUTO_INCREMENT untuk tabel `level_akun`
+--
+ALTER TABLE `level_akun`
+  MODIFY `id_level` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
 --
+
+--
+-- Ketidakleluasaan untuk tabel `akun`
+--
+ALTER TABLE `akun`
+  ADD CONSTRAINT `akun_ibfk_1` FOREIGN KEY (`id_level`) REFERENCES `level_akun` (`id_level`);
 
 --
 -- Ketidakleluasaan untuk tabel `pelanggan`

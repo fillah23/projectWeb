@@ -19,8 +19,8 @@ $query_run = mysqli_query($conn, $query);
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sidebar Menu</title>
   <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
-  <link rel="stylesheet" href="../css/home.css?v=2.4">
-  <link rel="stylesheet" href="../css/popup.css?v=2.0">
+  <link rel="stylesheet" href="../css/home.css">
+  <link rel="stylesheet" href="../css/popup.css">
 </head>
 
 <body class="shrink">
@@ -68,21 +68,10 @@ $query_run = mysqli_query($conn, $query);
             <span class="link hide">Pelanggan</span>
           </a>
         </li>
-        <li class="tooltip-element" data-tooltip="3">
-          <a href="" data-active="3" id="portfolio" class="menu">
-            <div class="icon">
-              <i class='bx bx-image-add'></i>
-              <i class='bx bxs-image-add'></i>
-            </div>
-            <span class="link hide">Portfolio</span>
-          </a>
-        </li>
         <div class="tooltip">
           <span class="show">Transaksi</span>
           <span>Produk</span>
           <span>Pelanggan</span>
-          <span>Portfolio</span>
-
         </div>
       </ul>
       <div id="main-page"></div>
@@ -91,7 +80,7 @@ $query_run = mysqli_query($conn, $query);
 
       <ul>
         <li class="tooltip-element" data-tooltip="0">
-          <a href="" data-active="4" id="faq" class="menu">
+          <a href="" data-active="3" id="faq" class="menu">
             <div class="icon">
               <i class='bx bx-message-dots'></i>
               <i class='bx bxs-message-dots'></i>
@@ -100,7 +89,7 @@ $query_run = mysqli_query($conn, $query);
           </a>
         </li>
         <li class="tooltip-element" data-tooltip="1" id="menu_akun">
-          <a href="" data-active="5" id="akun" class="menu">
+          <a href="" data-active="4" id="akun" class="menu">
             <div class="icon">
               <i class='bx bx-user-plus'></i>
               <i class='bx bxs-user-plus'></i>
@@ -109,7 +98,7 @@ $query_run = mysqli_query($conn, $query);
           </a>
         </li>
         <li class="tooltip-element" data-tooltip="2" id="menu_riwayat">
-          <a href="" data-active="6" id="riwayat" class="menu">
+          <a href="" data-active="5" id="riwayat" class="menu">
             <div class="icon">
               <i class='bx bx-bar-chart-square'></i>
               <i class='bx bxs-bar-chart-square'></i>
@@ -176,9 +165,6 @@ $query_run = mysqli_query($conn, $query);
         } else if (menu == "pelanggan") {
           $('#content').load('pelanggan/pelanggan.php');
           $(".search_field").attr("id", "search_pelanggan");
-        } else if (menu == "portfolio") {
-          $('#content').load('portfolio/portfolio.php');
-          $(".search_field").attr("id", "search_portfolio");
         } else if (menu == "akun") {
           $('#content').load('akun/akun.php');
           $(".search_field").attr("id", "search_akun");
@@ -254,14 +240,6 @@ $query_run = mysqli_query($conn, $query);
       return false;
     }
   </script>
-<link rel="stylesheet" href="../dropify/dist/css/dropify.min.css">
-<script src="../dropify/dist/js/dropify.min.js"></script>
-<script type="text/javascript">
-     $(document).ready(function() {
-        // Basic
-        $('.dropify').dropify();
-    });
-</script>
 </body>
 
 </html>
