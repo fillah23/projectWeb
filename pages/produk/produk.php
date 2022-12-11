@@ -118,4 +118,4 @@ function auto(){
 </div>
 <input type="text" name="" id="level"value="Admin" hidden >
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="produk/function.js"></script>
+<script src="produk/functions.js"></script>

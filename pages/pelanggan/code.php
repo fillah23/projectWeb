@@ -143,11 +143,11 @@ if(isset($_POST['checking_delete']))
 
     if($query_run)
     {
-        echo $return  = "Berhasil di hapus";
+        echo $return  = 0;
     }
     else
     {
-        echo $return  = "Something Went Wrong.!";
+        echo $return  = 1;
     }
 }
 

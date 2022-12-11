@@ -24,7 +24,7 @@ $produk= query($query);
             <td>Kecepatan</td>
             <td>Harga</td>
             <td>Bandwith</td>
-            <td>Aksi</td>
+            <td class="aksi_produk">Aksi</td>
         </tr>
     </thead>
     <tbody class="tabel">
@@ -35,7 +35,7 @@ $produk= query($query);
             <td style="width: 10%;"><?= $row["kecepatan"]; ?></td>
             <td style="width: 20%;"><?= $row["harga_produk"]; ?></td>
             <td style="width: 20%;"><?= $row["bandwith"]; ?></td>
-            <td style="width: 10%;">
+            <td style="width: 10%;" class="aksi_produk">
                 <a href="#" id="btn-edit">
                     <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"
                         style="fill: rgba(255, 212, 0, 1);">
@@ -54,5 +54,6 @@ $produk= query($query);
             </td>
         </tr>
         <?php } ?>
+        <script>$(".aksi_produk").hide();if(document.getElementById("level").value=="Super"){$(".aksi_produk").show();}</script>
     </tbody>
 </table>

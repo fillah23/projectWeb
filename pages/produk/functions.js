@@ -58,14 +58,25 @@ function hapus() {
                         'kode_produk': kode_produk,
                     },
                     success: function (response) {
-                        // console.log(response);
-                        Swal.fire({
-                            position: 'center',
-                            icon: 'success',
-                            title: response,
-                            showConfirmButton: false,
-                            timer: 2000
-                        })
+                        if(response == 0)
+                        {
+                            Swal.fire({
+                                position: 'center',
+                                icon: 'success',
+                                title: 'Berhasil dihapus',
+                                showConfirmButton: false,
+                                timer: 2000
+                            })
+                        }else{
+                            Swal.fire({
+                                position: 'center',
+                                icon: 'error',
+                                title: 'Produk tidak bisa di hapus',
+                                text : 'Ada pelanggan yang berlangganan produk ini',
+                                showConfirmButton: true,
+                                // timer: 2000
+                            })
+                        }
                         $('.tabel').html("");
                         getdata();
                     }

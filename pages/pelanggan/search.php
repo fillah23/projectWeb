@@ -38,7 +38,7 @@ $pelanggan= query($query);
             <td style="width: 12%;">
                 <a href="#" id="btn-view">
                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24"
-                        style="fill: rgba(13, 255, 19, 1);">
+                        style="fill: rgba(105, 172, 193, 1);">
                         <path
                             d="M12 5c-7.633 0-9.927 6.617-9.948 6.684L1.946 12l.105.316C2.073 12.383 4.367 19 12 19s9.927-6.617 9.948-6.684l.106-.316-.105-.316C21.927 11.617 19.633 5 12 5zm0 11c-2.206 0-4-1.794-4-4s1.794-4 4-4 4 1.794 4 4-1.794 4-4 4z">
                         </path>
@@ -46,7 +46,7 @@ $pelanggan= query($query);
                         </path>
                     </svg>
                 </a>
-                <a href="#" id="btn-edit">
+                <a href="#" id="btn-edit" class="aksi_pelanggan">
                     <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"
                         style="fill: rgba(255, 212, 0, 1);">
                         <path
@@ -54,7 +54,7 @@ $pelanggan= query($query);
                         </path>
                     </svg>
                 </a>
-                <a href="#" id="btn-hapus">
+                <a href="#" id="btn-hapus" class="aksi_pelanggan">
                     <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"
                         style="fill: rgba(227, 71, 36, 1);">
                         <path d="M6 7H5v13a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7H6zm10.618-3L15 2H9L7.382 4H3v2h18V4z">
@@ -64,5 +64,6 @@ $pelanggan= query($query);
             </td>
         </tr>
         <?php } ?>
+        <script>$(".aksi_pelanggan").hide();if(document.getElementById("level").value=="Super"){$(".aksi_pelanggan").show();}</script>
     </tbody>
 </table>
