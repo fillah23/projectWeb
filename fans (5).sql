@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 10 Des 2022 pada 14.57
+-- Waktu pembuatan: 15 Des 2022 pada 03.35
 -- Versi server: 10.4.21-MariaDB
 -- Versi PHP: 8.0.10
 
@@ -97,19 +97,7 @@ CREATE TABLE `pelanggan` (
 --
 
 INSERT INTO `pelanggan` (`kode_pelanggan`, `nama_pelanggan`, `email_pelanggan`, `password`, `nomer_hp`, `status`, `tanggal_berlangganan`, `kode_produk`) VALUES
-('PL00001', 'rio', 'rio@gmail.com', '123', '08880583766', 'non aktif', '2022-12-05', 'PD00002'),
-('PL00002', 'nabila', 'nabila@gmail.com', '123', '0888888', 'aktif', '2022-12-10', 'PD00001');
-
--- --------------------------------------------------------
-
---
--- Struktur dari tabel `portofolio`
---
-
-CREATE TABLE `portofolio` (
-  `kode_gambar` varchar(7) NOT NULL,
-  `gambar` varchar(15) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+('PL00001', 'rio', 'rio@gmail.com', '123', '08880583766', 'non aktif', '2022-12-05', 'PD00002');
 
 -- --------------------------------------------------------
 
@@ -153,8 +141,7 @@ CREATE TABLE `transaksi` (
 
 INSERT INTO `transaksi` (`kode_transaksi`, `tanggal_transaksi`, `total`, `kode_akun`, `kode_pelanggan`) VALUES
 ('TR00001', '2022-12-05', 100000, 'AA00001', 'PL00001'),
-('TR00002', '2022-12-05', 100000, 'AA00001', 'PL00001'),
-('TR00003', '2022-12-10', 100000, 'AA00001', 'PL00002');
+('TR00002', '2022-12-05', 100000, 'AA00001', 'PL00001');
 
 --
 -- Indexes for dumped tables
@@ -184,13 +171,7 @@ ALTER TABLE `level_akun`
 --
 ALTER TABLE `pelanggan`
   ADD PRIMARY KEY (`kode_pelanggan`),
-  ADD KEY `kode_produk` (`kode_produk`);
-
---
--- Indeks untuk tabel `portofolio`
---
-ALTER TABLE `portofolio`
-  ADD PRIMARY KEY (`kode_gambar`);
+  ADD KEY `pelanggan_ibfk_1` (`kode_produk`);
 
 --
 -- Indeks untuk tabel `produk`
@@ -236,14 +217,14 @@ ALTER TABLE `akun`
 -- Ketidakleluasaan untuk tabel `pelanggan`
 --
 ALTER TABLE `pelanggan`
-  ADD CONSTRAINT `pelanggan_ibfk_1` FOREIGN KEY (`kode_produk`) REFERENCES `produk` (`kode_produk`);
+  ADD CONSTRAINT `pelanggan_ibfk_1` FOREIGN KEY (`kode_produk`) REFERENCES `produk` (`kode_produk`) ON UPDATE CASCADE;
 
 --
 -- Ketidakleluasaan untuk tabel `transaksi`
 --
 ALTER TABLE `transaksi`
-  ADD CONSTRAINT `transaksi_ibfk_2` FOREIGN KEY (`kode_akun`) REFERENCES `akun` (`kode_akun`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `transaksi_ibfk_3` FOREIGN KEY (`kode_pelanggan`) REFERENCES `pelanggan` (`kode_pelanggan`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `transaksi_ibfk_2` FOREIGN KEY (`kode_akun`) REFERENCES `akun` (`kode_akun`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `transaksi_ibfk_3` FOREIGN KEY (`kode_pelanggan`) REFERENCES `pelanggan` (`kode_pelanggan`) ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
