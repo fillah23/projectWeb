@@ -1,5 +1,9 @@
 <?php 
-$conn = mysqli_connect("localhost","root","","fans");
+// $conn = mysqli_connect("localhost","root","","fans");
+include '../koneksi.php';
+$db = new Database();
+$conn =  $db->db_connect();
+// $query_run = $conn->query("select * from produk");
 
 if(isset($_POST['checking_add']))
 {
@@ -9,17 +13,19 @@ if(isset($_POST['checking_add']))
     $stok = $_POST['stok'];
     $kecepatan = $_POST['kecepatan'];
 
-    $query = "INSERT INTO produk (kode_produk,nama_produk,harga_produk,bandwith,kecepatan) VALUES ('$kode','$nama','$harga','$stok','$kecepatan')";
-    $query_run = mysqli_query($conn, $query);
+    $query_run = $conn->query("INSERT INTO produk (kode_produk,nama_produk,harga_produk,bandwith,kecepatan) VALUES ('$kode','$nama','$harga','$stok','$kecepatan')");
     function auto(){
-        $conn = mysqli_connect("localhost","root","","fans");
-    
+        // $conn = mysqli_connect("localhost","root","","fans");
+        $db = new Database();
+        $conn =  $db->db_connect();
+
         $num = '';
         $perfix = 'PD';
-        $query = "SELECT MAX(kode_produk) AS kode from produk";
-        $run = mysqli_query($conn,$query);
-        $data = mysqli_fetch_array($run);
-        $row = mysqli_fetch_row($run);
+        // $query = "SELECT MAX(kode_produk) AS kode from produk";
+        // $run = mysqli_query($conn,$query);
+        $query_run = $conn->query("SELECT MAX(kode_produk) AS kode from produk");
+        $data = mysqli_fetch_array($query_run);
+        $row = mysqli_fetch_row($query_run);
         $num = $data['kode'];
         $number = (int)substr($num,2,5);
         $number++;
@@ -47,8 +53,8 @@ if(isset($_POST['checking_edit']))
     $kode_produk = $_POST['kode_produk'];
     $result_array = [];
 
-    $query = "SELECT * FROM produk WHERE kode_produk='$kode_produk' ";
-    $query_run = mysqli_query($conn, $query);
+    // $query = "SELECT * FROM produk WHERE kode_produk='$kode_produk' ";
+    $query_run = $conn->query("SELECT * FROM produk WHERE kode_produk='$kode_produk'");
 
     if(mysqli_num_rows($query_run) > 0)
     {
@@ -72,8 +78,7 @@ if(isset($_POST['checking_update']))
     $stok = $_POST['stok'];
     $kecepatan = $_POST['kecepatan'];
 
-    $query = "UPDATE produk SET nama_produk='$nama',harga_produk='$harga',bandwith='$stok',kecepatan='$kecepatan' WHERE kode_produk='$kode'";
-    $query_run = mysqli_query($conn, $query);
+    $query_run = $conn->query("UPDATE produk SET nama_produk='$nama',harga_produk='$harga',bandwith='$stok',kecepatan='$kecepatan' WHERE kode_produk='$kode'");
 
     if($query_run)
     {
@@ -88,8 +93,7 @@ if(isset($_POST['checking_delete']))
 {
     $kode = $_POST['kode_produk'];
 
-    $query = "DELETE FROM produk WHERE kode_produk='$kode' ";
-    $query_run = mysqli_query($conn, $query);
+    $query_run = $conn->query("DELETE FROM produk WHERE kode_produk='$kode'");
 
     if($query_run)
     {

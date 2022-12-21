@@ -1,5 +1,8 @@
 <?php 
-$conn = mysqli_connect("localhost","root","","fans");
+include '../koneksi.php';
+$db = new Database();
+$conn =  $db->db_connect();
+
 $keyword = $_GET["keyword"];
 $query= "SELECT * FROM faq WHERE 
             pertanyaan LIKE '%$keyword%'";

@@ -1,6 +1,9 @@
 <?php 
+include ('koneksi.php');
+$db = new Database();
+$conn =  $db->db_connect();
 session_start();
-$conn = mysqli_connect("localhost","root","","fans");
+// $conn = mysqli_connect("localhost","root","","fans");
 
 
 if(isset($_SESSION["login"])){
@@ -10,7 +13,8 @@ if(isset($_SESSION["login"])){
 if(isset($_POST["login"])){
     $username=$_POST["email"];
     $password=$_POST["password"];
-    $result=mysqli_query($conn,"SELECT * FROM `akun` JOIN level_akun ON akun.id_level =level_akun.id_level WHERE email_akun='$username'");
+    // $result=mysqli_query($conn,"SELECT * FROM `akun` JOIN level_akun ON akun.id_level =level_akun.id_level WHERE email_akun='$username'");
+     $result= $conn->query("SELECT * FROM `akun` JOIN level_akun ON akun.id_level =level_akun.id_level WHERE email_akun='$username'");
 
     if(mysqli_num_rows($result )=== 1){
         $row= mysqli_fetch_assoc($result);

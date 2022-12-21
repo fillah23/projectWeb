@@ -4,10 +4,14 @@ if(!isset($_SESSION["login"])){
 	header("Location: login.php");
 	exit;
 }
-$conn = mysqli_connect("localhost","root","","fans");
+// $conn = mysqli_connect("localhost","root","","fans");
+include ('koneksi.php');
+$db = new Database();
+$conn =  $db->db_connect();
 
-$query = "UPDATE `pelanggan` SET status = 'non aktif', tanggal_berlangganan = date(now()) WHERE MONTH(tanggal_berlangganan) != MONTH(date(NOW()))";
-$query_run = mysqli_query($conn, $query);
+// $query = "UPDATE `pelanggan` SET status = 'non aktif', tanggal_berlangganan = date(now()) WHERE MONTH(tanggal_berlangganan) != MONTH(date(NOW()))";
+// $query_run = mysqli_query($conn, $query);
+$query_run = $conn->query("UPDATE `pelanggan` SET status = 'non aktif', tanggal_berlangganan = date(now()) WHERE MONTH(tanggal_berlangganan) != MONTH(date(NOW()))");
 
 ?>
 <!DOCTYPE html>

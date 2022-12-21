@@ -1,9 +1,9 @@
 <?php 
+include '../koneksi.php';
+$db = new Database();
+$conn =  $db->db_connect();
 
-$conn = mysqli_connect("localhost","root","","fans");
-
-$query = "SELECT * FROM `akun` JOIN level_akun ON akun.id_level =level_akun.id_level where kode_akun not like '%AA00001%'";
-$query_run = mysqli_query($conn, $query);
+$query_run = $conn->query("SELECT * FROM `akun` JOIN level_akun ON akun.id_level =level_akun.id_level where kode_akun not like '%AA00001%'");
 $result_array = [];
 
 if(mysqli_num_rows($query_run) > 0)

@@ -1,9 +1,9 @@
 <?php 
+include '../koneksi.php';
+$db = new Database();
+$conn =  $db->db_connect();
 
-$conn = mysqli_connect("localhost","root","","fans");
-
-$query = "SELECT * FROM faq";
-$query_run = mysqli_query($conn, $query);
+$query_run = $conn->query("SELECT * FROM faq");
 $result_array = [];
 
 if(mysqli_num_rows($query_run) > 0)

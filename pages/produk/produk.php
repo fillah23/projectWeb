@@ -1,18 +1,22 @@
 <?php 
+include "../koneksi.php";
 session_start();
 if(!isset($_SESSION["login"])){
 	header("Location: ../login.php");
 	exit;
 }
 function auto(){
-    $conn = mysqli_connect("localhost","root","","fans");
+    // $conn = mysqli_connect("localhost","root","","fans");
+    $db = new Database();
+    $conn =  $db->db_connect();
 
     $num = '';
     $perfix = 'PD';
-    $query = "SELECT MAX(kode_produk) AS kode from produk";
-    $run = mysqli_query($conn,$query);
-    $data = mysqli_fetch_array($run);
-    $row = mysqli_fetch_row($run);
+    // $query = "SELECT MAX(kode_produk) AS kode from produk";
+    // $run = mysqli_query($conn,$query);
+    $query_run = $conn->query("SELECT MAX(kode_produk) AS kode from produk");
+    $data = mysqli_fetch_array($query_run);
+    $row = mysqli_fetch_row($query_run);
     $num = $data['kode'];
     $number = (int)substr($num,2,5);
     $number++;

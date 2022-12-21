@@ -1,9 +1,10 @@
 <?php 
+include '../koneksi.php';
+$db = new Database();
+$conn =  $db->db_connect();
 
-$conn = mysqli_connect("localhost","root","","fans");
-
-$query = "SELECT * FROM pelanggan join produk on pelanggan.kode_produk = produk.kode_produk WHERE `status` LIKE 'non aktif'";
-$query_run = mysqli_query($conn, $query);
+// $query = "SELECT * FROM pelanggan join produk on pelanggan.kode_produk = produk.kode_produk WHERE `status` LIKE 'non aktif'";
+$query_run = $conn->query("SELECT * FROM pelanggan join produk on pelanggan.kode_produk = produk.kode_produk WHERE `status` LIKE 'non aktif'");
 $result_array = [];
 
 if(mysqli_num_rows($query_run) > 0)

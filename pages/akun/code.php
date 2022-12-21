@@ -1,12 +1,16 @@
 <?php 
-$conn = mysqli_connect("localhost","root","","fans");
+// $conn = mysqli_connect("localhost","root","","fans");
+include '../koneksi.php';
+$db = new Database();
+$conn =  $db->db_connect();
+// $query_run = $conn->query("select * from akun");
+
 if(isset($_POST['validasi_email']))
 {
     $email = $_POST['email'];
     $result_array = [];
 
-    $query = "SELECT * FROM `akun` JOIN level_akun ON akun.id_level =level_akun.id_level WHERE email_akun='$email' ";
-    $query_run = mysqli_query($conn, $query);
+    $query_run = $conn->query("SELECT * FROM `akun` JOIN level_akun ON akun.id_level =level_akun.id_level WHERE email_akun='$email' ");
     $num = mysqli_num_rows($query_run);
 
     if($num>0)
@@ -24,8 +28,7 @@ if(isset($_POST['validasi_email_edit']))
     $email_akun_user = $_POST['email_akun_user'];
     $result_array = [];
 
-    $query = "SELECT * FROM `akun` JOIN level_akun ON akun.id_level =level_akun.id_level WHERE email_akun='$email_akun' AND NOT email_akun='$email_akun_user' ";
-    $query_run = mysqli_query($conn, $query);
+    $query_run = $conn->query("SELECT * FROM `akun` JOIN level_akun ON akun.id_level =level_akun.id_level WHERE email_akun='$email_akun' AND NOT email_akun='$email_akun_user'");
     $num = mysqli_num_rows($query_run);
 
     if($num>0)
@@ -47,17 +50,21 @@ if(isset($_POST['checking_add']))
     $level = $_POST['level'];
    
 
-    $query = "INSERT INTO akun (kode_akun,nama_akun,email_akun, password, id_level ) VALUES ('$kode','$nama','$email','$password','$level')";
-    $query_run = mysqli_query($conn, $query);
+    // $query = "INSERT INTO akun (kode_akun,nama_akun,email_akun, password, id_level ) VALUES ('$kode','$nama','$email','$password','$level')";
+    $query_run = $conn->query("INSERT INTO akun (kode_akun,nama_akun,email_akun, password, id_level ) VALUES ('$kode','$nama','$email','$password','$level')");
+
     function auto(){
-        $conn = mysqli_connect("localhost","root","","fans");
-    
+        // $conn = mysqli_connect("localhost","root","","fans");
+        $db = new Database();
+        $conn =  $db->db_connect();
+
         $num = '';
         $perfix = 'AA';
-        $query = "SELECT MAX(kode_akun) AS kode from akun";
-        $run = mysqli_query($conn,$query);
-        $data = mysqli_fetch_array($run);
-        $row = mysqli_fetch_row($run);
+        // $query = "SELECT MAX(kode_akun) AS kode from akun";
+        // $run = mysqli_query($conn,$query);
+        $query_run = $conn->query("SELECT MAX(kode_akun) AS kode from akun");
+        $data = mysqli_fetch_array($query_run);
+        $row = mysqli_fetch_row($query_run);
         $num = $data['kode'];
         $number = (int)substr($num,2,5);
         $number++;
@@ -85,8 +92,8 @@ if(isset($_POST['checking_edit']))
     $kode_akun = $_POST['kode_akun'];
     $result_array = [];
 
-    $query = "SELECT * FROM `akun` JOIN level_akun ON akun.id_level =level_akun.id_level WHERE kode_akun='$kode_akun' ";
-    $query_run = mysqli_query($conn, $query);
+    // $query = "SELECT * FROM `akun` JOIN level_akun ON akun.id_level =level_akun.id_level WHERE kode_akun='$kode_akun' ";
+    $query_run = $conn->query("SELECT * FROM `akun` JOIN level_akun ON akun.id_level =level_akun.id_level WHERE kode_akun='$kode_akun'");
 
     if(mysqli_num_rows($query_run) > 0)
     {
@@ -111,8 +118,8 @@ if(isset($_POST['checking_update']))
     $password = password_hash($password,PASSWORD_DEFAULT);
     $level = $_POST['level'];
 
-    $query = "UPDATE akun SET nama_akun='$nama',email_akun='$email', password = '$password', id_level='$level' WHERE kode_akun='$kode'";
-    $query_run = mysqli_query($conn, $query);
+    // $query = "UPDATE akun SET nama_akun='$nama',email_akun='$email', password = '$password', id_level='$level' WHERE kode_akun='$kode'";
+    $query_run = $conn->query("UPDATE akun SET nama_akun='$nama',email_akun='$email', password = '$password', id_level='$level' WHERE kode_akun='$kode'");
 
     if($query_run)
     {
@@ -127,8 +134,8 @@ if(isset($_POST['checking_delete']))
 {
     $kode = $_POST['kode_akun'];
 
-    $query = "DELETE FROM akun WHERE kode_akun='$kode' ";
-    $query_run = mysqli_query($conn, $query);
+    // $query = "DELETE FROM akun WHERE kode_akun='$kode' ";
+    $query_run = $conn->query("DELETE FROM akun WHERE kode_akun='$kode'");
 
     if($query_run)
     {

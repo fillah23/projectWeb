@@ -1,11 +1,12 @@
 <?php 
+// $conn = mysqli_connect("localhost","root","","fans");
+include '../koneksi.php';
+$db = new Database();
+$conn =  $db->db_connect();
 
-$conn = mysqli_connect("localhost","root","","fans");
-
-$query = "SELECT * FROM pelanggan join produk on pelanggan.kode_produk = 
+$query_run = $conn->query("SELECT * FROM pelanggan join produk on pelanggan.kode_produk = 
 produk.kode_produk join transaksi on pelanggan.kode_pelanggan = transaksi.kode_pelanggan 
-join akun on transaksi.kode_akun = akun.kode_akun ";
-$query_run = mysqli_query($conn, $query);
+join akun on transaksi.kode_akun = akun.kode_akun ");
 $result_array = [];
 
 if(mysqli_num_rows($query_run) > 0)

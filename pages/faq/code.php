@@ -1,13 +1,17 @@
-<?php 
-$conn = mysqli_connect("localhost","root","","fans");
+<?php
+
+include '../koneksi.php';
+$db = new Database();
+$conn =  $db->db_connect();
+$query_run = $conn->query("select * from faq");
+
 
 if(isset($_POST['checking_add']))
 {
     $pertanyaan = $_POST['pertanyaan'];
     $jawaban = $_POST['jawaban'];
 
-    $query = "INSERT INTO faq (pertanyaan,jawaban) VALUES ('$pertanyaan','$jawaban')";
-    $query_run = mysqli_query($conn, $query);
+    $query_run = $conn->query("INSERT INTO faq (pertanyaan,jawaban) VALUES ('$pertanyaan','$jawaban')");
     
     if($query_run)
     {
@@ -24,8 +28,7 @@ if(isset($_POST['checking_edit']))
     $id = $_POST['id'];
     $result_array = [];
 
-    $query = "SELECT * FROM faq WHERE id='$id' ";
-    $query_run = mysqli_query($conn, $query);
+    $query_run = $conn->query("SELECT * FROM faq WHERE id='$id' ");
 
     if(mysqli_num_rows($query_run) > 0)
     {
@@ -47,8 +50,7 @@ if(isset($_POST['checking_update']))
     $pertanyaan = $_POST['pertanyaan'];
     $jawaban = $_POST['jawaban'];
 
-    $query = "UPDATE faq SET pertanyaan='$pertanyaan',jawaban='$jawaban' WHERE id='$kode'";
-    $query_run = mysqli_query($conn, $query);
+    $query_run = $conn->query("UPDATE faq SET pertanyaan='$pertanyaan',jawaban='$jawaban' WHERE id='$kode'");
 
     if($query_run)
     {
@@ -63,8 +65,7 @@ if(isset($_POST['checking_delete']))
 {
     $kode = $_POST['id'];
 
-    $query = "DELETE FROM faq WHERE id='$kode' ";
-    $query_run = mysqli_query($conn, $query);
+    $query_run = $conn->query("DELETE FROM faq WHERE id='$kode'");
 
     if($query_run)
     {
