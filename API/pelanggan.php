@@ -1,6 +1,6 @@
 <?php
-$connect = new mysqli("localhost", "root", "", "fans");
-$queryResult=$connect->query("SELECT * FROM pelanggan");
+include 'db.php';
+$queryResult=$db->query("SELECT * FROM pelanggan");
 $result=array();
 while($fetchData=$queryResult->fetch_assoc()){
     $result[]=$fetchData;

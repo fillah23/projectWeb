@@ -167,7 +167,7 @@
 			</div>
 			<div class="col-md-3 col-sm-6 wow fadeIn" data-wow-delay="0.9s">
 				<div class="team-wrapper">
-					<img src="images/team1.jpeg" class="img-responsive" alt="team img" style="width: 260px; height: 300px;">
+					<img src="images/team1.jpg" class="img-responsive" alt="team img" >
 						<div class="team-des">
 							<h4>Rio Javier Reyhan</h4>
 							<h3>Cable TV Manager</h3>
@@ -182,7 +182,7 @@
 			</div>
 			<div class="col-md-3 col-sm-6 wow fadeIn" data-wow-delay="1.3s">
 				<div class="team-wrapper">
-					<img src="images/team2.jpeg" class="img-responsive" alt="team img" style="width: 260px; height: 300px;">
+					<img src="images/team2.jpg" class="img-responsive" alt="team img" >
 						<div class="team-des">
 							<h4>Fillah Septian</h4>
 							<h3>Internet Manager</h3>
@@ -295,14 +295,17 @@
 					<hr>
 				</div>
 			</div>
-			<?php 	$conn = mysqli_connect("localhost","root","","fans");
+				<?php 	
+					include 'pages/koneksi.php';
+					$db = new Database();
+					$conn =  $db->db_connect();
                     $query = "SELECT * FROM produk";
                     $result = mysqli_query($conn,$query);
                     $no = 1;
                     while($row = $row = mysqli_fetch_array($result)){
                         
                     
-                    ?>
+                ?>
 			<div class="col-md-4 col-sm-6">
 				<div class="plan plan-one wow bounceIn" data-wow-delay="0.3s">
 					<div class="plan_title">

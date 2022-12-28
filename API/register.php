@@ -1,12 +1,12 @@
 <?php
-$db = mysqli_connect('localhost','root','','fans');
+include 'db.php';
 function auto(){
-    $conn = mysqli_connect("localhost","root","","fans");
+    include 'db.php';
 
     $num = '';
     $perfix = 'PL';
     $query = "SELECT MAX(kode_pelanggan) AS kode from pelanggan";
-    $run = mysqli_query($conn,$query);
+    $run = mysqli_query($db,$query);
     $data = mysqli_fetch_array($run);
     $row = mysqli_fetch_row($run);
     $num = $data['kode'];

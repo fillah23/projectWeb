@@ -92,28 +92,8 @@ $query_run = $conn->query("UPDATE `pelanggan` SET status = 'non aktif', tanggal_
             <span class="link hide">FAQ</span>
           </a>
         </li>
-        <li class="tooltip-element" data-tooltip="1" id="menu_akun">
-          <a href="" data-active="4" id="akun" class="menu">
-            <div class="icon">
-              <i class='bx bx-user-plus'></i>
-              <i class='bx bxs-user-plus'></i>
-            </div>
-            <span class="link hide">Pengaturan Akun</span>
-          </a>
-        </li>
-        <li class="tooltip-element" data-tooltip="2" id="menu_riwayat">
-          <a href="" data-active="5" id="riwayat" class="menu">
-            <div class="icon">
-              <i class='bx bx-bar-chart-square'></i>
-              <i class='bx bxs-bar-chart-square'></i>
-            </div>
-            <span class="link hide">Riwayat</span>
-          </a>
-        </li>
         <div class="tooltip">
           <span class="show">FAQ</span>
-          <span>Pengaturan Akun</span>
-          <span>Riwayat</span>
         </div>
       </ul>
     </div>
@@ -164,17 +144,11 @@ $query_run = $conn->query("UPDATE `pelanggan` SET status = 'non aktif', tanggal_
           $('#content').load('transaksi/transaksi.php');
           $(".search_field").attr("id", "search_transaksi");
         } else if (menu == "produk") {
-          $('#content').load('produk/produk.php');
+          $('#content').load('produk/produk_admin.php');
           $(".search_field").attr("id", "search_produk");
         } else if (menu == "pelanggan") {
-          $('#content').load('pelanggan/pelanggan.php');
+          $('#content').load('pelanggan/pelanggan_admin.php');
           $(".search_field").attr("id", "search_pelanggan");
-        } else if (menu == "akun") {
-          $('#content').load('akun/akun.php');
-          $(".search_field").attr("id", "search_akun");
-        } else if (menu == "riwayat") {
-          $('#content').load('riwayat/riwayat.php');
-          $(".search_field").attr("id", "search_riwayat");
         } else if (menu == "faq") {
           $('#content').load('faq/faq.php');
           $(".search_field").attr("id", "search_faq");
@@ -235,12 +209,6 @@ $query_run = $conn->query("UPDATE `pelanggan` SET status = 'non aktif', tanggal_
     function kirim2(){
       var y = document.getElementById("namaakun").value;
       sessionStorage.setItem("textvalue2",y);
-      return false;
-    }
-    function kirim3(){
-      var y = document.getElementById("levelakun").value;
-      var encrypted = CryptoJS.AES.encrypt(y, "Secret Passphrase");
-      sessionStorage.setItem("textvalue3",encrypted);
       return false;
     }
   </script>

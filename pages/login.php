@@ -39,7 +39,7 @@
             	   </div>
             	</div>
             	<input type="submit" class="btn" value="Login" name="login">
-				<p><a href="../index.php">kembali</a></p>
+				<p><a href="../">kembali</a></p>
             </form>
         </div>
     </div>

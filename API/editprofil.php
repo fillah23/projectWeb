@@ -1,5 +1,6 @@
 <?php 
-$db = mysqli_connect('localhost','root','','fans');
+include 'db.php';
+
 if(!$db)
 {
 	echo "Database connection failed";

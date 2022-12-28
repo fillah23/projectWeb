@@ -26,8 +26,18 @@ if(isset($_POST["login"])){
 			$_SESSION['nama_akun'] = $nama_akun;
 			$_SESSION['level'] = $level;
 			$_SESSION['kode_akun'] = $kode_akun;
-            header("Location: ../pages");
-            exit;
+            
+            if($_SESSION['level']=="Admin"){
+                header("Location: admin.php");
+                exit;
+            }elseif($_SESSION['level']=="Super"){
+                header("Location: ../pages");
+                        exit;
+            }else{
+                header("Location: login.php");
+                exit;
+            }
+            
         }
     }
     $error=true;
